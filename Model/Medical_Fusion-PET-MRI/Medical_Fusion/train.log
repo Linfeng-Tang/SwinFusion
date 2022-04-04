@@ -1,0 +1,1313 @@
+22-03-30 19:53:54.633 :   task: Medical_Fusion
+  model: plain
+  gpu_ids: [0, 1, 2]
+  dist: True
+  scale: 1
+  n_channels: 1
+  path:[
+    root: Model/Medical_Fusion-PET-MRI
+    pretrained_netG: None
+    pretrained_netE: None
+    task: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    log: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    options: Model/Medical_Fusion-PET-MRI/Medical_Fusion/options
+    models: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models
+    images: Model/Medical_Fusion-PET-MRI/Medical_Fusion/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: med
+      dataroot_A: Dataset/trainsets/PET-MRI/MRI
+      dataroot_B: Dataset/trainsets/PET-MRI/PET_Y
+      dataroot_GT: Dataset/trainsets/PET-MRI/PET_Y
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 12
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: med
+      dataroot_A: Dataset/valsets/PET-MRI/mri
+      dataroot_B: Dataset/valsets/PET-MRI/pet_Y
+      dataroot_GT: Dataset/valsets/PET-MRI/pet_Y
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: swinfusion1
+    upscale: 1
+    in_chans: 1
+    img_size: 128
+    window_size: 8
+    img_range: 1.0
+    depths: [6, 6, 6, 6]
+    embed_dim: 60
+    num_heads: [6, 6, 6, 6]
+    mlp_ratio: 2
+    upsampler: None
+    resi_connection: 1conv
+    init_type: default
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: med
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0002
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: True
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [250000, 400000, 450000, 475000, 500000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 1000
+    checkpoint_save: 1000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+  ]
+  opt_path: options/swinir/train_swinfusion_med.json
+  is_train: True
+  merge_bn: False
+  merge_bn_startpoint: -1
+  find_unused_parameters: True
+  num_gpu: 3
+  rank: 0
+  world_size: 3
+
+22-03-30 19:53:54.640 : Number of train images: 269, iters: 23
+22-03-30 19:54:34.254 :   task: Medical_Fusion
+  model: plain
+  gpu_ids: [0, 1, 2]
+  dist: True
+  scale: 1
+  n_channels: 1
+  path:[
+    root: Model/Medical_Fusion-PET-MRI
+    pretrained_netG: None
+    pretrained_netE: None
+    task: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    log: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    options: Model/Medical_Fusion-PET-MRI/Medical_Fusion/options
+    models: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models
+    images: Model/Medical_Fusion-PET-MRI/Medical_Fusion/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: med
+      dataroot_A: Dataset/trainsets/PET-MRI/MRI
+      dataroot_B: Dataset/trainsets/PET-MRI/PET_Y
+      dataroot_GT: Dataset/trainsets/PET-MRI/PET_Y
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 12
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: med
+      dataroot_A: Dataset/valsets/PET-MRI/MRI
+      dataroot_B: Dataset/valsets/PET-MRI/PET_Y
+      dataroot_GT: Dataset/valsets/PET-MRI/PET_Y
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: swinfusion1
+    upscale: 1
+    in_chans: 1
+    img_size: 128
+    window_size: 8
+    img_range: 1.0
+    depths: [6, 6, 6, 6]
+    embed_dim: 60
+    num_heads: [6, 6, 6, 6]
+    mlp_ratio: 2
+    upsampler: None
+    resi_connection: 1conv
+    init_type: default
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: med
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0002
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: True
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [250000, 400000, 450000, 475000, 500000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 1000
+    checkpoint_save: 1000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+  ]
+  opt_path: options/swinir/train_swinfusion_med.json
+  is_train: True
+  merge_bn: False
+  merge_bn_startpoint: -1
+  find_unused_parameters: True
+  num_gpu: 3
+  rank: 0
+  world_size: 3
+
+22-03-30 19:54:34.259 : Number of train images: 269, iters: 23
+22-03-30 19:55:42.466 : <epoch:  9, iter:     200, lr:2.000e-04> G_loss: 3.324e+01 TV_loss: 0.000e+00 Gradient_loss: 9.978e+00 l1_loss: 1.102e+00 Constrast_loss: 2.216e+01 
+22-03-30 19:56:45.392 : <epoch: 18, iter:     400, lr:2.000e-04> G_loss: 3.327e+01 TV_loss: 0.000e+00 Gradient_loss: 1.107e+01 l1_loss: 9.259e-01 Constrast_loss: 2.128e+01 
+22-03-30 19:57:48.676 : <epoch: 27, iter:     600, lr:2.000e-04> G_loss: 3.541e+01 TV_loss: 0.000e+00 Gradient_loss: 1.422e+01 l1_loss: 1.355e+00 Constrast_loss: 1.983e+01 
+22-03-30 19:58:51.571 : <epoch: 36, iter:     800, lr:2.000e-04> G_loss: 3.214e+01 TV_loss: 0.000e+00 Gradient_loss: 9.966e+00 l1_loss: 1.144e+00 Constrast_loss: 2.103e+01 
+22-03-30 19:59:55.077 : <epoch: 45, iter:   1,000, lr:2.000e-04> G_loss: 2.969e+01 TV_loss: 0.000e+00 Gradient_loss: 7.722e+00 l1_loss: 6.367e-01 Constrast_loss: 2.133e+01 
+22-03-30 19:59:55.082 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/1000_E.pth
+22-03-30 20:01:06.629 : <epoch: 54, iter:   1,200, lr:2.000e-04> G_loss: 3.382e+01 TV_loss: 0.000e+00 Gradient_loss: 1.201e+01 l1_loss: 1.750e+00 Constrast_loss: 2.006e+01 
+22-03-30 20:02:09.150 : <epoch: 63, iter:   1,400, lr:2.000e-04> G_loss: 3.133e+01 TV_loss: 0.000e+00 Gradient_loss: 1.136e+01 l1_loss: 1.125e+00 Constrast_loss: 1.884e+01 
+22-03-30 20:03:10.951 : <epoch: 72, iter:   1,600, lr:2.000e-04> G_loss: 2.868e+01 TV_loss: 0.000e+00 Gradient_loss: 7.026e+00 l1_loss: 5.327e-01 Constrast_loss: 2.112e+01 
+22-03-30 20:04:12.784 : <epoch: 81, iter:   1,800, lr:2.000e-04> G_loss: 3.258e+01 TV_loss: 0.000e+00 Gradient_loss: 9.635e+00 l1_loss: 1.000e+00 Constrast_loss: 2.194e+01 
+22-03-30 20:05:16.114 : <epoch: 90, iter:   2,000, lr:2.000e-04> G_loss: 2.831e+01 TV_loss: 0.000e+00 Gradient_loss: 4.900e+00 l1_loss: 6.117e-01 Constrast_loss: 2.280e+01 
+22-03-30 20:05:16.116 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/2000_E.pth
+22-03-30 20:06:27.485 : <epoch: 99, iter:   2,200, lr:2.000e-04> G_loss: 2.895e+01 TV_loss: 0.000e+00 Gradient_loss: 6.954e+00 l1_loss: 5.553e-01 Constrast_loss: 2.144e+01 
+22-03-30 20:07:33.256 : <epoch:109, iter:   2,400, lr:2.000e-04> G_loss: 3.016e+01 TV_loss: 0.000e+00 Gradient_loss: 1.097e+01 l1_loss: 9.326e-01 Constrast_loss: 1.826e+01 
+22-03-30 20:08:35.923 : <epoch:118, iter:   2,600, lr:2.000e-04> G_loss: 2.990e+01 TV_loss: 0.000e+00 Gradient_loss: 6.979e+00 l1_loss: 7.555e-01 Constrast_loss: 2.217e+01 
+22-03-30 20:09:38.562 : <epoch:127, iter:   2,800, lr:2.000e-04> G_loss: 2.879e+01 TV_loss: 0.000e+00 Gradient_loss: 6.516e+00 l1_loss: 6.484e-01 Constrast_loss: 2.162e+01 
+22-03-30 20:10:42.082 : <epoch:136, iter:   3,000, lr:2.000e-04> G_loss: 3.013e+01 TV_loss: 0.000e+00 Gradient_loss: 8.283e+00 l1_loss: 7.053e-01 Constrast_loss: 2.114e+01 
+22-03-30 20:10:42.086 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/3000_E.pth
+22-03-30 20:11:54.787 : <epoch:145, iter:   3,200, lr:2.000e-04> G_loss: 2.765e+01 TV_loss: 0.000e+00 Gradient_loss: 5.762e+00 l1_loss: 6.546e-01 Constrast_loss: 2.124e+01 
+22-03-30 20:12:58.854 : <epoch:154, iter:   3,400, lr:2.000e-04> G_loss: 2.887e+01 TV_loss: 0.000e+00 Gradient_loss: 7.789e+00 l1_loss: 7.117e-01 Constrast_loss: 2.037e+01 
+22-03-30 20:14:04.685 : <epoch:163, iter:   3,600, lr:2.000e-04> G_loss: 2.928e+01 TV_loss: 0.000e+00 Gradient_loss: 6.963e+00 l1_loss: 5.346e-01 Constrast_loss: 2.178e+01 
+22-03-30 20:15:07.125 : <epoch:172, iter:   3,800, lr:2.000e-04> G_loss: 2.756e+01 TV_loss: 0.000e+00 Gradient_loss: 4.913e+00 l1_loss: 4.460e-01 Constrast_loss: 2.220e+01 
+22-03-30 20:16:10.065 : <epoch:181, iter:   4,000, lr:2.000e-04> G_loss: 3.220e+01 TV_loss: 0.000e+00 Gradient_loss: 1.368e+01 l1_loss: 1.326e+00 Constrast_loss: 1.719e+01 
+22-03-30 20:16:10.069 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/4000_E.pth
+22-03-30 20:17:20.507 : <epoch:190, iter:   4,200, lr:2.000e-04> G_loss: 3.059e+01 TV_loss: 0.000e+00 Gradient_loss: 7.601e+00 l1_loss: 1.239e+00 Constrast_loss: 2.175e+01 
+22-03-30 20:18:23.372 : <epoch:199, iter:   4,400, lr:2.000e-04> G_loss: 3.033e+01 TV_loss: 0.000e+00 Gradient_loss: 7.956e+00 l1_loss: 1.051e+00 Constrast_loss: 2.133e+01 
+22-03-30 20:19:27.470 : <epoch:209, iter:   4,600, lr:2.000e-04> G_loss: 3.065e+01 TV_loss: 0.000e+00 Gradient_loss: 1.091e+01 l1_loss: 1.050e+00 Constrast_loss: 1.870e+01 
+22-03-30 20:20:29.909 : <epoch:218, iter:   4,800, lr:2.000e-04> G_loss: 2.726e+01 TV_loss: 0.000e+00 Gradient_loss: 3.350e+00 l1_loss: 3.252e-01 Constrast_loss: 2.359e+01 
+22-03-30 20:21:34.702 : <epoch:227, iter:   5,000, lr:2.000e-04> G_loss: 2.995e+01 TV_loss: 0.000e+00 Gradient_loss: 9.179e+00 l1_loss: 1.059e+00 Constrast_loss: 1.972e+01 
+22-03-30 20:21:34.706 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/5000_E.pth
+22-03-30 20:22:48.152 : <epoch:236, iter:   5,200, lr:2.000e-04> G_loss: 2.805e+01 TV_loss: 0.000e+00 Gradient_loss: 4.926e+00 l1_loss: 5.265e-01 Constrast_loss: 2.260e+01 
+22-03-30 20:23:51.650 : <epoch:245, iter:   5,400, lr:2.000e-04> G_loss: 2.926e+01 TV_loss: 0.000e+00 Gradient_loss: 7.896e+00 l1_loss: 6.823e-01 Constrast_loss: 2.068e+01 
+22-03-30 20:24:55.947 : <epoch:254, iter:   5,600, lr:2.000e-04> G_loss: 2.929e+01 TV_loss: 0.000e+00 Gradient_loss: 7.335e+00 l1_loss: 9.996e-01 Constrast_loss: 2.096e+01 
+22-03-30 20:25:59.235 : <epoch:263, iter:   5,800, lr:2.000e-04> G_loss: 2.731e+01 TV_loss: 0.000e+00 Gradient_loss: 3.427e+00 l1_loss: 4.056e-01 Constrast_loss: 2.348e+01 
+22-03-30 20:27:01.875 : <epoch:272, iter:   6,000, lr:2.000e-04> G_loss: 2.869e+01 TV_loss: 0.000e+00 Gradient_loss: 6.684e+00 l1_loss: 6.066e-01 Constrast_loss: 2.140e+01 
+22-03-30 20:27:01.879 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/6000_E.pth
+22-03-30 20:28:15.505 : <epoch:281, iter:   6,200, lr:2.000e-04> G_loss: 2.906e+01 TV_loss: 0.000e+00 Gradient_loss: 9.237e+00 l1_loss: 8.921e-01 Constrast_loss: 1.893e+01 
+22-03-30 20:29:19.532 : <epoch:290, iter:   6,400, lr:2.000e-04> G_loss: 2.845e+01 TV_loss: 0.000e+00 Gradient_loss: 6.671e+00 l1_loss: 8.852e-01 Constrast_loss: 2.090e+01 
+22-03-30 20:30:22.239 : <epoch:299, iter:   6,600, lr:2.000e-04> G_loss: 2.723e+01 TV_loss: 0.000e+00 Gradient_loss: 4.015e+00 l1_loss: 4.174e-01 Constrast_loss: 2.280e+01 
+22-03-30 20:31:27.025 : <epoch:309, iter:   6,800, lr:2.000e-04> G_loss: 2.824e+01 TV_loss: 0.000e+00 Gradient_loss: 6.755e+00 l1_loss: 7.438e-01 Constrast_loss: 2.074e+01 
+22-03-30 20:32:29.384 : <epoch:318, iter:   7,000, lr:2.000e-04> G_loss: 2.660e+01 TV_loss: 0.000e+00 Gradient_loss: 2.808e+00 l1_loss: 2.621e-01 Constrast_loss: 2.353e+01 
+22-03-30 20:32:29.386 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/7000_E.pth
+22-03-30 20:33:40.634 : <epoch:327, iter:   7,200, lr:2.000e-04> G_loss: 2.760e+01 TV_loss: 0.000e+00 Gradient_loss: 6.222e+00 l1_loss: 6.101e-01 Constrast_loss: 2.077e+01 
+22-03-30 20:34:44.240 : <epoch:336, iter:   7,400, lr:2.000e-04> G_loss: 3.095e+01 TV_loss: 0.000e+00 Gradient_loss: 9.106e+00 l1_loss: 9.636e-01 Constrast_loss: 2.088e+01 
+22-03-30 20:35:46.212 : <epoch:345, iter:   7,600, lr:2.000e-04> G_loss: 2.694e+01 TV_loss: 0.000e+00 Gradient_loss: 4.361e+00 l1_loss: 4.919e-01 Constrast_loss: 2.208e+01 
+22-03-30 20:36:49.037 : <epoch:354, iter:   7,800, lr:2.000e-04> G_loss: 2.790e+01 TV_loss: 0.000e+00 Gradient_loss: 5.731e+00 l1_loss: 5.860e-01 Constrast_loss: 2.158e+01 
+22-03-30 20:37:52.220 : <epoch:363, iter:   8,000, lr:2.000e-04> G_loss: 2.783e+01 TV_loss: 0.000e+00 Gradient_loss: 5.837e+00 l1_loss: 6.610e-01 Constrast_loss: 2.134e+01 
+22-03-30 20:37:52.224 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/8000_E.pth
+22-03-30 20:39:04.289 : <epoch:372, iter:   8,200, lr:2.000e-04> G_loss: 2.686e+01 TV_loss: 0.000e+00 Gradient_loss: 4.359e+00 l1_loss: 4.491e-01 Constrast_loss: 2.205e+01 
+22-03-30 20:40:07.087 : <epoch:381, iter:   8,400, lr:2.000e-04> G_loss: 2.937e+01 TV_loss: 0.000e+00 Gradient_loss: 8.805e+00 l1_loss: 8.072e-01 Constrast_loss: 1.976e+01 
+22-03-30 20:41:10.610 : <epoch:390, iter:   8,600, lr:2.000e-04> G_loss: 2.804e+01 TV_loss: 0.000e+00 Gradient_loss: 7.565e+00 l1_loss: 9.190e-01 Constrast_loss: 1.956e+01 
+22-03-30 20:42:13.660 : <epoch:399, iter:   8,800, lr:2.000e-04> G_loss: 2.779e+01 TV_loss: 0.000e+00 Gradient_loss: 7.294e+00 l1_loss: 8.216e-01 Constrast_loss: 1.967e+01 
+22-03-30 20:43:19.389 : <epoch:409, iter:   9,000, lr:2.000e-04> G_loss: 2.885e+01 TV_loss: 0.000e+00 Gradient_loss: 5.402e+00 l1_loss: 6.873e-01 Constrast_loss: 2.276e+01 
+22-03-30 20:43:19.392 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/9000_E.pth
+22-03-30 20:44:30.125 : <epoch:418, iter:   9,200, lr:2.000e-04> G_loss: 2.827e+01 TV_loss: 0.000e+00 Gradient_loss: 5.971e+00 l1_loss: 7.970e-01 Constrast_loss: 2.151e+01 
+22-03-30 20:45:33.012 : <epoch:427, iter:   9,400, lr:2.000e-04> G_loss: 2.724e+01 TV_loss: 0.000e+00 Gradient_loss: 6.393e+00 l1_loss: 7.066e-01 Constrast_loss: 2.014e+01 
+22-03-30 20:46:34.948 : <epoch:436, iter:   9,600, lr:2.000e-04> G_loss: 2.697e+01 TV_loss: 0.000e+00 Gradient_loss: 5.982e+00 l1_loss: 7.411e-01 Constrast_loss: 2.025e+01 
+22-03-30 20:47:37.584 : <epoch:445, iter:   9,800, lr:2.000e-04> G_loss: 2.712e+01 TV_loss: 0.000e+00 Gradient_loss: 4.320e+00 l1_loss: 4.783e-01 Constrast_loss: 2.233e+01 
+22-03-30 20:48:40.323 : <epoch:454, iter:  10,000, lr:2.000e-04> G_loss: 2.911e+01 TV_loss: 0.000e+00 Gradient_loss: 9.151e+00 l1_loss: 1.205e+00 Constrast_loss: 1.876e+01 
+22-03-30 20:48:40.327 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/10000_E.pth
+22-03-30 20:49:50.401 : <epoch:463, iter:  10,200, lr:2.000e-04> G_loss: 2.809e+01 TV_loss: 0.000e+00 Gradient_loss: 6.244e+00 l1_loss: 8.704e-01 Constrast_loss: 2.098e+01 
+22-03-30 20:50:54.643 : <epoch:472, iter:  10,400, lr:2.000e-04> G_loss: 3.011e+01 TV_loss: 0.000e+00 Gradient_loss: 7.839e+00 l1_loss: 9.065e-01 Constrast_loss: 2.136e+01 
+22-03-30 20:51:57.447 : <epoch:481, iter:  10,600, lr:2.000e-04> G_loss: 2.984e+01 TV_loss: 0.000e+00 Gradient_loss: 9.493e+00 l1_loss: 1.155e+00 Constrast_loss: 1.919e+01 
+22-03-30 20:53:00.419 : <epoch:490, iter:  10,800, lr:2.000e-04> G_loss: 2.911e+01 TV_loss: 0.000e+00 Gradient_loss: 7.109e+00 l1_loss: 1.126e+00 Constrast_loss: 2.088e+01 
+22-03-30 20:54:02.914 : <epoch:499, iter:  11,000, lr:2.000e-04> G_loss: 2.575e+01 TV_loss: 0.000e+00 Gradient_loss: 2.735e+00 l1_loss: 2.894e-01 Constrast_loss: 2.272e+01 
+22-03-30 20:54:02.919 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/11000_E.pth
+22-03-30 20:55:16.368 : <epoch:509, iter:  11,200, lr:2.000e-04> G_loss: 2.880e+01 TV_loss: 0.000e+00 Gradient_loss: 9.264e+00 l1_loss: 9.595e-01 Constrast_loss: 1.858e+01 
+22-03-30 20:56:20.020 : <epoch:518, iter:  11,400, lr:2.000e-04> G_loss: 2.842e+01 TV_loss: 0.000e+00 Gradient_loss: 5.620e+00 l1_loss: 7.450e-01 Constrast_loss: 2.205e+01 
+22-03-30 20:57:23.105 : <epoch:527, iter:  11,600, lr:2.000e-04> G_loss: 2.967e+01 TV_loss: 0.000e+00 Gradient_loss: 7.595e+00 l1_loss: 1.036e+00 Constrast_loss: 2.104e+01 
+22-03-30 20:58:26.099 : <epoch:536, iter:  11,800, lr:2.000e-04> G_loss: 2.830e+01 TV_loss: 0.000e+00 Gradient_loss: 6.252e+00 l1_loss: 8.768e-01 Constrast_loss: 2.117e+01 
+22-03-30 20:59:29.859 : <epoch:545, iter:  12,000, lr:2.000e-04> G_loss: 2.808e+01 TV_loss: 0.000e+00 Gradient_loss: 5.718e+00 l1_loss: 5.856e-01 Constrast_loss: 2.177e+01 
+22-03-30 20:59:29.861 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/12000_E.pth
+22-03-30 21:00:41.203 : <epoch:554, iter:  12,200, lr:2.000e-04> G_loss: 2.676e+01 TV_loss: 0.000e+00 Gradient_loss: 4.932e+00 l1_loss: 4.822e-01 Constrast_loss: 2.134e+01 
+22-03-30 21:01:44.030 : <epoch:563, iter:  12,400, lr:2.000e-04> G_loss: 2.822e+01 TV_loss: 0.000e+00 Gradient_loss: 5.837e+00 l1_loss: 7.860e-01 Constrast_loss: 2.160e+01 
+22-03-30 21:02:47.722 : <epoch:572, iter:  12,600, lr:2.000e-04> G_loss: 2.824e+01 TV_loss: 0.000e+00 Gradient_loss: 6.293e+00 l1_loss: 8.411e-01 Constrast_loss: 2.110e+01 
+22-03-30 21:03:50.515 : <epoch:581, iter:  12,800, lr:2.000e-04> G_loss: 2.811e+01 TV_loss: 0.000e+00 Gradient_loss: 7.413e+00 l1_loss: 9.794e-01 Constrast_loss: 1.972e+01 
+22-03-30 21:04:53.798 : <epoch:590, iter:  13,000, lr:2.000e-04> G_loss: 2.658e+01 TV_loss: 0.000e+00 Gradient_loss: 4.328e+00 l1_loss: 5.670e-01 Constrast_loss: 2.169e+01 
+22-03-30 21:04:53.802 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/13000_E.pth
+22-03-30 21:06:05.312 : <epoch:599, iter:  13,200, lr:2.000e-04> G_loss: 2.832e+01 TV_loss: 0.000e+00 Gradient_loss: 5.544e+00 l1_loss: 7.128e-01 Constrast_loss: 2.207e+01 
+22-03-30 21:07:11.924 : <epoch:609, iter:  13,400, lr:2.000e-04> G_loss: 2.762e+01 TV_loss: 0.000e+00 Gradient_loss: 5.865e+00 l1_loss: 7.223e-01 Constrast_loss: 2.103e+01 
+22-03-30 21:08:14.028 : <epoch:618, iter:  13,600, lr:2.000e-04> G_loss: 2.742e+01 TV_loss: 0.000e+00 Gradient_loss: 5.457e+00 l1_loss: 6.834e-01 Constrast_loss: 2.128e+01 
+22-03-30 21:09:17.451 : <epoch:627, iter:  13,800, lr:2.000e-04> G_loss: 2.978e+01 TV_loss: 0.000e+00 Gradient_loss: 8.947e+00 l1_loss: 1.089e+00 Constrast_loss: 1.974e+01 
+22-03-30 21:10:20.111 : <epoch:636, iter:  14,000, lr:2.000e-04> G_loss: 2.741e+01 TV_loss: 0.000e+00 Gradient_loss: 4.275e+00 l1_loss: 5.583e-01 Constrast_loss: 2.258e+01 
+22-03-30 21:10:20.113 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/14000_E.pth
+22-03-30 21:11:31.884 : <epoch:645, iter:  14,200, lr:2.000e-04> G_loss: 2.768e+01 TV_loss: 0.000e+00 Gradient_loss: 7.544e+00 l1_loss: 8.129e-01 Constrast_loss: 1.932e+01 
+22-03-30 21:12:34.859 : <epoch:654, iter:  14,400, lr:2.000e-04> G_loss: 2.661e+01 TV_loss: 0.000e+00 Gradient_loss: 3.882e+00 l1_loss: 5.533e-01 Constrast_loss: 2.218e+01 
+22-03-30 21:13:38.557 : <epoch:663, iter:  14,600, lr:2.000e-04> G_loss: 2.900e+01 TV_loss: 0.000e+00 Gradient_loss: 7.965e+00 l1_loss: 9.883e-01 Constrast_loss: 2.005e+01 
+22-03-30 21:14:44.775 : <epoch:672, iter:  14,800, lr:2.000e-04> G_loss: 2.841e+01 TV_loss: 0.000e+00 Gradient_loss: 7.960e+00 l1_loss: 1.094e+00 Constrast_loss: 1.936e+01 
+22-03-30 21:15:50.910 : <epoch:681, iter:  15,000, lr:2.000e-04> G_loss: 2.770e+01 TV_loss: 0.000e+00 Gradient_loss: 7.961e+00 l1_loss: 9.445e-01 Constrast_loss: 1.880e+01 
+22-03-30 21:15:50.914 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/15000_E.pth
+22-03-30 21:17:04.729 : <epoch:690, iter:  15,200, lr:2.000e-04> G_loss: 2.625e+01 TV_loss: 0.000e+00 Gradient_loss: 3.540e+00 l1_loss: 4.765e-01 Constrast_loss: 2.223e+01 
+22-03-30 21:18:08.707 : <epoch:699, iter:  15,400, lr:2.000e-04> G_loss: 2.814e+01 TV_loss: 0.000e+00 Gradient_loss: 6.775e+00 l1_loss: 9.406e-01 Constrast_loss: 2.042e+01 
+22-03-30 22:25:42.580 :   task: Medical_Fusion
+  model: plain
+  gpu_ids: [0, 1, 2]
+  dist: True1
+  scale: 1
+  n_channels: 1
+  path:[
+    root: Model/Medical_Fusion-PET-MRI
+    pretrained_netG: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/15000_G.pth
+    pretrained_netE: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/15000_E.pth
+    task: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    log: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    options: Model/Medical_Fusion-PET-MRI/Medical_Fusion/options
+    models: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models
+    images: Model/Medical_Fusion-PET-MRI/Medical_Fusion/images
+    pretrained_optimizerG: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/15000_optimizerG.pth
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: med
+      dataroot_A: Dataset/trainsets/PET-MRI/MRI
+      dataroot_B: Dataset/trainsets/PET-MRI/PET_Y
+      dataroot_GT: Dataset/trainsets/PET-MRI/PET_Y
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 12
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: med
+      dataroot_A: Dataset/valsets/PET-MRI/MRI
+      dataroot_B: Dataset/valsets/PET-MRI/PET_Y
+      dataroot_GT: Dataset/valsets/PET-MRI/PET_Y
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: swinfusion1
+    upscale: 1
+    in_chans: 1
+    img_size: 128
+    window_size: 8
+    img_range: 1.0
+    depths: [6, 6, 6, 6]
+    embed_dim: 60
+    num_heads: [6, 6, 6, 6]
+    mlp_ratio: 2
+    upsampler: None
+    resi_connection: 1conv
+    init_type: default
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: med
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0002
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: True
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [250000, 400000, 450000, 475000, 500000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 1000
+    checkpoint_save: 1000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+  ]
+  opt_path: options/swinir/train_swinfusion_med.json
+  is_train: True
+  merge_bn: False
+  merge_bn_startpoint: -1
+  find_unused_parameters: True
+  num_gpu: 3
+  rank: 0
+  world_size: 3
+
+22-03-30 22:25:42.587 : Number of train images: 269, iters: 23
+22-03-30 22:25:47.718 :   task: Medical_Fusion
+  model: plain
+  gpu_ids: [0, 1, 2]
+  dist: True
+  scale: 1
+  n_channels: 1
+  path:[
+    root: Model/Medical_Fusion-PET-MRI
+    pretrained_netG: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/15000_G.pth
+    pretrained_netE: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/15000_E.pth
+    task: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    log: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    options: Model/Medical_Fusion-PET-MRI/Medical_Fusion/options
+    models: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models
+    images: Model/Medical_Fusion-PET-MRI/Medical_Fusion/images
+    pretrained_optimizerG: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/15000_optimizerG.pth
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: med
+      dataroot_A: Dataset/trainsets/PET-MRI/MRI
+      dataroot_B: Dataset/trainsets/PET-MRI/PET_Y
+      dataroot_GT: Dataset/trainsets/PET-MRI/PET_Y
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 12
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: med
+      dataroot_A: Dataset/valsets/PET-MRI/MRI
+      dataroot_B: Dataset/valsets/PET-MRI/PET_Y
+      dataroot_GT: Dataset/valsets/PET-MRI/PET_Y
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: swinfusion1
+    upscale: 1
+    in_chans: 1
+    img_size: 128
+    window_size: 8
+    img_range: 1.0
+    depths: [6, 6, 6, 6]
+    embed_dim: 60
+    num_heads: [6, 6, 6, 6]
+    mlp_ratio: 2
+    upsampler: None
+    resi_connection: 1conv
+    init_type: default
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: med
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0002
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: True
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [250000, 400000, 450000, 475000, 500000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 1000
+    checkpoint_save: 1000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+  ]
+  opt_path: options/swinir/train_swinfusion_med.json
+  is_train: True
+  merge_bn: False
+  merge_bn_startpoint: -1
+  find_unused_parameters: True
+  num_gpu: 3
+  rank: 0
+  world_size: 3
+
+22-03-30 22:25:47.724 : Number of train images: 269, iters: 23
+22-03-30 22:26:56.543 : <epoch:  9, iter:  15,200, lr:2.000e-04> G_loss: 2.603e+01 TV_loss: 0.000e+00 Gradient_loss: 5.509e+00 l1_loss: 8.371e-01 Constrast_loss: 1.968e+01 
+22-03-30 22:27:58.895 : <epoch: 18, iter:  15,400, lr:2.000e-04> G_loss: 2.902e+01 TV_loss: 0.000e+00 Gradient_loss: 7.632e+00 l1_loss: 9.303e-01 Constrast_loss: 2.046e+01 
+22-03-30 22:28:59.940 : <epoch: 27, iter:  15,600, lr:2.000e-04> G_loss: 2.688e+01 TV_loss: 0.000e+00 Gradient_loss: 4.885e+00 l1_loss: 6.299e-01 Constrast_loss: 2.136e+01 
+22-03-30 22:30:02.770 : <epoch: 36, iter:  15,800, lr:2.000e-04> G_loss: 2.619e+01 TV_loss: 0.000e+00 Gradient_loss: 5.188e+00 l1_loss: 5.294e-01 Constrast_loss: 2.047e+01 
+22-03-30 22:31:06.650 : <epoch: 45, iter:  16,000, lr:2.000e-04> G_loss: 2.686e+01 TV_loss: 0.000e+00 Gradient_loss: 5.456e+00 l1_loss: 8.086e-01 Constrast_loss: 2.059e+01 
+22-03-30 22:31:06.655 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/16000_E.pth
+22-03-30 22:32:23.036 : <epoch: 54, iter:  16,200, lr:2.000e-04> G_loss: 2.699e+01 TV_loss: 0.000e+00 Gradient_loss: 5.402e+00 l1_loss: 6.178e-01 Constrast_loss: 2.097e+01 
+22-03-30 22:33:26.416 : <epoch: 63, iter:  16,400, lr:2.000e-04> G_loss: 2.820e+01 TV_loss: 0.000e+00 Gradient_loss: 6.121e+00 l1_loss: 8.797e-01 Constrast_loss: 2.120e+01 
+22-03-30 22:35:00.176 : <epoch: 72, iter:  16,600, lr:2.000e-04> G_loss: 2.657e+01 TV_loss: 0.000e+00 Gradient_loss: 5.272e+00 l1_loss: 6.981e-01 Constrast_loss: 2.060e+01 
+22-03-30 22:36:50.423 : <epoch: 81, iter:  16,800, lr:2.000e-04> G_loss: 2.704e+01 TV_loss: 0.000e+00 Gradient_loss: 4.039e+00 l1_loss: 5.513e-01 Constrast_loss: 2.245e+01 
+22-03-30 22:38:41.737 : <epoch: 90, iter:  17,000, lr:2.000e-04> G_loss: 2.681e+01 TV_loss: 0.000e+00 Gradient_loss: 3.921e+00 l1_loss: 5.369e-01 Constrast_loss: 2.236e+01 
+22-03-30 22:38:41.738 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/17000_E.pth
+22-03-30 22:40:44.171 : <epoch: 99, iter:  17,200, lr:2.000e-04> G_loss: 2.675e+01 TV_loss: 0.000e+00 Gradient_loss: 3.730e+00 l1_loss: 3.624e-01 Constrast_loss: 2.265e+01 
+22-03-30 22:42:26.912 : <epoch:109, iter:  17,400, lr:2.000e-04> G_loss: 2.667e+01 TV_loss: 0.000e+00 Gradient_loss: 3.070e+00 l1_loss: 4.510e-01 Constrast_loss: 2.315e+01 
+22-03-30 22:44:10.647 : <epoch:118, iter:  17,600, lr:2.000e-04> G_loss: 2.868e+01 TV_loss: 0.000e+00 Gradient_loss: 8.162e+00 l1_loss: 1.076e+00 Constrast_loss: 1.944e+01 
+22-03-30 22:45:52.351 : <epoch:127, iter:  17,800, lr:2.000e-04> G_loss: 2.797e+01 TV_loss: 0.000e+00 Gradient_loss: 5.995e+00 l1_loss: 7.523e-01 Constrast_loss: 2.122e+01 
+22-03-30 22:47:31.554 : <epoch:136, iter:  18,000, lr:2.000e-04> G_loss: 2.646e+01 TV_loss: 0.000e+00 Gradient_loss: 3.592e+00 l1_loss: 6.460e-01 Constrast_loss: 2.222e+01 
+22-03-30 22:47:31.556 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/18000_E.pth
+22-03-30 22:49:35.748 : <epoch:145, iter:  18,200, lr:2.000e-04> G_loss: 2.686e+01 TV_loss: 0.000e+00 Gradient_loss: 5.440e+00 l1_loss: 8.820e-01 Constrast_loss: 2.053e+01 
+22-03-30 22:51:17.937 : <epoch:154, iter:  18,400, lr:2.000e-04> G_loss: 2.744e+01 TV_loss: 0.000e+00 Gradient_loss: 6.526e+00 l1_loss: 7.543e-01 Constrast_loss: 2.016e+01 
+22-03-30 22:53:00.186 : <epoch:163, iter:  18,600, lr:2.000e-04> G_loss: 2.649e+01 TV_loss: 0.000e+00 Gradient_loss: 5.079e+00 l1_loss: 6.893e-01 Constrast_loss: 2.073e+01 
+22-03-30 22:54:17.466 : <epoch:172, iter:  18,800, lr:2.000e-04> G_loss: 2.625e+01 TV_loss: 0.000e+00 Gradient_loss: 5.396e+00 l1_loss: 6.993e-01 Constrast_loss: 2.016e+01 
+22-03-30 22:56:12.454 : <epoch:181, iter:  19,000, lr:2.000e-04> G_loss: 2.618e+01 TV_loss: 0.000e+00 Gradient_loss: 2.968e+00 l1_loss: 3.931e-01 Constrast_loss: 2.281e+01 
+22-03-30 22:56:12.456 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/19000_E.pth
+22-03-30 22:58:43.574 : <epoch:190, iter:  19,200, lr:2.000e-04> G_loss: 2.681e+01 TV_loss: 0.000e+00 Gradient_loss: 6.819e+00 l1_loss: 8.277e-01 Constrast_loss: 1.917e+01 
+22-03-30 23:00:40.831 : <epoch:199, iter:  19,400, lr:2.000e-04> G_loss: 2.611e+01 TV_loss: 0.000e+00 Gradient_loss: 3.793e+00 l1_loss: 4.568e-01 Constrast_loss: 2.186e+01 
+22-03-30 23:02:36.356 : <epoch:209, iter:  19,600, lr:2.000e-04> G_loss: 2.603e+01 TV_loss: 0.000e+00 Gradient_loss: 4.033e+00 l1_loss: 5.971e-01 Constrast_loss: 2.140e+01 
+22-03-30 23:04:28.796 : <epoch:218, iter:  19,800, lr:2.000e-04> G_loss: 2.785e+01 TV_loss: 0.000e+00 Gradient_loss: 7.790e+00 l1_loss: 1.005e+00 Constrast_loss: 1.906e+01 
+22-03-30 23:06:18.111 : <epoch:227, iter:  20,000, lr:2.000e-04> G_loss: 2.777e+01 TV_loss: 0.000e+00 Gradient_loss: 7.393e+00 l1_loss: 9.859e-01 Constrast_loss: 1.939e+01 
+22-03-30 23:06:18.111 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/20000_E.pth
+22-03-30 23:08:19.315 : <epoch:236, iter:  20,200, lr:2.000e-04> G_loss: 2.709e+01 TV_loss: 0.000e+00 Gradient_loss: 5.392e+00 l1_loss: 7.012e-01 Constrast_loss: 2.099e+01 
+22-03-30 23:10:11.875 : <epoch:245, iter:  20,400, lr:2.000e-04> G_loss: 2.594e+01 TV_loss: 0.000e+00 Gradient_loss: 2.599e+00 l1_loss: 3.454e-01 Constrast_loss: 2.299e+01 
+22-03-30 23:12:08.825 : <epoch:254, iter:  20,600, lr:2.000e-04> G_loss: 2.647e+01 TV_loss: 0.000e+00 Gradient_loss: 4.200e+00 l1_loss: 5.782e-01 Constrast_loss: 2.169e+01 
+22-03-30 23:14:00.700 : <epoch:263, iter:  20,800, lr:2.000e-04> G_loss: 2.695e+01 TV_loss: 0.000e+00 Gradient_loss: 3.544e+00 l1_loss: 5.274e-01 Constrast_loss: 2.288e+01 
+22-03-30 23:16:08.713 : <epoch:272, iter:  21,000, lr:2.000e-04> G_loss: 2.577e+01 TV_loss: 0.000e+00 Gradient_loss: 6.444e+00 l1_loss: 8.865e-01 Constrast_loss: 1.844e+01 
+22-03-30 23:16:08.716 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/21000_E.pth
+22-03-30 23:18:46.242 : <epoch:281, iter:  21,200, lr:2.000e-04> G_loss: 2.676e+01 TV_loss: 0.000e+00 Gradient_loss: 5.511e+00 l1_loss: 7.397e-01 Constrast_loss: 2.051e+01 
+22-03-30 23:20:43.948 : <epoch:290, iter:  21,400, lr:2.000e-04> G_loss: 2.657e+01 TV_loss: 0.000e+00 Gradient_loss: 4.963e+00 l1_loss: 8.449e-01 Constrast_loss: 2.076e+01 
+22-03-30 23:22:33.867 : <epoch:299, iter:  21,600, lr:2.000e-04> G_loss: 2.607e+01 TV_loss: 0.000e+00 Gradient_loss: 4.288e+00 l1_loss: 5.810e-01 Constrast_loss: 2.120e+01 
+22-03-30 23:24:28.061 : <epoch:309, iter:  21,800, lr:2.000e-04> G_loss: 2.595e+01 TV_loss: 0.000e+00 Gradient_loss: 5.651e+00 l1_loss: 1.025e+00 Constrast_loss: 1.927e+01 
+22-03-30 23:26:17.983 : <epoch:318, iter:  22,000, lr:2.000e-04> G_loss: 2.964e+01 TV_loss: 0.000e+00 Gradient_loss: 9.273e+00 l1_loss: 1.384e+00 Constrast_loss: 1.898e+01 
+22-03-30 23:26:17.987 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/22000_E.pth
+22-03-30 23:28:32.088 : <epoch:327, iter:  22,200, lr:2.000e-04> G_loss: 2.659e+01 TV_loss: 0.000e+00 Gradient_loss: 4.921e+00 l1_loss: 6.892e-01 Constrast_loss: 2.098e+01 
+22-03-30 23:30:19.264 : <epoch:336, iter:  22,400, lr:2.000e-04> G_loss: 2.767e+01 TV_loss: 0.000e+00 Gradient_loss: 6.722e+00 l1_loss: 8.102e-01 Constrast_loss: 2.014e+01 
+22-03-30 23:32:05.171 : <epoch:345, iter:  22,600, lr:2.000e-04> G_loss: 2.803e+01 TV_loss: 0.000e+00 Gradient_loss: 6.190e+00 l1_loss: 7.570e-01 Constrast_loss: 2.108e+01 
+22-03-30 23:33:53.973 : <epoch:354, iter:  22,800, lr:2.000e-04> G_loss: 2.627e+01 TV_loss: 0.000e+00 Gradient_loss: 4.879e+00 l1_loss: 6.371e-01 Constrast_loss: 2.075e+01 
+22-03-30 23:35:48.050 : <epoch:363, iter:  23,000, lr:2.000e-04> G_loss: 2.837e+01 TV_loss: 0.000e+00 Gradient_loss: 5.814e+00 l1_loss: 8.525e-01 Constrast_loss: 2.170e+01 
+22-03-30 23:35:48.056 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/23000_E.pth
+22-03-30 23:38:15.378 : <epoch:372, iter:  23,200, lr:2.000e-04> G_loss: 2.608e+01 TV_loss: 0.000e+00 Gradient_loss: 6.093e+00 l1_loss: 9.305e-01 Constrast_loss: 1.905e+01 
+22-03-30 23:40:09.814 : <epoch:381, iter:  23,400, lr:2.000e-04> G_loss: 2.566e+01 TV_loss: 0.000e+00 Gradient_loss: 4.658e+00 l1_loss: 6.483e-01 Constrast_loss: 2.035e+01 
+22-03-30 23:42:02.442 : <epoch:390, iter:  23,600, lr:2.000e-04> G_loss: 2.631e+01 TV_loss: 0.000e+00 Gradient_loss: 5.138e+00 l1_loss: 7.119e-01 Constrast_loss: 2.046e+01 
+22-03-30 23:43:56.729 : <epoch:399, iter:  23,800, lr:2.000e-04> G_loss: 2.579e+01 TV_loss: 0.000e+00 Gradient_loss: 2.670e+00 l1_loss: 4.037e-01 Constrast_loss: 2.272e+01 
+22-03-30 23:45:48.976 : <epoch:409, iter:  24,000, lr:2.000e-04> G_loss: 2.639e+01 TV_loss: 0.000e+00 Gradient_loss: 4.105e+00 l1_loss: 5.015e-01 Constrast_loss: 2.178e+01 
+22-03-30 23:45:48.980 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/24000_E.pth
+22-03-30 23:48:03.310 : <epoch:418, iter:  24,200, lr:2.000e-04> G_loss: 2.711e+01 TV_loss: 0.000e+00 Gradient_loss: 6.364e+00 l1_loss: 9.545e-01 Constrast_loss: 1.979e+01 
+22-03-30 23:49:49.939 : <epoch:427, iter:  24,400, lr:2.000e-04> G_loss: 2.775e+01 TV_loss: 0.000e+00 Gradient_loss: 5.251e+00 l1_loss: 7.930e-01 Constrast_loss: 2.171e+01 
+22-03-30 23:51:39.578 : <epoch:436, iter:  24,600, lr:2.000e-04> G_loss: 2.780e+01 TV_loss: 0.000e+00 Gradient_loss: 5.342e+00 l1_loss: 8.676e-01 Constrast_loss: 2.159e+01 
+22-03-30 23:53:30.240 : <epoch:445, iter:  24,800, lr:2.000e-04> G_loss: 2.646e+01 TV_loss: 0.000e+00 Gradient_loss: 3.861e+00 l1_loss: 6.170e-01 Constrast_loss: 2.198e+01 
+22-03-30 23:55:21.613 : <epoch:454, iter:  25,000, lr:2.000e-04> G_loss: 2.746e+01 TV_loss: 0.000e+00 Gradient_loss: 5.964e+00 l1_loss: 9.234e-01 Constrast_loss: 2.057e+01 
+22-03-30 23:55:21.615 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/25000_E.pth
+22-03-30 23:57:46.501 : <epoch:463, iter:  25,200, lr:2.000e-04> G_loss: 2.661e+01 TV_loss: 0.000e+00 Gradient_loss: 5.294e+00 l1_loss: 7.946e-01 Constrast_loss: 2.052e+01 
+22-03-30 23:59:38.432 : <epoch:472, iter:  25,400, lr:2.000e-04> G_loss: 2.654e+01 TV_loss: 0.000e+00 Gradient_loss: 5.103e+00 l1_loss: 8.262e-01 Constrast_loss: 2.061e+01 
+22-03-31 00:01:47.796 : <epoch:481, iter:  25,600, lr:2.000e-04> G_loss: 2.622e+01 TV_loss: 0.000e+00 Gradient_loss: 4.465e+00 l1_loss: 7.166e-01 Constrast_loss: 2.104e+01 
+22-03-31 00:03:57.997 : <epoch:490, iter:  25,800, lr:2.000e-04> G_loss: 2.627e+01 TV_loss: 0.000e+00 Gradient_loss: 4.177e+00 l1_loss: 5.977e-01 Constrast_loss: 2.150e+01 
+22-03-31 00:06:10.446 : <epoch:499, iter:  26,000, lr:2.000e-04> G_loss: 2.588e+01 TV_loss: 0.000e+00 Gradient_loss: 5.126e+00 l1_loss: 7.383e-01 Constrast_loss: 2.001e+01 
+22-03-31 00:06:10.450 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/26000_E.pth
+22-03-31 00:09:13.187 : <epoch:509, iter:  26,200, lr:2.000e-04> G_loss: 2.689e+01 TV_loss: 0.000e+00 Gradient_loss: 8.271e+00 l1_loss: 1.175e+00 Constrast_loss: 1.744e+01 
+22-03-31 00:11:24.441 : <epoch:518, iter:  26,400, lr:2.000e-04> G_loss: 2.851e+01 TV_loss: 0.000e+00 Gradient_loss: 7.987e+00 l1_loss: 1.293e+00 Constrast_loss: 1.923e+01 
+22-03-31 00:13:26.202 : <epoch:527, iter:  26,600, lr:2.000e-04> G_loss: 2.691e+01 TV_loss: 0.000e+00 Gradient_loss: 5.395e+00 l1_loss: 8.864e-01 Constrast_loss: 2.063e+01 
+22-03-31 00:14:28.957 : <epoch:536, iter:  26,800, lr:2.000e-04> G_loss: 2.748e+01 TV_loss: 0.000e+00 Gradient_loss: 6.692e+00 l1_loss: 9.074e-01 Constrast_loss: 1.988e+01 
+22-03-31 00:15:31.981 : <epoch:545, iter:  27,000, lr:2.000e-04> G_loss: 2.816e+01 TV_loss: 0.000e+00 Gradient_loss: 5.860e+00 l1_loss: 9.259e-01 Constrast_loss: 2.138e+01 
+22-03-31 00:15:31.985 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/27000_E.pth
+22-03-31 00:16:48.698 : <epoch:554, iter:  27,200, lr:2.000e-04> G_loss: 2.584e+01 TV_loss: 0.000e+00 Gradient_loss: 4.426e+00 l1_loss: 6.905e-01 Constrast_loss: 2.072e+01 
+22-03-31 00:17:51.451 : <epoch:563, iter:  27,400, lr:2.000e-04> G_loss: 2.816e+01 TV_loss: 0.000e+00 Gradient_loss: 5.551e+00 l1_loss: 8.757e-01 Constrast_loss: 2.173e+01 
+22-03-31 00:18:52.692 : <epoch:572, iter:  27,600, lr:2.000e-04> G_loss: 2.600e+01 TV_loss: 0.000e+00 Gradient_loss: 4.713e+00 l1_loss: 6.181e-01 Constrast_loss: 2.067e+01 
+22-03-31 00:19:54.750 : <epoch:581, iter:  27,800, lr:2.000e-04> G_loss: 2.590e+01 TV_loss: 0.000e+00 Gradient_loss: 3.439e+00 l1_loss: 5.926e-01 Constrast_loss: 2.187e+01 
+22-03-31 00:20:56.626 : <epoch:590, iter:  28,000, lr:2.000e-04> G_loss: 2.699e+01 TV_loss: 0.000e+00 Gradient_loss: 4.434e+00 l1_loss: 6.187e-01 Constrast_loss: 2.194e+01 
+22-03-31 00:20:56.628 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/28000_E.pth
+22-03-31 00:22:12.456 : <epoch:599, iter:  28,200, lr:2.000e-04> G_loss: 2.545e+01 TV_loss: 0.000e+00 Gradient_loss: 2.097e+00 l1_loss: 2.927e-01 Constrast_loss: 2.306e+01 
+22-03-31 00:23:16.477 : <epoch:609, iter:  28,400, lr:2.000e-04> G_loss: 2.631e+01 TV_loss: 0.000e+00 Gradient_loss: 5.710e+00 l1_loss: 9.936e-01 Constrast_loss: 1.960e+01 
+22-03-31 00:24:19.320 : <epoch:618, iter:  28,600, lr:2.000e-04> G_loss: 2.757e+01 TV_loss: 0.000e+00 Gradient_loss: 6.215e+00 l1_loss: 8.115e-01 Constrast_loss: 2.054e+01 
+22-03-31 00:25:21.088 : <epoch:627, iter:  28,800, lr:2.000e-04> G_loss: 2.645e+01 TV_loss: 0.000e+00 Gradient_loss: 5.124e+00 l1_loss: 6.812e-01 Constrast_loss: 2.065e+01 
+22-03-31 00:26:23.715 : <epoch:636, iter:  29,000, lr:2.000e-04> G_loss: 2.758e+01 TV_loss: 0.000e+00 Gradient_loss: 7.881e+00 l1_loss: 1.049e+00 Constrast_loss: 1.865e+01 
+22-03-31 00:26:23.719 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/29000_E.pth
+22-03-31 00:27:39.112 : <epoch:645, iter:  29,200, lr:2.000e-04> G_loss: 2.663e+01 TV_loss: 0.000e+00 Gradient_loss: 3.664e+00 l1_loss: 5.493e-01 Constrast_loss: 2.242e+01 
+22-03-31 00:28:41.919 : <epoch:654, iter:  29,400, lr:2.000e-04> G_loss: 2.624e+01 TV_loss: 0.000e+00 Gradient_loss: 6.645e+00 l1_loss: 1.103e+00 Constrast_loss: 1.850e+01 
+22-03-31 00:29:44.568 : <epoch:663, iter:  29,600, lr:2.000e-04> G_loss: 2.796e+01 TV_loss: 0.000e+00 Gradient_loss: 6.013e+00 l1_loss: 1.044e+00 Constrast_loss: 2.090e+01 
+22-03-31 00:30:46.027 : <epoch:672, iter:  29,800, lr:2.000e-04> G_loss: 2.662e+01 TV_loss: 0.000e+00 Gradient_loss: 2.864e+00 l1_loss: 4.017e-01 Constrast_loss: 2.335e+01 
+22-03-31 00:31:48.894 : <epoch:681, iter:  30,000, lr:2.000e-04> G_loss: 2.564e+01 TV_loss: 0.000e+00 Gradient_loss: 2.725e+00 l1_loss: 3.674e-01 Constrast_loss: 2.255e+01 
+22-03-31 00:31:48.897 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/30000_E.pth
+22-03-31 00:33:03.781 : <epoch:690, iter:  30,200, lr:2.000e-04> G_loss: 2.588e+01 TV_loss: 0.000e+00 Gradient_loss: 4.417e+00 l1_loss: 5.951e-01 Constrast_loss: 2.087e+01 
+22-03-31 00:34:06.724 : <epoch:699, iter:  30,400, lr:2.000e-04> G_loss: 2.578e+01 TV_loss: 0.000e+00 Gradient_loss: 1.217e+00 l1_loss: 2.821e-01 Constrast_loss: 2.428e+01 
+22-03-31 00:35:10.751 : <epoch:709, iter:  30,600, lr:2.000e-04> G_loss: 2.654e+01 TV_loss: 0.000e+00 Gradient_loss: 5.581e+00 l1_loss: 7.181e-01 Constrast_loss: 2.024e+01 
+22-03-31 00:36:12.476 : <epoch:718, iter:  30,800, lr:2.000e-04> G_loss: 2.673e+01 TV_loss: 0.000e+00 Gradient_loss: 5.500e+00 l1_loss: 8.513e-01 Constrast_loss: 2.038e+01 
+22-03-31 00:37:14.475 : <epoch:727, iter:  31,000, lr:2.000e-04> G_loss: 2.826e+01 TV_loss: 0.000e+00 Gradient_loss: 5.769e+00 l1_loss: 9.523e-01 Constrast_loss: 2.154e+01 
+22-03-31 00:37:14.477 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/31000_E.pth
+22-03-31 00:38:29.021 : <epoch:736, iter:  31,200, lr:2.000e-04> G_loss: 2.629e+01 TV_loss: 0.000e+00 Gradient_loss: 5.480e+00 l1_loss: 1.033e+00 Constrast_loss: 1.978e+01 
+22-03-31 00:39:30.974 : <epoch:745, iter:  31,400, lr:2.000e-04> G_loss: 2.602e+01 TV_loss: 0.000e+00 Gradient_loss: 2.232e+00 l1_loss: 3.982e-01 Constrast_loss: 2.339e+01 
+22-03-31 00:40:33.398 : <epoch:754, iter:  31,600, lr:2.000e-04> G_loss: 2.622e+01 TV_loss: 0.000e+00 Gradient_loss: 5.820e+00 l1_loss: 9.408e-01 Constrast_loss: 1.945e+01 
+22-03-31 00:41:36.594 : <epoch:763, iter:  31,800, lr:2.000e-04> G_loss: 2.775e+01 TV_loss: 0.000e+00 Gradient_loss: 6.831e+00 l1_loss: 1.012e+00 Constrast_loss: 1.991e+01 
+22-03-31 00:42:38.963 : <epoch:772, iter:  32,000, lr:2.000e-04> G_loss: 2.649e+01 TV_loss: 0.000e+00 Gradient_loss: 5.090e+00 l1_loss: 8.122e-01 Constrast_loss: 2.059e+01 
+22-03-31 00:42:38.968 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/32000_E.pth
+22-03-31 00:43:53.231 : <epoch:781, iter:  32,200, lr:2.000e-04> G_loss: 2.464e+01 TV_loss: 0.000e+00 Gradient_loss: 2.442e+00 l1_loss: 3.396e-01 Constrast_loss: 2.186e+01 
+22-03-31 00:44:55.324 : <epoch:790, iter:  32,400, lr:2.000e-04> G_loss: 2.592e+01 TV_loss: 0.000e+00 Gradient_loss: 3.117e+00 l1_loss: 4.533e-01 Constrast_loss: 2.235e+01 
+22-03-31 00:45:57.669 : <epoch:799, iter:  32,600, lr:2.000e-04> G_loss: 2.603e+01 TV_loss: 0.000e+00 Gradient_loss: 3.823e+00 l1_loss: 4.879e-01 Constrast_loss: 2.172e+01 
+22-03-31 00:47:01.695 : <epoch:809, iter:  32,800, lr:2.000e-04> G_loss: 2.581e+01 TV_loss: 0.000e+00 Gradient_loss: 5.225e+00 l1_loss: 7.490e-01 Constrast_loss: 1.984e+01 
+22-03-31 00:48:03.996 : <epoch:818, iter:  33,000, lr:2.000e-04> G_loss: 2.614e+01 TV_loss: 0.000e+00 Gradient_loss: 3.693e+00 l1_loss: 5.894e-01 Constrast_loss: 2.185e+01 
+22-03-31 00:48:03.999 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/33000_E.pth
+22-03-31 00:49:18.771 : <epoch:827, iter:  33,200, lr:2.000e-04> G_loss: 2.651e+01 TV_loss: 0.000e+00 Gradient_loss: 4.525e+00 l1_loss: 6.859e-01 Constrast_loss: 2.130e+01 
+22-03-31 00:50:20.786 : <epoch:836, iter:  33,400, lr:2.000e-04> G_loss: 2.618e+01 TV_loss: 0.000e+00 Gradient_loss: 4.408e+00 l1_loss: 6.830e-01 Constrast_loss: 2.109e+01 
+22-03-31 00:51:22.820 : <epoch:845, iter:  33,600, lr:2.000e-04> G_loss: 2.655e+01 TV_loss: 0.000e+00 Gradient_loss: 3.804e+00 l1_loss: 5.354e-01 Constrast_loss: 2.221e+01 
+22-03-31 00:52:25.280 : <epoch:854, iter:  33,800, lr:2.000e-04> G_loss: 2.556e+01 TV_loss: 0.000e+00 Gradient_loss: 3.227e+00 l1_loss: 4.657e-01 Constrast_loss: 2.187e+01 
+22-03-31 00:53:27.262 : <epoch:863, iter:  34,000, lr:2.000e-04> G_loss: 2.816e+01 TV_loss: 0.000e+00 Gradient_loss: 6.018e+00 l1_loss: 1.083e+00 Constrast_loss: 2.106e+01 
+22-03-31 00:53:27.266 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/34000_E.pth
+22-03-31 00:54:41.214 : <epoch:872, iter:  34,200, lr:2.000e-04> G_loss: 2.506e+01 TV_loss: 0.000e+00 Gradient_loss: 3.117e+00 l1_loss: 4.818e-01 Constrast_loss: 2.146e+01 
+22-03-31 00:55:44.079 : <epoch:881, iter:  34,400, lr:2.000e-04> G_loss: 2.743e+01 TV_loss: 0.000e+00 Gradient_loss: 5.644e+00 l1_loss: 1.058e+00 Constrast_loss: 2.073e+01 
+22-03-31 00:56:46.511 : <epoch:890, iter:  34,600, lr:2.000e-04> G_loss: 2.634e+01 TV_loss: 0.000e+00 Gradient_loss: 4.783e+00 l1_loss: 7.627e-01 Constrast_loss: 2.079e+01 
+22-03-31 00:57:49.607 : <epoch:899, iter:  34,800, lr:2.000e-04> G_loss: 2.597e+01 TV_loss: 0.000e+00 Gradient_loss: 6.087e+00 l1_loss: 8.195e-01 Constrast_loss: 1.907e+01 
+22-03-31 00:58:54.817 : <epoch:909, iter:  35,000, lr:2.000e-04> G_loss: 2.573e+01 TV_loss: 0.000e+00 Gradient_loss: 5.100e+00 l1_loss: 8.236e-01 Constrast_loss: 1.980e+01 
+22-03-31 00:58:54.821 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/35000_E.pth
+22-03-31 01:00:09.720 : <epoch:918, iter:  35,200, lr:2.000e-04> G_loss: 2.867e+01 TV_loss: 0.000e+00 Gradient_loss: 7.418e+00 l1_loss: 1.110e+00 Constrast_loss: 2.014e+01 
+22-03-31 01:01:11.569 : <epoch:927, iter:  35,400, lr:2.000e-04> G_loss: 2.571e+01 TV_loss: 0.000e+00 Gradient_loss: 5.307e+00 l1_loss: 8.308e-01 Constrast_loss: 1.957e+01 
+22-03-31 01:02:14.161 : <epoch:936, iter:  35,600, lr:2.000e-04> G_loss: 2.711e+01 TV_loss: 0.000e+00 Gradient_loss: 5.859e+00 l1_loss: 8.721e-01 Constrast_loss: 2.038e+01 
+22-03-31 01:03:16.486 : <epoch:945, iter:  35,800, lr:2.000e-04> G_loss: 2.581e+01 TV_loss: 0.000e+00 Gradient_loss: 1.936e+00 l1_loss: 3.093e-01 Constrast_loss: 2.357e+01 
+22-03-31 01:04:20.161 : <epoch:954, iter:  36,000, lr:2.000e-04> G_loss: 2.551e+01 TV_loss: 0.000e+00 Gradient_loss: 2.479e+00 l1_loss: 3.168e-01 Constrast_loss: 2.272e+01 
+22-03-31 01:04:20.166 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/36000_E.pth
+22-03-31 01:05:37.354 : <epoch:963, iter:  36,200, lr:2.000e-04> G_loss: 2.740e+01 TV_loss: 0.000e+00 Gradient_loss: 5.596e+00 l1_loss: 9.666e-01 Constrast_loss: 2.083e+01 
+22-03-31 01:06:40.031 : <epoch:972, iter:  36,400, lr:2.000e-04> G_loss: 2.622e+01 TV_loss: 0.000e+00 Gradient_loss: 4.865e+00 l1_loss: 9.300e-01 Constrast_loss: 2.042e+01 
+22-03-31 01:07:42.265 : <epoch:981, iter:  36,600, lr:2.000e-04> G_loss: 2.621e+01 TV_loss: 0.000e+00 Gradient_loss: 3.386e+00 l1_loss: 6.145e-01 Constrast_loss: 2.221e+01 
+22-03-31 01:08:45.610 : <epoch:990, iter:  36,800, lr:2.000e-04> G_loss: 2.727e+01 TV_loss: 0.000e+00 Gradient_loss: 6.345e+00 l1_loss: 1.072e+00 Constrast_loss: 1.985e+01 
+22-03-31 01:09:47.993 : <epoch:999, iter:  37,000, lr:2.000e-04> G_loss: 2.614e+01 TV_loss: 0.000e+00 Gradient_loss: 3.807e+00 l1_loss: 6.400e-01 Constrast_loss: 2.169e+01 
+22-03-31 01:09:47.998 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/37000_E.pth
+22-03-31 01:11:04.834 : <epoch:1009, iter:  37,200, lr:2.000e-04> G_loss: 2.544e+01 TV_loss: 0.000e+00 Gradient_loss: 3.682e+00 l1_loss: 6.494e-01 Constrast_loss: 2.111e+01 
+22-03-31 01:12:07.470 : <epoch:1018, iter:  37,400, lr:2.000e-04> G_loss: 2.729e+01 TV_loss: 0.000e+00 Gradient_loss: 7.492e+00 l1_loss: 1.406e+00 Constrast_loss: 1.840e+01 
+22-03-31 01:13:09.739 : <epoch:1027, iter:  37,600, lr:2.000e-04> G_loss: 2.677e+01 TV_loss: 0.000e+00 Gradient_loss: 3.811e+00 l1_loss: 4.206e-01 Constrast_loss: 2.254e+01 
+22-03-31 01:14:11.319 : <epoch:1036, iter:  37,800, lr:2.000e-04> G_loss: 2.558e+01 TV_loss: 0.000e+00 Gradient_loss: 1.731e+00 l1_loss: 3.032e-01 Constrast_loss: 2.355e+01 
+22-03-31 01:15:12.864 : <epoch:1045, iter:  38,000, lr:2.000e-04> G_loss: 2.638e+01 TV_loss: 0.000e+00 Gradient_loss: 3.089e+00 l1_loss: 6.531e-01 Constrast_loss: 2.264e+01 
+22-03-31 01:15:12.869 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/38000_E.pth
+22-03-31 01:16:28.463 : <epoch:1054, iter:  38,200, lr:2.000e-04> G_loss: 2.573e+01 TV_loss: 0.000e+00 Gradient_loss: 4.137e+00 l1_loss: 6.833e-01 Constrast_loss: 2.091e+01 
+22-03-31 01:17:30.726 : <epoch:1063, iter:  38,400, lr:2.000e-04> G_loss: 2.606e+01 TV_loss: 0.000e+00 Gradient_loss: 5.810e+00 l1_loss: 1.047e+00 Constrast_loss: 1.921e+01 
+22-03-31 01:18:33.121 : <epoch:1072, iter:  38,600, lr:2.000e-04> G_loss: 2.616e+01 TV_loss: 0.000e+00 Gradient_loss: 3.679e+00 l1_loss: 5.956e-01 Constrast_loss: 2.189e+01 
+22-03-31 01:19:35.646 : <epoch:1081, iter:  38,800, lr:2.000e-04> G_loss: 2.611e+01 TV_loss: 0.000e+00 Gradient_loss: 3.309e+00 l1_loss: 3.832e-01 Constrast_loss: 2.242e+01 
+22-03-31 01:20:38.237 : <epoch:1090, iter:  39,000, lr:2.000e-04> G_loss: 2.558e+01 TV_loss: 0.000e+00 Gradient_loss: 3.701e+00 l1_loss: 5.761e-01 Constrast_loss: 2.130e+01 
+22-03-31 01:20:38.240 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/39000_E.pth
+22-03-31 01:21:55.298 : <epoch:1099, iter:  39,200, lr:2.000e-04> G_loss: 2.655e+01 TV_loss: 0.000e+00 Gradient_loss: 4.365e+00 l1_loss: 7.663e-01 Constrast_loss: 2.142e+01 
+22-03-31 01:23:00.324 : <epoch:1109, iter:  39,400, lr:2.000e-04> G_loss: 2.604e+01 TV_loss: 0.000e+00 Gradient_loss: 4.055e+00 l1_loss: 5.720e-01 Constrast_loss: 2.141e+01 
+22-03-31 01:24:02.857 : <epoch:1118, iter:  39,600, lr:2.000e-04> G_loss: 2.688e+01 TV_loss: 0.000e+00 Gradient_loss: 5.986e+00 l1_loss: 9.556e-01 Constrast_loss: 1.994e+01 
+22-03-31 01:25:04.663 : <epoch:1127, iter:  39,800, lr:2.000e-04> G_loss: 2.582e+01 TV_loss: 0.000e+00 Gradient_loss: 3.575e+00 l1_loss: 5.393e-01 Constrast_loss: 2.170e+01 
+22-03-31 01:26:06.630 : <epoch:1136, iter:  40,000, lr:2.000e-04> G_loss: 2.497e+01 TV_loss: 0.000e+00 Gradient_loss: 3.391e+00 l1_loss: 4.295e-01 Constrast_loss: 2.115e+01 
+22-03-31 01:26:06.637 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/40000_E.pth
+22-03-31 01:27:22.267 : <epoch:1145, iter:  40,200, lr:2.000e-04> G_loss: 2.731e+01 TV_loss: 0.000e+00 Gradient_loss: 5.599e+00 l1_loss: 9.970e-01 Constrast_loss: 2.072e+01 
+22-03-31 01:28:25.337 : <epoch:1154, iter:  40,400, lr:2.000e-04> G_loss: 2.560e+01 TV_loss: 0.000e+00 Gradient_loss: 5.360e+00 l1_loss: 7.550e-01 Constrast_loss: 1.949e+01 
+22-03-31 01:29:27.005 : <epoch:1163, iter:  40,600, lr:2.000e-04> G_loss: 2.706e+01 TV_loss: 0.000e+00 Gradient_loss: 6.931e+00 l1_loss: 1.055e+00 Constrast_loss: 1.907e+01 
+22-03-31 01:30:29.430 : <epoch:1172, iter:  40,800, lr:2.000e-04> G_loss: 2.543e+01 TV_loss: 0.000e+00 Gradient_loss: 3.441e+00 l1_loss: 5.241e-01 Constrast_loss: 2.146e+01 
+22-03-31 01:31:31.187 : <epoch:1181, iter:  41,000, lr:2.000e-04> G_loss: 2.625e+01 TV_loss: 0.000e+00 Gradient_loss: 4.416e+00 l1_loss: 7.632e-01 Constrast_loss: 2.107e+01 
+22-03-31 01:31:31.192 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/41000_E.pth
+22-03-31 01:32:44.970 : <epoch:1190, iter:  41,200, lr:2.000e-04> G_loss: 2.529e+01 TV_loss: 0.000e+00 Gradient_loss: 4.379e+00 l1_loss: 7.196e-01 Constrast_loss: 2.019e+01 
+22-03-31 01:33:47.236 : <epoch:1199, iter:  41,400, lr:2.000e-04> G_loss: 2.553e+01 TV_loss: 0.000e+00 Gradient_loss: 2.244e+00 l1_loss: 3.673e-01 Constrast_loss: 2.292e+01 
+22-03-31 01:34:51.960 : <epoch:1209, iter:  41,600, lr:2.000e-04> G_loss: 2.601e+01 TV_loss: 0.000e+00 Gradient_loss: 2.036e+00 l1_loss: 2.300e-01 Constrast_loss: 2.374e+01 
+22-03-31 01:35:55.254 : <epoch:1218, iter:  41,800, lr:2.000e-04> G_loss: 2.731e+01 TV_loss: 0.000e+00 Gradient_loss: 5.863e+00 l1_loss: 9.600e-01 Constrast_loss: 2.049e+01 
+22-03-31 01:36:58.750 : <epoch:1227, iter:  42,000, lr:2.000e-04> G_loss: 2.600e+01 TV_loss: 0.000e+00 Gradient_loss: 4.369e+00 l1_loss: 5.588e-01 Constrast_loss: 2.107e+01 
+22-03-31 01:36:58.754 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/42000_E.pth
+22-03-31 01:38:15.095 : <epoch:1236, iter:  42,200, lr:2.000e-04> G_loss: 2.650e+01 TV_loss: 0.000e+00 Gradient_loss: 5.133e+00 l1_loss: 7.754e-01 Constrast_loss: 2.059e+01 
+22-03-31 01:39:17.275 : <epoch:1245, iter:  42,400, lr:2.000e-04> G_loss: 2.647e+01 TV_loss: 0.000e+00 Gradient_loss: 5.091e+00 l1_loss: 1.042e+00 Constrast_loss: 2.034e+01 
+22-03-31 01:40:19.714 : <epoch:1254, iter:  42,600, lr:2.000e-04> G_loss: 2.538e+01 TV_loss: 0.000e+00 Gradient_loss: 4.291e+00 l1_loss: 7.617e-01 Constrast_loss: 2.033e+01 
+22-03-31 01:41:21.886 : <epoch:1263, iter:  42,800, lr:2.000e-04> G_loss: 2.707e+01 TV_loss: 0.000e+00 Gradient_loss: 7.176e+00 l1_loss: 1.272e+00 Constrast_loss: 1.862e+01 
+22-03-31 01:42:24.880 : <epoch:1272, iter:  43,000, lr:2.000e-04> G_loss: 2.530e+01 TV_loss: 0.000e+00 Gradient_loss: 4.076e+00 l1_loss: 6.828e-01 Constrast_loss: 2.054e+01 
+22-03-31 01:42:24.883 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/43000_E.pth
+22-03-31 01:43:40.984 : <epoch:1281, iter:  43,200, lr:2.000e-04> G_loss: 2.705e+01 TV_loss: 0.000e+00 Gradient_loss: 4.644e+00 l1_loss: 8.174e-01 Constrast_loss: 2.159e+01 
+22-03-31 01:44:43.030 : <epoch:1290, iter:  43,400, lr:2.000e-04> G_loss: 2.711e+01 TV_loss: 0.000e+00 Gradient_loss: 5.197e+00 l1_loss: 9.297e-01 Constrast_loss: 2.099e+01 
+22-03-31 01:45:46.457 : <epoch:1299, iter:  43,600, lr:2.000e-04> G_loss: 2.587e+01 TV_loss: 0.000e+00 Gradient_loss: 3.258e+00 l1_loss: 4.561e-01 Constrast_loss: 2.216e+01 
+22-03-31 01:46:50.944 : <epoch:1309, iter:  43,800, lr:2.000e-04> G_loss: 2.527e+01 TV_loss: 0.000e+00 Gradient_loss: 2.868e+00 l1_loss: 4.090e-01 Constrast_loss: 2.200e+01 
+22-03-31 01:47:53.505 : <epoch:1318, iter:  44,000, lr:2.000e-04> G_loss: 2.784e+01 TV_loss: 0.000e+00 Gradient_loss: 6.148e+00 l1_loss: 1.003e+00 Constrast_loss: 2.069e+01 
+22-03-31 01:47:53.510 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/44000_E.pth
+22-03-31 01:49:09.980 : <epoch:1327, iter:  44,200, lr:2.000e-04> G_loss: 2.682e+01 TV_loss: 0.000e+00 Gradient_loss: 5.289e+00 l1_loss: 9.133e-01 Constrast_loss: 2.062e+01 
+22-03-31 01:50:11.654 : <epoch:1336, iter:  44,400, lr:2.000e-04> G_loss: 2.534e+01 TV_loss: 0.000e+00 Gradient_loss: 3.691e+00 l1_loss: 7.560e-01 Constrast_loss: 2.090e+01 
+22-03-31 01:51:13.677 : <epoch:1345, iter:  44,600, lr:2.000e-04> G_loss: 2.529e+01 TV_loss: 0.000e+00 Gradient_loss: 2.073e+00 l1_loss: 3.499e-01 Constrast_loss: 2.287e+01 
+22-03-31 01:52:18.192 : <epoch:1354, iter:  44,800, lr:2.000e-04> G_loss: 2.533e+01 TV_loss: 0.000e+00 Gradient_loss: 4.590e+00 l1_loss: 9.098e-01 Constrast_loss: 1.983e+01 
+22-03-31 01:53:19.907 : <epoch:1363, iter:  45,000, lr:2.000e-04> G_loss: 2.661e+01 TV_loss: 0.000e+00 Gradient_loss: 5.491e+00 l1_loss: 8.009e-01 Constrast_loss: 2.032e+01 
+22-03-31 01:53:19.911 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/45000_E.pth
+22-03-31 01:54:35.776 : <epoch:1372, iter:  45,200, lr:2.000e-04> G_loss: 2.628e+01 TV_loss: 0.000e+00 Gradient_loss: 5.912e+00 l1_loss: 1.103e+00 Constrast_loss: 1.926e+01 
+22-03-31 01:55:37.095 : <epoch:1381, iter:  45,400, lr:2.000e-04> G_loss: 2.599e+01 TV_loss: 0.000e+00 Gradient_loss: 3.691e+00 l1_loss: 5.546e-01 Constrast_loss: 2.175e+01 
+22-03-31 01:56:40.198 : <epoch:1390, iter:  45,600, lr:2.000e-04> G_loss: 2.579e+01 TV_loss: 0.000e+00 Gradient_loss: 4.369e+00 l1_loss: 8.013e-01 Constrast_loss: 2.062e+01 
+22-03-31 01:57:43.019 : <epoch:1399, iter:  45,800, lr:2.000e-04> G_loss: 2.491e+01 TV_loss: 0.000e+00 Gradient_loss: 1.050e+00 l1_loss: 2.306e-01 Constrast_loss: 2.363e+01 
+22-03-31 01:58:46.782 : <epoch:1409, iter:  46,000, lr:2.000e-04> G_loss: 2.733e+01 TV_loss: 0.000e+00 Gradient_loss: 5.523e+00 l1_loss: 1.213e+00 Constrast_loss: 2.060e+01 
+22-03-31 01:58:46.786 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/46000_E.pth
+22-03-31 02:00:02.133 : <epoch:1418, iter:  46,200, lr:2.000e-04> G_loss: 2.692e+01 TV_loss: 0.000e+00 Gradient_loss: 4.794e+00 l1_loss: 7.431e-01 Constrast_loss: 2.138e+01 
+22-03-31 02:01:04.394 : <epoch:1427, iter:  46,400, lr:2.000e-04> G_loss: 2.646e+01 TV_loss: 0.000e+00 Gradient_loss: 3.247e+00 l1_loss: 6.123e-01 Constrast_loss: 2.260e+01 
+22-03-31 02:02:06.354 : <epoch:1436, iter:  46,600, lr:2.000e-04> G_loss: 2.568e+01 TV_loss: 0.000e+00 Gradient_loss: 6.103e+00 l1_loss: 1.009e+00 Constrast_loss: 1.856e+01 
+22-03-31 02:03:08.084 : <epoch:1445, iter:  46,800, lr:2.000e-04> G_loss: 2.642e+01 TV_loss: 0.000e+00 Gradient_loss: 4.579e+00 l1_loss: 8.193e-01 Constrast_loss: 2.102e+01 
+22-03-31 02:04:09.563 : <epoch:1454, iter:  47,000, lr:2.000e-04> G_loss: 2.597e+01 TV_loss: 0.000e+00 Gradient_loss: 2.634e+00 l1_loss: 3.897e-01 Constrast_loss: 2.295e+01 
+22-03-31 02:04:09.567 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/47000_E.pth
+22-03-31 02:05:23.283 : <epoch:1463, iter:  47,200, lr:2.000e-04> G_loss: 2.695e+01 TV_loss: 0.000e+00 Gradient_loss: 5.375e+00 l1_loss: 9.234e-01 Constrast_loss: 2.065e+01 
+22-03-31 02:06:24.979 : <epoch:1472, iter:  47,400, lr:2.000e-04> G_loss: 2.616e+01 TV_loss: 0.000e+00 Gradient_loss: 4.313e+00 l1_loss: 7.238e-01 Constrast_loss: 2.112e+01 
+22-03-31 02:07:28.594 : <epoch:1481, iter:  47,600, lr:2.000e-04> G_loss: 2.595e+01 TV_loss: 0.000e+00 Gradient_loss: 4.113e+00 l1_loss: 5.627e-01 Constrast_loss: 2.128e+01 
+22-03-31 02:08:30.798 : <epoch:1490, iter:  47,800, lr:2.000e-04> G_loss: 2.596e+01 TV_loss: 0.000e+00 Gradient_loss: 3.104e+00 l1_loss: 4.616e-01 Constrast_loss: 2.239e+01 
+22-03-31 02:09:32.890 : <epoch:1499, iter:  48,000, lr:2.000e-04> G_loss: 2.475e+01 TV_loss: 0.000e+00 Gradient_loss: 3.429e+00 l1_loss: 6.182e-01 Constrast_loss: 2.070e+01 
+22-03-31 02:09:32.892 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/48000_E.pth
+22-03-31 02:10:48.976 : <epoch:1509, iter:  48,200, lr:2.000e-04> G_loss: 2.514e+01 TV_loss: 0.000e+00 Gradient_loss: 2.359e+00 l1_loss: 4.165e-01 Constrast_loss: 2.236e+01 
+22-03-31 02:11:51.079 : <epoch:1518, iter:  48,400, lr:2.000e-04> G_loss: 2.694e+01 TV_loss: 0.000e+00 Gradient_loss: 5.301e+00 l1_loss: 1.043e+00 Constrast_loss: 2.059e+01 
+22-03-31 02:12:54.713 : <epoch:1527, iter:  48,600, lr:2.000e-04> G_loss: 2.463e+01 TV_loss: 0.000e+00 Gradient_loss: 4.025e+00 l1_loss: 6.898e-01 Constrast_loss: 1.991e+01 
+22-03-31 02:13:56.064 : <epoch:1536, iter:  48,800, lr:2.000e-04> G_loss: 2.574e+01 TV_loss: 0.000e+00 Gradient_loss: 4.915e+00 l1_loss: 6.944e-01 Constrast_loss: 2.013e+01 
+22-03-31 02:14:57.949 : <epoch:1545, iter:  49,000, lr:2.000e-04> G_loss: 2.723e+01 TV_loss: 0.000e+00 Gradient_loss: 4.679e+00 l1_loss: 8.843e-01 Constrast_loss: 2.167e+01 
+22-03-31 02:14:57.954 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/49000_E.pth
+22-03-31 02:16:12.064 : <epoch:1554, iter:  49,200, lr:2.000e-04> G_loss: 2.549e+01 TV_loss: 0.000e+00 Gradient_loss: 5.210e+00 l1_loss: 1.058e+00 Constrast_loss: 1.923e+01 
+22-03-31 02:17:14.202 : <epoch:1563, iter:  49,400, lr:2.000e-04> G_loss: 2.606e+01 TV_loss: 0.000e+00 Gradient_loss: 5.694e+00 l1_loss: 9.828e-01 Constrast_loss: 1.938e+01 
+22-03-31 02:18:16.603 : <epoch:1572, iter:  49,600, lr:2.000e-04> G_loss: 2.568e+01 TV_loss: 0.000e+00 Gradient_loss: 2.762e+00 l1_loss: 5.056e-01 Constrast_loss: 2.241e+01 
+22-03-31 02:19:19.422 : <epoch:1581, iter:  49,800, lr:2.000e-04> G_loss: 2.547e+01 TV_loss: 0.000e+00 Gradient_loss: 3.632e+00 l1_loss: 6.962e-01 Constrast_loss: 2.114e+01 
+22-03-31 02:20:21.569 : <epoch:1590, iter:  50,000, lr:2.000e-04> G_loss: 2.549e+01 TV_loss: 0.000e+00 Gradient_loss: 3.547e+00 l1_loss: 9.072e-01 Constrast_loss: 2.104e+01 
+22-03-31 02:20:21.572 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/50000_E.pth
+22-03-31 02:21:37.088 : <epoch:1599, iter:  50,200, lr:2.000e-04> G_loss: 2.552e+01 TV_loss: 0.000e+00 Gradient_loss: 3.955e+00 l1_loss: 5.284e-01 Constrast_loss: 2.104e+01 
+22-03-31 02:22:41.619 : <epoch:1609, iter:  50,400, lr:2.000e-04> G_loss: 2.489e+01 TV_loss: 0.000e+00 Gradient_loss: 5.790e+00 l1_loss: 1.129e+00 Constrast_loss: 1.797e+01 
+22-03-31 02:23:43.233 : <epoch:1618, iter:  50,600, lr:2.000e-04> G_loss: 2.640e+01 TV_loss: 0.000e+00 Gradient_loss: 3.585e+00 l1_loss: 6.082e-01 Constrast_loss: 2.220e+01 
+22-03-31 02:24:46.096 : <epoch:1627, iter:  50,800, lr:2.000e-04> G_loss: 2.640e+01 TV_loss: 0.000e+00 Gradient_loss: 2.879e+00 l1_loss: 4.749e-01 Constrast_loss: 2.305e+01 
+22-03-31 02:25:48.768 : <epoch:1636, iter:  51,000, lr:2.000e-04> G_loss: 2.523e+01 TV_loss: 0.000e+00 Gradient_loss: 4.090e+00 l1_loss: 6.845e-01 Constrast_loss: 2.046e+01 
+22-03-31 02:25:48.769 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/51000_E.pth
+22-03-31 02:27:04.012 : <epoch:1645, iter:  51,200, lr:2.000e-04> G_loss: 2.561e+01 TV_loss: 0.000e+00 Gradient_loss: 3.794e+00 l1_loss: 6.470e-01 Constrast_loss: 2.117e+01 
+22-03-31 02:28:05.829 : <epoch:1654, iter:  51,400, lr:2.000e-04> G_loss: 2.519e+01 TV_loss: 0.000e+00 Gradient_loss: 3.191e+00 l1_loss: 5.981e-01 Constrast_loss: 2.140e+01 
+22-03-31 02:29:08.155 : <epoch:1663, iter:  51,600, lr:2.000e-04> G_loss: 2.713e+01 TV_loss: 0.000e+00 Gradient_loss: 6.070e+00 l1_loss: 9.932e-01 Constrast_loss: 2.007e+01 
+22-03-31 02:30:09.719 : <epoch:1672, iter:  51,800, lr:2.000e-04> G_loss: 2.533e+01 TV_loss: 0.000e+00 Gradient_loss: 2.572e+00 l1_loss: 4.466e-01 Constrast_loss: 2.231e+01 
+22-03-31 02:31:10.689 : <epoch:1681, iter:  52,000, lr:2.000e-04> G_loss: 2.545e+01 TV_loss: 0.000e+00 Gradient_loss: 2.838e+00 l1_loss: 5.268e-01 Constrast_loss: 2.209e+01 
+22-03-31 02:31:10.692 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/52000_E.pth
+22-03-31 02:32:25.178 : <epoch:1690, iter:  52,200, lr:2.000e-04> G_loss: 2.573e+01 TV_loss: 0.000e+00 Gradient_loss: 4.086e+00 l1_loss: 6.780e-01 Constrast_loss: 2.096e+01 
+22-03-31 02:33:26.350 : <epoch:1699, iter:  52,400, lr:2.000e-04> G_loss: 2.477e+01 TV_loss: 0.000e+00 Gradient_loss: 5.287e+00 l1_loss: 8.236e-01 Constrast_loss: 1.866e+01 
+22-03-31 02:34:29.637 : <epoch:1709, iter:  52,600, lr:2.000e-04> G_loss: 2.561e+01 TV_loss: 0.000e+00 Gradient_loss: 4.528e+00 l1_loss: 9.247e-01 Constrast_loss: 2.016e+01 
+22-03-31 02:35:31.756 : <epoch:1718, iter:  52,800, lr:2.000e-04> G_loss: 2.695e+01 TV_loss: 0.000e+00 Gradient_loss: 6.161e+00 l1_loss: 1.140e+00 Constrast_loss: 1.965e+01 
+22-03-31 02:36:34.870 : <epoch:1727, iter:  53,000, lr:2.000e-04> G_loss: 2.716e+01 TV_loss: 0.000e+00 Gradient_loss: 5.059e+00 l1_loss: 8.412e-01 Constrast_loss: 2.126e+01 
+22-03-31 02:36:34.871 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/53000_E.pth
+22-03-31 02:37:49.681 : <epoch:1736, iter:  53,200, lr:2.000e-04> G_loss: 2.528e+01 TV_loss: 0.000e+00 Gradient_loss: 5.087e+00 l1_loss: 8.444e-01 Constrast_loss: 1.935e+01 
+22-03-31 02:38:50.750 : <epoch:1745, iter:  53,400, lr:2.000e-04> G_loss: 2.614e+01 TV_loss: 0.000e+00 Gradient_loss: 2.955e+00 l1_loss: 7.624e-01 Constrast_loss: 2.242e+01 
+22-03-31 02:39:52.204 : <epoch:1754, iter:  53,600, lr:2.000e-04> G_loss: 2.584e+01 TV_loss: 0.000e+00 Gradient_loss: 4.524e+00 l1_loss: 8.780e-01 Constrast_loss: 2.043e+01 
+22-03-31 02:40:54.988 : <epoch:1763, iter:  53,800, lr:2.000e-04> G_loss: 2.808e+01 TV_loss: 0.000e+00 Gradient_loss: 6.322e+00 l1_loss: 1.310e+00 Constrast_loss: 2.045e+01 
+22-03-31 02:41:58.092 : <epoch:1772, iter:  54,000, lr:2.000e-04> G_loss: 2.557e+01 TV_loss: 0.000e+00 Gradient_loss: 3.093e+00 l1_loss: 5.021e-01 Constrast_loss: 2.198e+01 
+22-03-31 02:41:58.095 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/54000_E.pth
+22-03-31 02:43:13.450 : <epoch:1781, iter:  54,200, lr:2.000e-04> G_loss: 2.583e+01 TV_loss: 0.000e+00 Gradient_loss: 4.343e+00 l1_loss: 7.804e-01 Constrast_loss: 2.071e+01 
+22-03-31 02:44:15.958 : <epoch:1790, iter:  54,400, lr:2.000e-04> G_loss: 2.612e+01 TV_loss: 0.000e+00 Gradient_loss: 4.068e+00 l1_loss: 8.335e-01 Constrast_loss: 2.122e+01 
+22-03-31 02:45:17.508 : <epoch:1799, iter:  54,600, lr:2.000e-04> G_loss: 2.543e+01 TV_loss: 0.000e+00 Gradient_loss: 2.076e+00 l1_loss: 4.605e-01 Constrast_loss: 2.289e+01 
+22-03-31 02:46:22.370 : <epoch:1809, iter:  54,800, lr:2.000e-04> G_loss: 2.592e+01 TV_loss: 0.000e+00 Gradient_loss: 4.551e+00 l1_loss: 7.172e-01 Constrast_loss: 2.065e+01 
+22-03-31 02:47:24.879 : <epoch:1818, iter:  55,000, lr:2.000e-04> G_loss: 2.681e+01 TV_loss: 0.000e+00 Gradient_loss: 5.443e+00 l1_loss: 9.158e-01 Constrast_loss: 2.045e+01 
+22-03-31 02:47:24.880 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/55000_E.pth
+22-03-31 02:48:39.861 : <epoch:1827, iter:  55,200, lr:2.000e-04> G_loss: 2.726e+01 TV_loss: 0.000e+00 Gradient_loss: 5.433e+00 l1_loss: 1.105e+00 Constrast_loss: 2.072e+01 
+22-03-31 02:49:42.116 : <epoch:1836, iter:  55,400, lr:2.000e-04> G_loss: 2.683e+01 TV_loss: 0.000e+00 Gradient_loss: 5.247e+00 l1_loss: 8.662e-01 Constrast_loss: 2.072e+01 
+22-03-31 02:50:43.571 : <epoch:1845, iter:  55,600, lr:2.000e-04> G_loss: 2.624e+01 TV_loss: 0.000e+00 Gradient_loss: 4.118e+00 l1_loss: 7.189e-01 Constrast_loss: 2.140e+01 
+22-03-31 02:51:45.036 : <epoch:1854, iter:  55,800, lr:2.000e-04> G_loss: 2.494e+01 TV_loss: 0.000e+00 Gradient_loss: 2.492e+00 l1_loss: 4.309e-01 Constrast_loss: 2.201e+01 
+22-03-31 02:52:48.192 : <epoch:1863, iter:  56,000, lr:2.000e-04> G_loss: 2.617e+01 TV_loss: 0.000e+00 Gradient_loss: 5.873e+00 l1_loss: 1.115e+00 Constrast_loss: 1.918e+01 
+22-03-31 02:52:48.195 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/56000_E.pth
+22-03-31 02:54:01.985 : <epoch:1872, iter:  56,200, lr:2.000e-04> G_loss: 2.538e+01 TV_loss: 0.000e+00 Gradient_loss: 3.634e+00 l1_loss: 5.569e-01 Constrast_loss: 2.118e+01 
+22-03-31 02:55:04.027 : <epoch:1881, iter:  56,400, lr:2.000e-04> G_loss: 2.518e+01 TV_loss: 0.000e+00 Gradient_loss: 4.102e+00 l1_loss: 6.555e-01 Constrast_loss: 2.042e+01 
+22-03-31 02:56:06.026 : <epoch:1890, iter:  56,600, lr:2.000e-04> G_loss: 2.654e+01 TV_loss: 0.000e+00 Gradient_loss: 2.594e+00 l1_loss: 4.721e-01 Constrast_loss: 2.347e+01 
+22-03-31 02:57:07.879 : <epoch:1899, iter:  56,800, lr:2.000e-04> G_loss: 2.496e+01 TV_loss: 0.000e+00 Gradient_loss: 2.396e+00 l1_loss: 4.283e-01 Constrast_loss: 2.214e+01 
+22-03-31 02:58:11.488 : <epoch:1909, iter:  57,000, lr:2.000e-04> G_loss: 2.524e+01 TV_loss: 0.000e+00 Gradient_loss: 3.195e+00 l1_loss: 6.596e-01 Constrast_loss: 2.139e+01 
+22-03-31 02:58:11.491 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/57000_E.pth
+22-03-31 02:59:27.062 : <epoch:1918, iter:  57,200, lr:2.000e-04> G_loss: 2.600e+01 TV_loss: 0.000e+00 Gradient_loss: 4.921e+00 l1_loss: 9.227e-01 Constrast_loss: 2.016e+01 
+22-03-31 03:00:29.109 : <epoch:1927, iter:  57,400, lr:2.000e-04> G_loss: 2.639e+01 TV_loss: 0.000e+00 Gradient_loss: 5.674e+00 l1_loss: 9.912e-01 Constrast_loss: 1.972e+01 
+22-03-31 03:01:31.472 : <epoch:1936, iter:  57,600, lr:2.000e-04> G_loss: 2.595e+01 TV_loss: 0.000e+00 Gradient_loss: 4.735e+00 l1_loss: 8.939e-01 Constrast_loss: 2.032e+01 
+22-03-31 03:02:34.080 : <epoch:1945, iter:  57,800, lr:2.000e-04> G_loss: 2.576e+01 TV_loss: 0.000e+00 Gradient_loss: 1.340e+00 l1_loss: 1.904e-01 Constrast_loss: 2.423e+01 
+22-03-31 03:03:35.799 : <epoch:1954, iter:  58,000, lr:2.000e-04> G_loss: 2.611e+01 TV_loss: 0.000e+00 Gradient_loss: 5.505e+00 l1_loss: 9.017e-01 Constrast_loss: 1.971e+01 
+22-03-31 03:03:35.803 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/58000_E.pth
+22-03-31 03:04:51.562 : <epoch:1963, iter:  58,200, lr:2.000e-04> G_loss: 2.722e+01 TV_loss: 0.000e+00 Gradient_loss: 5.770e+00 l1_loss: 1.250e+00 Constrast_loss: 2.020e+01 
+22-03-31 03:05:53.545 : <epoch:1972, iter:  58,400, lr:2.000e-04> G_loss: 2.501e+01 TV_loss: 0.000e+00 Gradient_loss: 3.586e+00 l1_loss: 7.325e-01 Constrast_loss: 2.069e+01 
+22-03-31 03:06:55.201 : <epoch:1981, iter:  58,600, lr:2.000e-04> G_loss: 2.635e+01 TV_loss: 0.000e+00 Gradient_loss: 2.004e+00 l1_loss: 4.930e-01 Constrast_loss: 2.385e+01 
+22-03-31 03:07:57.000 : <epoch:1990, iter:  58,800, lr:2.000e-04> G_loss: 2.634e+01 TV_loss: 0.000e+00 Gradient_loss: 3.429e+00 l1_loss: 5.643e-01 Constrast_loss: 2.235e+01 
+22-03-31 03:08:59.318 : <epoch:1999, iter:  59,000, lr:2.000e-04> G_loss: 2.508e+01 TV_loss: 0.000e+00 Gradient_loss: 2.866e+00 l1_loss: 5.794e-01 Constrast_loss: 2.164e+01 
+22-03-31 03:08:59.322 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/59000_E.pth
+22-03-31 03:10:15.828 : <epoch:2009, iter:  59,200, lr:2.000e-04> G_loss: 2.565e+01 TV_loss: 0.000e+00 Gradient_loss: 3.581e+00 l1_loss: 6.786e-01 Constrast_loss: 2.139e+01 
+22-03-31 03:11:18.224 : <epoch:2018, iter:  59,400, lr:2.000e-04> G_loss: 2.688e+01 TV_loss: 0.000e+00 Gradient_loss: 4.178e+00 l1_loss: 7.758e-01 Constrast_loss: 2.193e+01 
+22-03-31 03:12:20.159 : <epoch:2027, iter:  59,600, lr:2.000e-04> G_loss: 2.578e+01 TV_loss: 0.000e+00 Gradient_loss: 3.880e+00 l1_loss: 6.363e-01 Constrast_loss: 2.127e+01 
+22-03-31 03:13:21.492 : <epoch:2036, iter:  59,800, lr:2.000e-04> G_loss: 2.534e+01 TV_loss: 0.000e+00 Gradient_loss: 3.503e+00 l1_loss: 6.091e-01 Constrast_loss: 2.123e+01 
+22-03-31 03:14:24.276 : <epoch:2045, iter:  60,000, lr:2.000e-04> G_loss: 2.519e+01 TV_loss: 0.000e+00 Gradient_loss: 1.959e+00 l1_loss: 3.189e-01 Constrast_loss: 2.291e+01 
+22-03-31 03:14:24.280 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/60000_E.pth
+22-03-31 03:15:38.263 : <epoch:2054, iter:  60,200, lr:2.000e-04> G_loss: 2.632e+01 TV_loss: 0.000e+00 Gradient_loss: 5.751e+00 l1_loss: 1.118e+00 Constrast_loss: 1.946e+01 
+22-03-31 03:16:40.287 : <epoch:2063, iter:  60,400, lr:2.000e-04> G_loss: 2.693e+01 TV_loss: 0.000e+00 Gradient_loss: 4.323e+00 l1_loss: 8.336e-01 Constrast_loss: 2.177e+01 
+22-03-31 03:17:42.107 : <epoch:2072, iter:  60,600, lr:2.000e-04> G_loss: 2.527e+01 TV_loss: 0.000e+00 Gradient_loss: 3.282e+00 l1_loss: 5.344e-01 Constrast_loss: 2.145e+01 
+22-03-31 03:18:43.417 : <epoch:2081, iter:  60,800, lr:2.000e-04> G_loss: 2.572e+01 TV_loss: 0.000e+00 Gradient_loss: 5.585e+00 l1_loss: 1.014e+00 Constrast_loss: 1.912e+01 
+22-03-31 03:19:46.183 : <epoch:2090, iter:  61,000, lr:2.000e-04> G_loss: 2.578e+01 TV_loss: 0.000e+00 Gradient_loss: 4.700e+00 l1_loss: 6.400e-01 Constrast_loss: 2.044e+01 
+22-03-31 03:19:46.186 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/61000_E.pth
+22-03-31 03:21:01.251 : <epoch:2099, iter:  61,200, lr:2.000e-04> G_loss: 2.462e+01 TV_loss: 0.000e+00 Gradient_loss: 3.850e+00 l1_loss: 6.327e-01 Constrast_loss: 2.014e+01 
+22-03-31 03:22:05.258 : <epoch:2109, iter:  61,400, lr:2.000e-04> G_loss: 2.515e+01 TV_loss: 0.000e+00 Gradient_loss: 5.235e+00 l1_loss: 1.020e+00 Constrast_loss: 1.889e+01 
+22-03-31 03:23:09.144 : <epoch:2118, iter:  61,600, lr:2.000e-04> G_loss: 2.567e+01 TV_loss: 0.000e+00 Gradient_loss: 4.373e+00 l1_loss: 8.707e-01 Constrast_loss: 2.043e+01 
+22-03-31 03:24:10.616 : <epoch:2127, iter:  61,800, lr:2.000e-04> G_loss: 2.604e+01 TV_loss: 0.000e+00 Gradient_loss: 3.849e+00 l1_loss: 7.736e-01 Constrast_loss: 2.142e+01 
+22-03-31 03:25:14.721 : <epoch:2136, iter:  62,000, lr:2.000e-04> G_loss: 2.637e+01 TV_loss: 0.000e+00 Gradient_loss: 4.462e+00 l1_loss: 8.679e-01 Constrast_loss: 2.104e+01 
+22-03-31 03:25:14.725 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/62000_E.pth
+22-03-31 03:26:30.435 : <epoch:2145, iter:  62,200, lr:2.000e-04> G_loss: 2.589e+01 TV_loss: 0.000e+00 Gradient_loss: 5.441e+00 l1_loss: 1.122e+00 Constrast_loss: 1.933e+01 
+22-03-31 03:27:32.259 : <epoch:2154, iter:  62,400, lr:2.000e-04> G_loss: 2.564e+01 TV_loss: 0.000e+00 Gradient_loss: 4.258e+00 l1_loss: 6.921e-01 Constrast_loss: 2.069e+01 
+22-03-31 03:28:34.206 : <epoch:2163, iter:  62,600, lr:2.000e-04> G_loss: 2.732e+01 TV_loss: 0.000e+00 Gradient_loss: 5.882e+00 l1_loss: 1.247e+00 Constrast_loss: 2.019e+01 
+22-03-31 03:29:36.308 : <epoch:2172, iter:  62,800, lr:2.000e-04> G_loss: 2.514e+01 TV_loss: 0.000e+00 Gradient_loss: 3.625e+00 l1_loss: 5.290e-01 Constrast_loss: 2.098e+01 
+22-03-31 03:30:38.002 : <epoch:2181, iter:  63,000, lr:2.000e-04> G_loss: 2.560e+01 TV_loss: 0.000e+00 Gradient_loss: 4.309e+00 l1_loss: 9.023e-01 Constrast_loss: 2.038e+01 
+22-03-31 03:30:38.006 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/63000_E.pth
+22-03-31 03:31:55.135 : <epoch:2190, iter:  63,200, lr:2.000e-04> G_loss: 2.668e+01 TV_loss: 0.000e+00 Gradient_loss: 2.917e+00 l1_loss: 4.516e-01 Constrast_loss: 2.331e+01 
+22-03-31 03:32:56.531 : <epoch:2199, iter:  63,400, lr:2.000e-04> G_loss: 2.537e+01 TV_loss: 0.000e+00 Gradient_loss: 3.974e+00 l1_loss: 5.902e-01 Constrast_loss: 2.080e+01 
+22-03-31 03:34:00.700 : <epoch:2209, iter:  63,600, lr:2.000e-04> G_loss: 2.586e+01 TV_loss: 0.000e+00 Gradient_loss: 2.963e+00 l1_loss: 6.034e-01 Constrast_loss: 2.229e+01 
+22-03-31 03:35:02.992 : <epoch:2218, iter:  63,800, lr:2.000e-04> G_loss: 2.655e+01 TV_loss: 0.000e+00 Gradient_loss: 7.107e+00 l1_loss: 1.298e+00 Constrast_loss: 1.814e+01 
+22-03-31 03:36:04.954 : <epoch:2227, iter:  64,000, lr:2.000e-04> G_loss: 2.517e+01 TV_loss: 0.000e+00 Gradient_loss: 2.424e+00 l1_loss: 5.191e-01 Constrast_loss: 2.223e+01 
+22-03-31 03:36:04.958 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/64000_E.pth
+22-03-31 03:37:19.747 : <epoch:2236, iter:  64,200, lr:2.000e-04> G_loss: 2.617e+01 TV_loss: 0.000e+00 Gradient_loss: 4.575e+00 l1_loss: 7.422e-01 Constrast_loss: 2.085e+01 
+22-03-31 03:38:21.737 : <epoch:2245, iter:  64,400, lr:2.000e-04> G_loss: 2.694e+01 TV_loss: 0.000e+00 Gradient_loss: 4.930e+00 l1_loss: 1.141e+00 Constrast_loss: 2.087e+01 
+22-03-31 03:39:22.822 : <epoch:2254, iter:  64,600, lr:2.000e-04> G_loss: 2.564e+01 TV_loss: 0.000e+00 Gradient_loss: 4.162e+00 l1_loss: 7.560e-01 Constrast_loss: 2.072e+01 
+22-03-31 03:40:24.533 : <epoch:2263, iter:  64,800, lr:2.000e-04> G_loss: 2.579e+01 TV_loss: 0.000e+00 Gradient_loss: 3.807e+00 l1_loss: 7.113e-01 Constrast_loss: 2.128e+01 
+22-03-31 03:41:26.740 : <epoch:2272, iter:  65,000, lr:2.000e-04> G_loss: 2.573e+01 TV_loss: 0.000e+00 Gradient_loss: 3.783e+00 l1_loss: 6.832e-01 Constrast_loss: 2.127e+01 
+22-03-31 03:41:26.744 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/65000_E.pth
+22-03-31 03:42:41.805 : <epoch:2281, iter:  65,200, lr:2.000e-04> G_loss: 2.598e+01 TV_loss: 0.000e+00 Gradient_loss: 3.517e+00 l1_loss: 8.025e-01 Constrast_loss: 2.166e+01 
+22-03-31 03:43:43.929 : <epoch:2290, iter:  65,400, lr:2.000e-04> G_loss: 2.634e+01 TV_loss: 0.000e+00 Gradient_loss: 3.415e+00 l1_loss: 6.174e-01 Constrast_loss: 2.231e+01 
+22-03-31 03:44:49.728 : <epoch:2299, iter:  65,600, lr:2.000e-04> G_loss: 2.492e+01 TV_loss: 0.000e+00 Gradient_loss: 2.547e+00 l1_loss: 5.313e-01 Constrast_loss: 2.184e+01 
+22-03-31 03:45:54.031 : <epoch:2309, iter:  65,800, lr:2.000e-04> G_loss: 2.597e+01 TV_loss: 0.000e+00 Gradient_loss: 2.931e+00 l1_loss: 5.223e-01 Constrast_loss: 2.251e+01 
+22-03-31 03:46:57.315 : <epoch:2318, iter:  66,000, lr:2.000e-04> G_loss: 2.621e+01 TV_loss: 0.000e+00 Gradient_loss: 3.422e+00 l1_loss: 6.557e-01 Constrast_loss: 2.214e+01 
+22-03-31 03:46:57.319 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/66000_E.pth
+22-03-31 03:48:13.507 : <epoch:2327, iter:  66,200, lr:2.000e-04> G_loss: 2.643e+01 TV_loss: 0.000e+00 Gradient_loss: 3.731e+00 l1_loss: 6.542e-01 Constrast_loss: 2.205e+01 
+22-03-31 03:49:17.850 : <epoch:2336, iter:  66,400, lr:2.000e-04> G_loss: 2.613e+01 TV_loss: 0.000e+00 Gradient_loss: 4.877e+00 l1_loss: 9.755e-01 Constrast_loss: 2.028e+01 
+22-03-31 03:50:21.031 : <epoch:2345, iter:  66,600, lr:2.000e-04> G_loss: 2.502e+01 TV_loss: 0.000e+00 Gradient_loss: 1.451e+00 l1_loss: 2.574e-01 Constrast_loss: 2.331e+01 
+22-03-31 03:51:24.006 : <epoch:2354, iter:  66,800, lr:2.000e-04> G_loss: 2.536e+01 TV_loss: 0.000e+00 Gradient_loss: 3.633e+00 l1_loss: 6.636e-01 Constrast_loss: 2.107e+01 
+22-03-31 03:52:25.524 : <epoch:2363, iter:  67,000, lr:2.000e-04> G_loss: 2.633e+01 TV_loss: 0.000e+00 Gradient_loss: 4.650e+00 l1_loss: 9.032e-01 Constrast_loss: 2.078e+01 
+22-03-31 03:52:25.529 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/67000_E.pth
+22-03-31 03:53:41.139 : <epoch:2372, iter:  67,200, lr:2.000e-04> G_loss: 2.460e+01 TV_loss: 0.000e+00 Gradient_loss: 4.639e+00 l1_loss: 8.490e-01 Constrast_loss: 1.912e+01 
+22-03-31 03:54:43.443 : <epoch:2381, iter:  67,400, lr:2.000e-04> G_loss: 2.686e+01 TV_loss: 0.000e+00 Gradient_loss: 3.289e+00 l1_loss: 8.167e-01 Constrast_loss: 2.276e+01 
+22-03-31 03:55:46.404 : <epoch:2390, iter:  67,600, lr:2.000e-04> G_loss: 2.606e+01 TV_loss: 0.000e+00 Gradient_loss: 3.785e+00 l1_loss: 6.931e-01 Constrast_loss: 2.158e+01 
+22-03-31 03:56:48.725 : <epoch:2399, iter:  67,800, lr:2.000e-04> G_loss: 2.455e+01 TV_loss: 0.000e+00 Gradient_loss: 3.147e+00 l1_loss: 5.296e-01 Constrast_loss: 2.087e+01 
+22-03-31 03:57:52.658 : <epoch:2409, iter:  68,000, lr:2.000e-04> G_loss: 2.507e+01 TV_loss: 0.000e+00 Gradient_loss: 1.532e+00 l1_loss: 2.381e-01 Constrast_loss: 2.330e+01 
+22-03-31 03:57:52.661 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/68000_E.pth
+22-03-31 03:59:06.927 : <epoch:2418, iter:  68,200, lr:2.000e-04> G_loss: 2.635e+01 TV_loss: 0.000e+00 Gradient_loss: 5.938e+00 l1_loss: 1.099e+00 Constrast_loss: 1.931e+01 
+22-03-31 04:00:10.048 : <epoch:2427, iter:  68,400, lr:2.000e-04> G_loss: 2.523e+01 TV_loss: 0.000e+00 Gradient_loss: 1.661e+00 l1_loss: 3.306e-01 Constrast_loss: 2.324e+01 
+22-03-31 04:01:11.403 : <epoch:2436, iter:  68,600, lr:2.000e-04> G_loss: 2.627e+01 TV_loss: 0.000e+00 Gradient_loss: 4.867e+00 l1_loss: 9.788e-01 Constrast_loss: 2.042e+01 
+22-03-31 04:02:13.379 : <epoch:2445, iter:  68,800, lr:2.000e-04> G_loss: 2.553e+01 TV_loss: 0.000e+00 Gradient_loss: 3.613e+00 l1_loss: 6.177e-01 Constrast_loss: 2.130e+01 
+22-03-31 04:03:15.716 : <epoch:2454, iter:  69,000, lr:2.000e-04> G_loss: 2.616e+01 TV_loss: 0.000e+00 Gradient_loss: 3.694e+00 l1_loss: 7.132e-01 Constrast_loss: 2.175e+01 
+22-03-31 04:03:15.720 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/69000_E.pth
+22-03-31 04:04:30.396 : <epoch:2463, iter:  69,200, lr:2.000e-04> G_loss: 2.644e+01 TV_loss: 0.000e+00 Gradient_loss: 4.473e+00 l1_loss: 9.695e-01 Constrast_loss: 2.100e+01 
+22-03-31 04:05:32.014 : <epoch:2472, iter:  69,400, lr:2.000e-04> G_loss: 2.577e+01 TV_loss: 0.000e+00 Gradient_loss: 3.202e+00 l1_loss: 6.779e-01 Constrast_loss: 2.189e+01 
+22-03-31 04:06:33.532 : <epoch:2481, iter:  69,600, lr:2.000e-04> G_loss: 2.560e+01 TV_loss: 0.000e+00 Gradient_loss: 4.644e+00 l1_loss: 8.875e-01 Constrast_loss: 2.007e+01 
+22-03-31 04:07:35.426 : <epoch:2490, iter:  69,800, lr:2.000e-04> G_loss: 2.612e+01 TV_loss: 0.000e+00 Gradient_loss: 5.019e+00 l1_loss: 1.031e+00 Constrast_loss: 2.007e+01 
+22-03-31 04:08:36.803 : <epoch:2499, iter:  70,000, lr:2.000e-04> G_loss: 2.475e+01 TV_loss: 0.000e+00 Gradient_loss: 2.978e+00 l1_loss: 7.161e-01 Constrast_loss: 2.105e+01 
+22-03-31 04:08:36.806 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/70000_E.pth
+22-03-31 04:09:52.363 : <epoch:2509, iter:  70,200, lr:2.000e-04> G_loss: 2.555e+01 TV_loss: 0.000e+00 Gradient_loss: 4.621e+00 l1_loss: 9.564e-01 Constrast_loss: 1.997e+01 
+22-03-31 04:10:53.964 : <epoch:2518, iter:  70,400, lr:2.000e-04> G_loss: 2.599e+01 TV_loss: 0.000e+00 Gradient_loss: 5.602e+00 l1_loss: 1.191e+00 Constrast_loss: 1.920e+01 
+22-03-31 04:11:56.287 : <epoch:2527, iter:  70,600, lr:2.000e-04> G_loss: 2.659e+01 TV_loss: 0.000e+00 Gradient_loss: 2.406e+00 l1_loss: 4.888e-01 Constrast_loss: 2.369e+01 
+22-03-31 04:12:58.255 : <epoch:2536, iter:  70,800, lr:2.000e-04> G_loss: 2.577e+01 TV_loss: 0.000e+00 Gradient_loss: 3.759e+00 l1_loss: 8.575e-01 Constrast_loss: 2.115e+01 
+22-03-31 04:14:01.229 : <epoch:2545, iter:  71,000, lr:2.000e-04> G_loss: 2.556e+01 TV_loss: 0.000e+00 Gradient_loss: 2.994e+00 l1_loss: 5.416e-01 Constrast_loss: 2.203e+01 
+22-03-31 04:14:01.233 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/71000_E.pth
+22-03-31 04:15:15.193 : <epoch:2554, iter:  71,200, lr:2.000e-04> G_loss: 2.490e+01 TV_loss: 0.000e+00 Gradient_loss: 4.363e+00 l1_loss: 8.974e-01 Constrast_loss: 1.964e+01 
+22-03-31 04:16:16.556 : <epoch:2563, iter:  71,400, lr:2.000e-04> G_loss: 2.626e+01 TV_loss: 0.000e+00 Gradient_loss: 5.708e+00 l1_loss: 1.123e+00 Constrast_loss: 1.943e+01 
+22-03-31 04:17:18.279 : <epoch:2572, iter:  71,600, lr:2.000e-04> G_loss: 2.530e+01 TV_loss: 0.000e+00 Gradient_loss: 5.119e+00 l1_loss: 1.124e+00 Constrast_loss: 1.905e+01 
+22-03-31 04:18:20.346 : <epoch:2581, iter:  71,800, lr:2.000e-04> G_loss: 2.643e+01 TV_loss: 0.000e+00 Gradient_loss: 2.937e+00 l1_loss: 8.067e-01 Constrast_loss: 2.268e+01 
+22-03-31 04:19:22.126 : <epoch:2590, iter:  72,000, lr:2.000e-04> G_loss: 2.595e+01 TV_loss: 0.000e+00 Gradient_loss: 3.376e+00 l1_loss: 6.850e-01 Constrast_loss: 2.189e+01 
+22-03-31 04:19:22.130 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/72000_E.pth
+22-03-31 04:20:37.480 : <epoch:2599, iter:  72,200, lr:2.000e-04> G_loss: 2.551e+01 TV_loss: 0.000e+00 Gradient_loss: 1.509e+00 l1_loss: 3.300e-01 Constrast_loss: 2.367e+01 
+22-03-31 04:21:41.426 : <epoch:2609, iter:  72,400, lr:2.000e-04> G_loss: 2.532e+01 TV_loss: 0.000e+00 Gradient_loss: 2.566e+00 l1_loss: 4.745e-01 Constrast_loss: 2.228e+01 
+22-03-31 04:22:43.880 : <epoch:2618, iter:  72,600, lr:2.000e-04> G_loss: 2.603e+01 TV_loss: 0.000e+00 Gradient_loss: 4.146e+00 l1_loss: 7.858e-01 Constrast_loss: 2.110e+01 
+22-03-31 04:23:46.534 : <epoch:2627, iter:  72,800, lr:2.000e-04> G_loss: 2.476e+01 TV_loss: 0.000e+00 Gradient_loss: 2.589e+00 l1_loss: 4.465e-01 Constrast_loss: 2.172e+01 
+22-03-31 04:24:49.132 : <epoch:2636, iter:  73,000, lr:2.000e-04> G_loss: 2.689e+01 TV_loss: 0.000e+00 Gradient_loss: 5.327e+00 l1_loss: 1.090e+00 Constrast_loss: 2.047e+01 
+22-03-31 04:24:49.135 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/73000_E.pth
+22-03-31 04:26:03.336 : <epoch:2645, iter:  73,200, lr:2.000e-04> G_loss: 2.621e+01 TV_loss: 0.000e+00 Gradient_loss: 4.434e+00 l1_loss: 6.893e-01 Constrast_loss: 2.108e+01 
+22-03-31 04:27:05.737 : <epoch:2654, iter:  73,400, lr:2.000e-04> G_loss: 2.635e+01 TV_loss: 0.000e+00 Gradient_loss: 3.430e+00 l1_loss: 6.684e-01 Constrast_loss: 2.225e+01 
+22-03-31 04:28:07.450 : <epoch:2663, iter:  73,600, lr:2.000e-04> G_loss: 2.528e+01 TV_loss: 0.000e+00 Gradient_loss: 4.755e+00 l1_loss: 8.575e-01 Constrast_loss: 1.967e+01 
+22-03-31 04:29:08.458 : <epoch:2672, iter:  73,800, lr:2.000e-04> G_loss: 2.420e+01 TV_loss: 0.000e+00 Gradient_loss: 3.807e+00 l1_loss: 8.960e-01 Constrast_loss: 1.950e+01 
+22-03-31 04:30:11.973 : <epoch:2681, iter:  74,000, lr:2.000e-04> G_loss: 2.554e+01 TV_loss: 0.000e+00 Gradient_loss: 3.486e+00 l1_loss: 8.467e-01 Constrast_loss: 2.121e+01 
+22-03-31 04:30:11.977 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/74000_E.pth
+22-03-31 04:31:26.058 : <epoch:2690, iter:  74,200, lr:2.000e-04> G_loss: 2.560e+01 TV_loss: 0.000e+00 Gradient_loss: 2.263e+00 l1_loss: 4.520e-01 Constrast_loss: 2.288e+01 
+22-03-31 04:32:28.746 : <epoch:2699, iter:  74,400, lr:2.000e-04> G_loss: 2.485e+01 TV_loss: 0.000e+00 Gradient_loss: 1.588e+00 l1_loss: 3.678e-01 Constrast_loss: 2.289e+01 
+22-03-31 04:33:32.816 : <epoch:2709, iter:  74,600, lr:2.000e-04> G_loss: 2.539e+01 TV_loss: 0.000e+00 Gradient_loss: 3.271e+00 l1_loss: 6.208e-01 Constrast_loss: 2.150e+01 
+22-03-31 04:34:34.964 : <epoch:2718, iter:  74,800, lr:2.000e-04> G_loss: 2.706e+01 TV_loss: 0.000e+00 Gradient_loss: 5.959e+00 l1_loss: 9.810e-01 Constrast_loss: 2.012e+01 
+22-03-31 04:35:36.019 : <epoch:2727, iter:  75,000, lr:2.000e-04> G_loss: 2.670e+01 TV_loss: 0.000e+00 Gradient_loss: 3.875e+00 l1_loss: 8.395e-01 Constrast_loss: 2.199e+01 
+22-03-31 04:35:36.021 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/75000_E.pth
+22-03-31 04:36:50.396 : <epoch:2736, iter:  75,200, lr:2.000e-04> G_loss: 2.495e+01 TV_loss: 0.000e+00 Gradient_loss: 4.258e+00 l1_loss: 6.190e-01 Constrast_loss: 2.008e+01 
+22-03-31 04:37:51.776 : <epoch:2745, iter:  75,400, lr:2.000e-04> G_loss: 2.565e+01 TV_loss: 0.000e+00 Gradient_loss: 4.435e+00 l1_loss: 8.279e-01 Constrast_loss: 2.039e+01 
+22-03-31 04:38:54.134 : <epoch:2754, iter:  75,600, lr:2.000e-04> G_loss: 2.575e+01 TV_loss: 0.000e+00 Gradient_loss: 4.201e+00 l1_loss: 9.052e-01 Constrast_loss: 2.065e+01 
+22-03-31 04:39:56.111 : <epoch:2763, iter:  75,800, lr:2.000e-04> G_loss: 2.611e+01 TV_loss: 0.000e+00 Gradient_loss: 4.606e+00 l1_loss: 8.837e-01 Constrast_loss: 2.062e+01 
+22-03-31 04:40:57.428 : <epoch:2772, iter:  76,000, lr:2.000e-04> G_loss: 2.560e+01 TV_loss: 0.000e+00 Gradient_loss: 2.487e+00 l1_loss: 4.244e-01 Constrast_loss: 2.269e+01 
+22-03-31 04:40:57.431 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/76000_E.pth
+22-03-31 04:42:11.869 : <epoch:2781, iter:  76,200, lr:2.000e-04> G_loss: 2.412e+01 TV_loss: 0.000e+00 Gradient_loss: 3.965e+00 l1_loss: 6.860e-01 Constrast_loss: 1.947e+01 
+22-03-31 04:43:14.158 : <epoch:2790, iter:  76,400, lr:2.000e-04> G_loss: 2.555e+01 TV_loss: 0.000e+00 Gradient_loss: 3.444e+00 l1_loss: 6.550e-01 Constrast_loss: 2.145e+01 
+22-03-31 04:44:16.293 : <epoch:2799, iter:  76,600, lr:2.000e-04> G_loss: 2.427e+01 TV_loss: 0.000e+00 Gradient_loss: 4.071e+00 l1_loss: 7.433e-01 Constrast_loss: 1.946e+01 
+22-03-31 04:45:21.682 : <epoch:2809, iter:  76,800, lr:2.000e-04> G_loss: 2.517e+01 TV_loss: 0.000e+00 Gradient_loss: 6.388e+00 l1_loss: 1.336e+00 Constrast_loss: 1.745e+01 
+22-03-31 04:46:25.114 : <epoch:2818, iter:  77,000, lr:2.000e-04> G_loss: 2.663e+01 TV_loss: 0.000e+00 Gradient_loss: 4.831e+00 l1_loss: 1.038e+00 Constrast_loss: 2.076e+01 
+22-03-31 04:46:25.118 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/77000_E.pth
+22-03-31 04:47:38.674 : <epoch:2827, iter:  77,200, lr:2.000e-04> G_loss: 2.568e+01 TV_loss: 0.000e+00 Gradient_loss: 3.478e+00 l1_loss: 7.639e-01 Constrast_loss: 2.144e+01 
+22-03-31 04:48:40.396 : <epoch:2836, iter:  77,400, lr:2.000e-04> G_loss: 2.603e+01 TV_loss: 0.000e+00 Gradient_loss: 5.389e+00 l1_loss: 1.114e+00 Constrast_loss: 1.953e+01 
+22-03-31 04:49:43.955 : <epoch:2845, iter:  77,600, lr:2.000e-04> G_loss: 2.514e+01 TV_loss: 0.000e+00 Gradient_loss: 3.807e+00 l1_loss: 9.042e-01 Constrast_loss: 2.043e+01 
+22-03-31 04:50:47.316 : <epoch:2854, iter:  77,800, lr:2.000e-04> G_loss: 2.538e+01 TV_loss: 0.000e+00 Gradient_loss: 2.161e+00 l1_loss: 3.833e-01 Constrast_loss: 2.283e+01 
+22-03-31 04:51:50.127 : <epoch:2863, iter:  78,000, lr:2.000e-04> G_loss: 2.604e+01 TV_loss: 0.000e+00 Gradient_loss: 4.077e+00 l1_loss: 9.000e-01 Constrast_loss: 2.106e+01 
+22-03-31 04:51:50.131 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/78000_E.pth
+22-03-31 04:53:04.753 : <epoch:2872, iter:  78,200, lr:2.000e-04> G_loss: 2.549e+01 TV_loss: 0.000e+00 Gradient_loss: 4.517e+00 l1_loss: 9.364e-01 Constrast_loss: 2.003e+01 
+22-03-31 04:54:09.641 : <epoch:2881, iter:  78,400, lr:2.000e-04> G_loss: 2.617e+01 TV_loss: 0.000e+00 Gradient_loss: 3.411e+00 l1_loss: 6.719e-01 Constrast_loss: 2.208e+01 
+22-03-31 04:55:11.148 : <epoch:2890, iter:  78,600, lr:2.000e-04> G_loss: 2.665e+01 TV_loss: 0.000e+00 Gradient_loss: 4.236e+00 l1_loss: 8.002e-01 Constrast_loss: 2.161e+01 
+22-03-31 04:56:12.827 : <epoch:2899, iter:  78,800, lr:2.000e-04> G_loss: 2.482e+01 TV_loss: 0.000e+00 Gradient_loss: 2.407e+00 l1_loss: 4.097e-01 Constrast_loss: 2.201e+01 
+22-03-31 04:57:16.405 : <epoch:2909, iter:  79,000, lr:2.000e-04> G_loss: 2.525e+01 TV_loss: 0.000e+00 Gradient_loss: 3.136e+00 l1_loss: 6.430e-01 Constrast_loss: 2.147e+01 
+22-03-31 04:57:16.410 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/79000_E.pth
+22-03-31 04:58:31.070 : <epoch:2918, iter:  79,200, lr:2.000e-04> G_loss: 2.633e+01 TV_loss: 0.000e+00 Gradient_loss: 4.743e+00 l1_loss: 9.798e-01 Constrast_loss: 2.061e+01 
+22-03-31 04:59:32.910 : <epoch:2927, iter:  79,400, lr:2.000e-04> G_loss: 2.679e+01 TV_loss: 0.000e+00 Gradient_loss: 5.939e+00 l1_loss: 1.161e+00 Constrast_loss: 1.969e+01 
+22-03-31 05:00:34.371 : <epoch:2936, iter:  79,600, lr:2.000e-04> G_loss: 2.570e+01 TV_loss: 0.000e+00 Gradient_loss: 2.532e+00 l1_loss: 7.148e-01 Constrast_loss: 2.245e+01 
+22-03-31 05:01:36.740 : <epoch:2945, iter:  79,800, lr:2.000e-04> G_loss: 2.529e+01 TV_loss: 0.000e+00 Gradient_loss: 2.797e+00 l1_loss: 6.534e-01 Constrast_loss: 2.184e+01 
+22-03-31 05:02:39.157 : <epoch:2954, iter:  80,000, lr:2.000e-04> G_loss: 2.531e+01 TV_loss: 0.000e+00 Gradient_loss: 4.327e+00 l1_loss: 7.583e-01 Constrast_loss: 2.022e+01 
+22-03-31 05:02:39.160 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/80000_E.pth
+22-03-31 05:03:54.544 : <epoch:2963, iter:  80,200, lr:2.000e-04> G_loss: 2.617e+01 TV_loss: 0.000e+00 Gradient_loss: 4.312e+00 l1_loss: 9.785e-01 Constrast_loss: 2.088e+01 
+22-03-31 05:04:56.487 : <epoch:2972, iter:  80,400, lr:2.000e-04> G_loss: 2.498e+01 TV_loss: 0.000e+00 Gradient_loss: 3.365e+00 l1_loss: 5.687e-01 Constrast_loss: 2.105e+01 
+22-03-31 05:05:58.475 : <epoch:2981, iter:  80,600, lr:2.000e-04> G_loss: 2.553e+01 TV_loss: 0.000e+00 Gradient_loss: 2.215e+00 l1_loss: 5.591e-01 Constrast_loss: 2.276e+01 
+22-03-31 05:07:01.591 : <epoch:2990, iter:  80,800, lr:2.000e-04> G_loss: 2.500e+01 TV_loss: 0.000e+00 Gradient_loss: 3.557e+00 l1_loss: 7.010e-01 Constrast_loss: 2.074e+01 
+22-03-31 05:08:03.364 : <epoch:2999, iter:  81,000, lr:2.000e-04> G_loss: 2.473e+01 TV_loss: 0.000e+00 Gradient_loss: 1.395e+00 l1_loss: 3.117e-01 Constrast_loss: 2.302e+01 
+22-03-31 05:08:03.365 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/81000_E.pth
+22-03-31 05:09:21.348 : <epoch:3009, iter:  81,200, lr:2.000e-04> G_loss: 2.528e+01 TV_loss: 0.000e+00 Gradient_loss: 2.370e+00 l1_loss: 3.599e-01 Constrast_loss: 2.255e+01 
+22-03-31 05:10:23.973 : <epoch:3018, iter:  81,400, lr:2.000e-04> G_loss: 2.598e+01 TV_loss: 0.000e+00 Gradient_loss: 4.086e+00 l1_loss: 7.090e-01 Constrast_loss: 2.118e+01 
+22-03-31 05:11:25.899 : <epoch:3027, iter:  81,600, lr:2.000e-04> G_loss: 2.589e+01 TV_loss: 0.000e+00 Gradient_loss: 5.077e+00 l1_loss: 1.096e+00 Constrast_loss: 1.972e+01 
+22-03-31 05:12:28.174 : <epoch:3036, iter:  81,800, lr:2.000e-04> G_loss: 2.548e+01 TV_loss: 0.000e+00 Gradient_loss: 3.041e+00 l1_loss: 7.560e-01 Constrast_loss: 2.168e+01 
+22-03-31 05:13:29.941 : <epoch:3045, iter:  82,000, lr:2.000e-04> G_loss: 2.703e+01 TV_loss: 0.000e+00 Gradient_loss: 5.394e+00 l1_loss: 1.359e+00 Constrast_loss: 2.027e+01 
+22-03-31 05:13:29.946 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/82000_E.pth
+22-03-31 05:14:44.571 : <epoch:3054, iter:  82,200, lr:2.000e-04> G_loss: 2.469e+01 TV_loss: 0.000e+00 Gradient_loss: 3.917e+00 l1_loss: 8.088e-01 Constrast_loss: 1.997e+01 
+22-03-31 05:15:46.600 : <epoch:3063, iter:  82,400, lr:2.000e-04> G_loss: 2.662e+01 TV_loss: 0.000e+00 Gradient_loss: 3.409e+00 l1_loss: 6.773e-01 Constrast_loss: 2.253e+01 
+22-03-31 05:16:48.406 : <epoch:3072, iter:  82,600, lr:2.000e-04> G_loss: 2.551e+01 TV_loss: 0.000e+00 Gradient_loss: 3.502e+00 l1_loss: 7.756e-01 Constrast_loss: 2.123e+01 
+22-03-31 05:17:49.523 : <epoch:3081, iter:  82,800, lr:2.000e-04> G_loss: 2.551e+01 TV_loss: 0.000e+00 Gradient_loss: 4.391e+00 l1_loss: 7.919e-01 Constrast_loss: 2.032e+01 
+22-03-31 05:18:51.272 : <epoch:3090, iter:  83,000, lr:2.000e-04> G_loss: 2.532e+01 TV_loss: 0.000e+00 Gradient_loss: 3.368e+00 l1_loss: 6.576e-01 Constrast_loss: 2.130e+01 
+22-03-31 05:18:51.276 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/83000_E.pth
+22-03-31 05:20:06.143 : <epoch:3099, iter:  83,200, lr:2.000e-04> G_loss: 2.389e+01 TV_loss: 0.000e+00 Gradient_loss: 1.982e+00 l1_loss: 3.742e-01 Constrast_loss: 2.153e+01 
+22-03-31 05:21:11.020 : <epoch:3109, iter:  83,400, lr:2.000e-04> G_loss: 2.485e+01 TV_loss: 0.000e+00 Gradient_loss: 3.184e+00 l1_loss: 6.125e-01 Constrast_loss: 2.106e+01 
+22-03-31 05:22:13.014 : <epoch:3118, iter:  83,600, lr:2.000e-04> G_loss: 2.659e+01 TV_loss: 0.000e+00 Gradient_loss: 5.751e+00 l1_loss: 1.164e+00 Constrast_loss: 1.967e+01 
+22-03-31 05:23:15.431 : <epoch:3127, iter:  83,800, lr:2.000e-04> G_loss: 2.581e+01 TV_loss: 0.000e+00 Gradient_loss: 4.163e+00 l1_loss: 6.995e-01 Constrast_loss: 2.095e+01 
+22-03-31 05:24:17.191 : <epoch:3136, iter:  84,000, lr:2.000e-04> G_loss: 2.510e+01 TV_loss: 0.000e+00 Gradient_loss: 3.639e+00 l1_loss: 7.513e-01 Constrast_loss: 2.071e+01 
+22-03-31 05:24:17.195 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/84000_E.pth
+22-03-31 05:25:30.761 : <epoch:3145, iter:  84,200, lr:2.000e-04> G_loss: 2.550e+01 TV_loss: 0.000e+00 Gradient_loss: 3.432e+00 l1_loss: 7.567e-01 Constrast_loss: 2.131e+01 
+22-03-31 05:26:32.195 : <epoch:3154, iter:  84,400, lr:2.000e-04> G_loss: 2.422e+01 TV_loss: 0.000e+00 Gradient_loss: 3.826e+00 l1_loss: 6.824e-01 Constrast_loss: 1.971e+01 
+22-03-31 05:27:33.584 : <epoch:3163, iter:  84,600, lr:2.000e-04> G_loss: 2.607e+01 TV_loss: 0.000e+00 Gradient_loss: 4.940e+00 l1_loss: 1.064e+00 Constrast_loss: 2.006e+01 
+22-03-31 05:28:34.868 : <epoch:3172, iter:  84,800, lr:2.000e-04> G_loss: 2.559e+01 TV_loss: 0.000e+00 Gradient_loss: 3.627e+00 l1_loss: 7.210e-01 Constrast_loss: 2.125e+01 
+22-03-31 05:29:37.320 : <epoch:3181, iter:  85,000, lr:2.000e-04> G_loss: 2.498e+01 TV_loss: 0.000e+00 Gradient_loss: 1.699e+00 l1_loss: 3.001e-01 Constrast_loss: 2.298e+01 
+22-03-31 05:29:37.324 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/85000_E.pth
+22-03-31 05:30:51.699 : <epoch:3190, iter:  85,200, lr:2.000e-04> G_loss: 2.500e+01 TV_loss: 0.000e+00 Gradient_loss: 3.261e+00 l1_loss: 6.142e-01 Constrast_loss: 2.113e+01 
+22-03-31 05:31:53.323 : <epoch:3199, iter:  85,400, lr:2.000e-04> G_loss: 2.479e+01 TV_loss: 0.000e+00 Gradient_loss: 2.591e+00 l1_loss: 5.114e-01 Constrast_loss: 2.169e+01 
+22-03-31 05:32:56.992 : <epoch:3209, iter:  85,600, lr:2.000e-04> G_loss: 2.519e+01 TV_loss: 0.000e+00 Gradient_loss: 3.826e+00 l1_loss: 9.265e-01 Constrast_loss: 2.043e+01 
+22-03-31 05:33:58.706 : <epoch:3218, iter:  85,800, lr:2.000e-04> G_loss: 2.610e+01 TV_loss: 0.000e+00 Gradient_loss: 3.709e+00 l1_loss: 8.171e-01 Constrast_loss: 2.158e+01 
+22-03-31 05:35:01.351 : <epoch:3227, iter:  86,000, lr:2.000e-04> G_loss: 2.638e+01 TV_loss: 0.000e+00 Gradient_loss: 3.294e+00 l1_loss: 6.713e-01 Constrast_loss: 2.242e+01 
+22-03-31 05:35:01.353 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/86000_E.pth
+22-03-31 05:36:15.123 : <epoch:3236, iter:  86,200, lr:2.000e-04> G_loss: 2.668e+01 TV_loss: 0.000e+00 Gradient_loss: 5.040e+00 l1_loss: 1.037e+00 Constrast_loss: 2.060e+01 
+22-03-31 05:37:16.460 : <epoch:3245, iter:  86,400, lr:2.000e-04> G_loss: 2.538e+01 TV_loss: 0.000e+00 Gradient_loss: 2.752e+00 l1_loss: 4.984e-01 Constrast_loss: 2.213e+01 
+22-03-31 05:38:19.566 : <epoch:3254, iter:  86,600, lr:2.000e-04> G_loss: 2.535e+01 TV_loss: 0.000e+00 Gradient_loss: 3.672e+00 l1_loss: 7.942e-01 Constrast_loss: 2.088e+01 
+22-03-31 05:39:21.173 : <epoch:3263, iter:  86,800, lr:2.000e-04> G_loss: 2.588e+01 TV_loss: 0.000e+00 Gradient_loss: 4.665e+00 l1_loss: 1.079e+00 Constrast_loss: 2.014e+01 
+22-03-31 05:40:23.008 : <epoch:3272, iter:  87,000, lr:2.000e-04> G_loss: 2.636e+01 TV_loss: 0.000e+00 Gradient_loss: 2.812e+00 l1_loss: 7.227e-01 Constrast_loss: 2.283e+01 
+22-03-31 05:40:23.012 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/87000_E.pth
+22-03-31 05:41:36.489 : <epoch:3281, iter:  87,200, lr:2.000e-04> G_loss: 2.598e+01 TV_loss: 0.000e+00 Gradient_loss: 3.783e+00 l1_loss: 8.263e-01 Constrast_loss: 2.137e+01 
+22-03-31 05:42:37.636 : <epoch:3290, iter:  87,400, lr:2.000e-04> G_loss: 2.687e+01 TV_loss: 0.000e+00 Gradient_loss: 5.592e+00 l1_loss: 1.299e+00 Constrast_loss: 1.998e+01 
+22-03-31 05:43:40.850 : <epoch:3299, iter:  87,600, lr:2.000e-04> G_loss: 2.540e+01 TV_loss: 0.000e+00 Gradient_loss: 2.527e+00 l1_loss: 5.347e-01 Constrast_loss: 2.233e+01 
+22-03-31 05:44:45.187 : <epoch:3309, iter:  87,800, lr:2.000e-04> G_loss: 2.594e+01 TV_loss: 0.000e+00 Gradient_loss: 4.652e+00 l1_loss: 8.684e-01 Constrast_loss: 2.042e+01 
+22-03-31 05:45:47.484 : <epoch:3318, iter:  88,000, lr:2.000e-04> G_loss: 2.594e+01 TV_loss: 0.000e+00 Gradient_loss: 4.010e+00 l1_loss: 7.561e-01 Constrast_loss: 2.118e+01 
+22-03-31 05:45:47.487 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/88000_E.pth
+22-03-31 05:47:02.287 : <epoch:3327, iter:  88,200, lr:2.000e-04> G_loss: 2.635e+01 TV_loss: 0.000e+00 Gradient_loss: 4.189e+00 l1_loss: 8.870e-01 Constrast_loss: 2.128e+01 
+22-03-31 05:48:03.587 : <epoch:3336, iter:  88,400, lr:2.000e-04> G_loss: 2.495e+01 TV_loss: 0.000e+00 Gradient_loss: 2.775e+00 l1_loss: 5.283e-01 Constrast_loss: 2.164e+01 
+22-03-31 05:49:05.647 : <epoch:3345, iter:  88,600, lr:2.000e-04> G_loss: 2.570e+01 TV_loss: 0.000e+00 Gradient_loss: 3.217e+00 l1_loss: 7.549e-01 Constrast_loss: 2.173e+01 
+22-03-31 05:50:07.207 : <epoch:3354, iter:  88,800, lr:2.000e-04> G_loss: 2.494e+01 TV_loss: 0.000e+00 Gradient_loss: 2.072e+00 l1_loss: 3.526e-01 Constrast_loss: 2.251e+01 
+22-03-31 05:51:10.428 : <epoch:3363, iter:  89,000, lr:2.000e-04> G_loss: 2.623e+01 TV_loss: 0.000e+00 Gradient_loss: 5.656e+00 l1_loss: 1.286e+00 Constrast_loss: 1.929e+01 
+22-03-31 05:51:10.433 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/89000_E.pth
+22-03-31 05:52:24.377 : <epoch:3372, iter:  89,200, lr:2.000e-04> G_loss: 2.466e+01 TV_loss: 0.000e+00 Gradient_loss: 4.320e+00 l1_loss: 9.489e-01 Constrast_loss: 1.939e+01 
+22-03-31 05:53:25.943 : <epoch:3381, iter:  89,400, lr:2.000e-04> G_loss: 2.494e+01 TV_loss: 0.000e+00 Gradient_loss: 1.411e+00 l1_loss: 3.861e-01 Constrast_loss: 2.315e+01 
+22-03-31 05:54:27.440 : <epoch:3390, iter:  89,600, lr:2.000e-04> G_loss: 2.594e+01 TV_loss: 0.000e+00 Gradient_loss: 4.411e+00 l1_loss: 9.106e-01 Constrast_loss: 2.062e+01 
+22-03-31 05:55:29.586 : <epoch:3399, iter:  89,800, lr:2.000e-04> G_loss: 2.496e+01 TV_loss: 0.000e+00 Gradient_loss: 2.599e+00 l1_loss: 5.460e-01 Constrast_loss: 2.181e+01 
+22-03-31 05:56:33.737 : <epoch:3409, iter:  90,000, lr:2.000e-04> G_loss: 2.529e+01 TV_loss: 0.000e+00 Gradient_loss: 3.488e+00 l1_loss: 7.937e-01 Constrast_loss: 2.101e+01 
+22-03-31 05:56:33.740 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/90000_E.pth
+22-03-31 05:57:49.116 : <epoch:3418, iter:  90,200, lr:2.000e-04> G_loss: 2.592e+01 TV_loss: 0.000e+00 Gradient_loss: 5.956e+00 l1_loss: 1.170e+00 Constrast_loss: 1.879e+01 
+22-03-31 05:58:51.447 : <epoch:3427, iter:  90,400, lr:2.000e-04> G_loss: 2.499e+01 TV_loss: 0.000e+00 Gradient_loss: 2.257e+00 l1_loss: 5.368e-01 Constrast_loss: 2.220e+01 
+22-03-31 05:59:52.729 : <epoch:3436, iter:  90,600, lr:2.000e-04> G_loss: 2.514e+01 TV_loss: 0.000e+00 Gradient_loss: 3.355e+00 l1_loss: 5.425e-01 Constrast_loss: 2.125e+01 
+22-03-31 06:00:54.629 : <epoch:3445, iter:  90,800, lr:2.000e-04> G_loss: 2.616e+01 TV_loss: 0.000e+00 Gradient_loss: 3.335e+00 l1_loss: 5.882e-01 Constrast_loss: 2.223e+01 
+22-03-31 06:01:55.891 : <epoch:3454, iter:  91,000, lr:2.000e-04> G_loss: 2.517e+01 TV_loss: 0.000e+00 Gradient_loss: 3.686e+00 l1_loss: 8.671e-01 Constrast_loss: 2.062e+01 
+22-03-31 06:01:55.895 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/91000_E.pth
+22-03-31 06:03:10.370 : <epoch:3463, iter:  91,200, lr:2.000e-04> G_loss: 2.440e+01 TV_loss: 0.000e+00 Gradient_loss: 4.468e+00 l1_loss: 9.102e-01 Constrast_loss: 1.902e+01 
+22-03-31 06:04:12.240 : <epoch:3472, iter:  91,400, lr:2.000e-04> G_loss: 2.463e+01 TV_loss: 0.000e+00 Gradient_loss: 4.238e+00 l1_loss: 8.074e-01 Constrast_loss: 1.958e+01 
+22-03-31 06:05:16.802 : <epoch:3481, iter:  91,600, lr:2.000e-04> G_loss: 2.467e+01 TV_loss: 0.000e+00 Gradient_loss: 3.406e+00 l1_loss: 8.898e-01 Constrast_loss: 2.037e+01 
+22-03-31 06:06:19.364 : <epoch:3490, iter:  91,800, lr:2.000e-04> G_loss: 2.594e+01 TV_loss: 0.000e+00 Gradient_loss: 2.998e+00 l1_loss: 6.488e-01 Constrast_loss: 2.229e+01 
+22-03-31 06:07:22.028 : <epoch:3499, iter:  92,000, lr:2.000e-04> G_loss: 2.504e+01 TV_loss: 0.000e+00 Gradient_loss: 2.742e+00 l1_loss: 4.867e-01 Constrast_loss: 2.181e+01 
+22-03-31 06:07:22.033 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/92000_E.pth
+22-03-31 06:08:40.341 : <epoch:3509, iter:  92,200, lr:2.000e-04> G_loss: 2.480e+01 TV_loss: 0.000e+00 Gradient_loss: 3.437e+00 l1_loss: 6.919e-01 Constrast_loss: 2.067e+01 
+22-03-31 06:09:42.143 : <epoch:3518, iter:  92,400, lr:2.000e-04> G_loss: 2.667e+01 TV_loss: 0.000e+00 Gradient_loss: 5.704e+00 l1_loss: 1.127e+00 Constrast_loss: 1.984e+01 
+22-03-31 06:10:44.133 : <epoch:3527, iter:  92,600, lr:2.000e-04> G_loss: 2.632e+01 TV_loss: 0.000e+00 Gradient_loss: 4.101e+00 l1_loss: 8.033e-01 Constrast_loss: 2.141e+01 
+22-03-31 06:11:47.664 : <epoch:3536, iter:  92,800, lr:2.000e-04> G_loss: 2.537e+01 TV_loss: 0.000e+00 Gradient_loss: 3.131e+00 l1_loss: 6.954e-01 Constrast_loss: 2.155e+01 
+22-03-31 06:12:49.452 : <epoch:3545, iter:  93,000, lr:2.000e-04> G_loss: 2.550e+01 TV_loss: 0.000e+00 Gradient_loss: 3.062e+00 l1_loss: 6.218e-01 Constrast_loss: 2.181e+01 
+22-03-31 06:12:49.454 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/93000_E.pth
+22-03-31 06:14:03.710 : <epoch:3554, iter:  93,200, lr:2.000e-04> G_loss: 2.451e+01 TV_loss: 0.000e+00 Gradient_loss: 2.359e+00 l1_loss: 5.416e-01 Constrast_loss: 2.160e+01 
+22-03-31 06:15:08.668 : <epoch:3563, iter:  93,400, lr:2.000e-04> G_loss: 2.617e+01 TV_loss: 0.000e+00 Gradient_loss: 4.188e+00 l1_loss: 9.897e-01 Constrast_loss: 2.099e+01 
+22-03-31 06:16:10.541 : <epoch:3572, iter:  93,600, lr:2.000e-04> G_loss: 2.590e+01 TV_loss: 0.000e+00 Gradient_loss: 3.954e+00 l1_loss: 7.023e-01 Constrast_loss: 2.124e+01 
+22-03-31 06:17:12.568 : <epoch:3581, iter:  93,800, lr:2.000e-04> G_loss: 2.516e+01 TV_loss: 0.000e+00 Gradient_loss: 1.474e+00 l1_loss: 3.077e-01 Constrast_loss: 2.338e+01 
+22-03-31 06:18:16.151 : <epoch:3590, iter:  94,000, lr:2.000e-04> G_loss: 2.584e+01 TV_loss: 0.000e+00 Gradient_loss: 5.169e+00 l1_loss: 1.420e+00 Constrast_loss: 1.925e+01 
+22-03-31 06:18:16.153 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/94000_E.pth
+22-03-31 06:19:31.170 : <epoch:3599, iter:  94,200, lr:2.000e-04> G_loss: 2.516e+01 TV_loss: 0.000e+00 Gradient_loss: 1.227e+00 l1_loss: 2.972e-01 Constrast_loss: 2.364e+01 
+22-03-31 06:20:34.523 : <epoch:3609, iter:  94,400, lr:2.000e-04> G_loss: 2.498e+01 TV_loss: 0.000e+00 Gradient_loss: 2.150e+00 l1_loss: 4.699e-01 Constrast_loss: 2.236e+01 
+22-03-31 06:21:35.496 : <epoch:3618, iter:  94,600, lr:2.000e-04> G_loss: 2.560e+01 TV_loss: 0.000e+00 Gradient_loss: 4.582e+00 l1_loss: 9.811e-01 Constrast_loss: 2.004e+01 
+22-03-31 06:22:37.450 : <epoch:3627, iter:  94,800, lr:2.000e-04> G_loss: 2.551e+01 TV_loss: 0.000e+00 Gradient_loss: 4.972e+00 l1_loss: 1.026e+00 Constrast_loss: 1.952e+01 
+22-03-31 06:23:40.072 : <epoch:3636, iter:  95,000, lr:2.000e-04> G_loss: 2.441e+01 TV_loss: 0.000e+00 Gradient_loss: 2.464e+00 l1_loss: 4.773e-01 Constrast_loss: 2.147e+01 
+22-03-31 06:23:40.076 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/95000_E.pth
+22-03-31 06:24:54.284 : <epoch:3645, iter:  95,200, lr:2.000e-04> G_loss: 2.551e+01 TV_loss: 0.000e+00 Gradient_loss: 3.189e+00 l1_loss: 8.547e-01 Constrast_loss: 2.146e+01 
+22-03-31 06:25:56.098 : <epoch:3654, iter:  95,400, lr:2.000e-04> G_loss: 2.523e+01 TV_loss: 0.000e+00 Gradient_loss: 3.421e+00 l1_loss: 8.998e-01 Constrast_loss: 2.091e+01 
+22-03-31 06:26:57.121 : <epoch:3663, iter:  95,600, lr:2.000e-04> G_loss: 2.570e+01 TV_loss: 0.000e+00 Gradient_loss: 2.993e+00 l1_loss: 5.394e-01 Constrast_loss: 2.216e+01 
+22-03-31 06:27:59.563 : <epoch:3672, iter:  95,800, lr:2.000e-04> G_loss: 2.523e+01 TV_loss: 0.000e+00 Gradient_loss: 2.906e+00 l1_loss: 4.816e-01 Constrast_loss: 2.184e+01 
+22-03-31 06:29:01.142 : <epoch:3681, iter:  96,000, lr:2.000e-04> G_loss: 2.562e+01 TV_loss: 0.000e+00 Gradient_loss: 2.873e+00 l1_loss: 6.909e-01 Constrast_loss: 2.206e+01 
+22-03-31 06:29:01.144 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/96000_E.pth
+22-03-31 06:30:15.684 : <epoch:3690, iter:  96,200, lr:2.000e-04> G_loss: 2.540e+01 TV_loss: 0.000e+00 Gradient_loss: 1.194e+00 l1_loss: 1.869e-01 Constrast_loss: 2.401e+01 
+22-03-31 06:31:16.947 : <epoch:3699, iter:  96,400, lr:2.000e-04> G_loss: 2.450e+01 TV_loss: 0.000e+00 Gradient_loss: 3.064e+00 l1_loss: 6.492e-01 Constrast_loss: 2.078e+01 
+22-03-31 06:32:21.127 : <epoch:3709, iter:  96,600, lr:2.000e-04> G_loss: 2.494e+01 TV_loss: 0.000e+00 Gradient_loss: 3.900e+00 l1_loss: 8.001e-01 Constrast_loss: 2.024e+01 
+22-03-31 06:33:22.898 : <epoch:3718, iter:  96,800, lr:2.000e-04> G_loss: 2.616e+01 TV_loss: 0.000e+00 Gradient_loss: 4.932e+00 l1_loss: 7.721e-01 Constrast_loss: 2.045e+01 
+22-03-31 06:34:27.229 : <epoch:3727, iter:  97,000, lr:2.000e-04> G_loss: 2.605e+01 TV_loss: 0.000e+00 Gradient_loss: 3.599e+00 l1_loss: 6.605e-01 Constrast_loss: 2.179e+01 
+22-03-31 06:34:27.232 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/97000_E.pth
+22-03-31 06:35:42.275 : <epoch:3736, iter:  97,200, lr:2.000e-04> G_loss: 2.523e+01 TV_loss: 0.000e+00 Gradient_loss: 5.039e+00 l1_loss: 9.544e-01 Constrast_loss: 1.924e+01 
+22-03-31 06:36:46.484 : <epoch:3745, iter:  97,400, lr:2.000e-04> G_loss: 2.509e+01 TV_loss: 0.000e+00 Gradient_loss: 3.208e+00 l1_loss: 7.240e-01 Constrast_loss: 2.116e+01 
+22-03-31 06:37:49.021 : <epoch:3754, iter:  97,600, lr:2.000e-04> G_loss: 2.485e+01 TV_loss: 0.000e+00 Gradient_loss: 3.866e+00 l1_loss: 7.594e-01 Constrast_loss: 2.023e+01 
+22-03-31 06:38:51.730 : <epoch:3763, iter:  97,800, lr:2.000e-04> G_loss: 2.466e+01 TV_loss: 0.000e+00 Gradient_loss: 2.583e+00 l1_loss: 4.566e-01 Constrast_loss: 2.162e+01 
+22-03-31 06:39:54.088 : <epoch:3772, iter:  98,000, lr:2.000e-04> G_loss: 2.572e+01 TV_loss: 0.000e+00 Gradient_loss: 3.540e+00 l1_loss: 7.652e-01 Constrast_loss: 2.142e+01 
+22-03-31 06:39:54.092 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/98000_E.pth
+22-03-31 06:41:08.855 : <epoch:3781, iter:  98,200, lr:2.000e-04> G_loss: 2.561e+01 TV_loss: 0.000e+00 Gradient_loss: 3.763e+00 l1_loss: 7.976e-01 Constrast_loss: 2.105e+01 
+22-03-31 06:42:12.679 : <epoch:3790, iter:  98,400, lr:2.000e-04> G_loss: 2.536e+01 TV_loss: 0.000e+00 Gradient_loss: 3.793e+00 l1_loss: 8.118e-01 Constrast_loss: 2.075e+01 
+22-03-31 06:43:14.111 : <epoch:3799, iter:  98,600, lr:2.000e-04> G_loss: 2.519e+01 TV_loss: 0.000e+00 Gradient_loss: 2.091e+00 l1_loss: 4.609e-01 Constrast_loss: 2.264e+01 
+22-03-31 06:44:17.036 : <epoch:3809, iter:  98,800, lr:2.000e-04> G_loss: 2.491e+01 TV_loss: 0.000e+00 Gradient_loss: 3.918e+00 l1_loss: 1.047e+00 Constrast_loss: 1.994e+01 
+22-03-31 06:45:19.350 : <epoch:3818, iter:  99,000, lr:2.000e-04> G_loss: 2.619e+01 TV_loss: 0.000e+00 Gradient_loss: 4.322e+00 l1_loss: 9.459e-01 Constrast_loss: 2.092e+01 
+22-03-31 06:45:19.352 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/99000_E.pth
+22-03-31 06:46:33.863 : <epoch:3827, iter:  99,200, lr:2.000e-04> G_loss: 2.464e+01 TV_loss: 0.000e+00 Gradient_loss: 5.281e+00 l1_loss: 1.047e+00 Constrast_loss: 1.831e+01 
+22-03-31 06:47:36.558 : <epoch:3836, iter:  99,400, lr:2.000e-04> G_loss: 2.467e+01 TV_loss: 0.000e+00 Gradient_loss: 3.537e+00 l1_loss: 6.301e-01 Constrast_loss: 2.050e+01 
+22-03-31 06:48:38.567 : <epoch:3845, iter:  99,600, lr:2.000e-04> G_loss: 2.479e+01 TV_loss: 0.000e+00 Gradient_loss: 1.953e+00 l1_loss: 4.790e-01 Constrast_loss: 2.236e+01 
+22-03-31 06:49:40.542 : <epoch:3854, iter:  99,800, lr:2.000e-04> G_loss: 2.519e+01 TV_loss: 0.000e+00 Gradient_loss: 3.534e+00 l1_loss: 7.225e-01 Constrast_loss: 2.093e+01 
+22-03-31 06:50:41.886 : <epoch:3863, iter: 100,000, lr:2.000e-04> G_loss: 2.617e+01 TV_loss: 0.000e+00 Gradient_loss: 5.058e+00 l1_loss: 1.068e+00 Constrast_loss: 2.004e+01 
+22-03-31 06:50:41.888 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/100000_E.pth
+22-03-31 06:51:56.466 : <epoch:3872, iter: 100,200, lr:2.000e-04> G_loss: 2.483e+01 TV_loss: 0.000e+00 Gradient_loss: 3.011e+00 l1_loss: 5.895e-01 Constrast_loss: 2.123e+01 
+22-03-31 06:52:59.237 : <epoch:3881, iter: 100,400, lr:2.000e-04> G_loss: 2.536e+01 TV_loss: 0.000e+00 Gradient_loss: 2.334e+00 l1_loss: 6.339e-01 Constrast_loss: 2.239e+01 
+22-03-31 06:54:01.045 : <epoch:3890, iter: 100,600, lr:2.000e-04> G_loss: 2.588e+01 TV_loss: 0.000e+00 Gradient_loss: 2.603e+00 l1_loss: 4.892e-01 Constrast_loss: 2.279e+01 
+22-03-31 06:55:02.447 : <epoch:3899, iter: 100,800, lr:2.000e-04> G_loss: 2.460e+01 TV_loss: 0.000e+00 Gradient_loss: 3.382e+00 l1_loss: 7.198e-01 Constrast_loss: 2.050e+01 
+22-03-31 06:56:06.728 : <epoch:3909, iter: 101,000, lr:2.000e-04> G_loss: 2.554e+01 TV_loss: 0.000e+00 Gradient_loss: 3.548e+00 l1_loss: 9.436e-01 Constrast_loss: 2.105e+01 
+22-03-31 06:56:06.732 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/101000_E.pth
+22-03-31 06:57:20.955 : <epoch:3918, iter: 101,200, lr:2.000e-04> G_loss: 2.572e+01 TV_loss: 0.000e+00 Gradient_loss: 4.832e+00 l1_loss: 1.102e+00 Constrast_loss: 1.979e+01 
+22-03-31 06:58:22.802 : <epoch:3927, iter: 101,400, lr:2.000e-04> G_loss: 2.599e+01 TV_loss: 0.000e+00 Gradient_loss: 4.781e+00 l1_loss: 1.051e+00 Constrast_loss: 2.015e+01 
+22-03-31 06:59:24.439 : <epoch:3936, iter: 101,600, lr:2.000e-04> G_loss: 2.553e+01 TV_loss: 0.000e+00 Gradient_loss: 4.144e+00 l1_loss: 9.363e-01 Constrast_loss: 2.045e+01 
+22-03-31 07:00:26.956 : <epoch:3945, iter: 101,800, lr:2.000e-04> G_loss: 2.645e+01 TV_loss: 0.000e+00 Gradient_loss: 3.877e+00 l1_loss: 1.177e+00 Constrast_loss: 2.140e+01 
+22-03-31 07:01:30.447 : <epoch:3954, iter: 102,000, lr:2.000e-04> G_loss: 2.529e+01 TV_loss: 0.000e+00 Gradient_loss: 4.619e+00 l1_loss: 1.102e+00 Constrast_loss: 1.957e+01 
+22-03-31 07:01:30.451 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/102000_E.pth
+22-03-31 07:02:44.705 : <epoch:3963, iter: 102,200, lr:2.000e-04> G_loss: 2.527e+01 TV_loss: 0.000e+00 Gradient_loss: 2.044e+00 l1_loss: 5.190e-01 Constrast_loss: 2.271e+01 
+22-03-31 07:03:46.517 : <epoch:3972, iter: 102,400, lr:2.000e-04> G_loss: 2.546e+01 TV_loss: 0.000e+00 Gradient_loss: 4.414e+00 l1_loss: 9.385e-01 Constrast_loss: 2.010e+01 
+22-03-31 07:04:49.427 : <epoch:3981, iter: 102,600, lr:2.000e-04> G_loss: 2.565e+01 TV_loss: 0.000e+00 Gradient_loss: 3.522e+00 l1_loss: 5.550e-01 Constrast_loss: 2.158e+01 
+22-03-31 07:05:51.669 : <epoch:3990, iter: 102,800, lr:2.000e-04> G_loss: 2.563e+01 TV_loss: 0.000e+00 Gradient_loss: 4.692e+00 l1_loss: 1.064e+00 Constrast_loss: 1.988e+01 
+22-03-31 07:06:53.587 : <epoch:3999, iter: 103,000, lr:2.000e-04> G_loss: 2.539e+01 TV_loss: 0.000e+00 Gradient_loss: 3.231e+00 l1_loss: 4.899e-01 Constrast_loss: 2.167e+01 
+22-03-31 07:06:53.592 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/103000_E.pth
+22-03-31 07:08:10.100 : <epoch:4009, iter: 103,200, lr:2.000e-04> G_loss: 2.513e+01 TV_loss: 0.000e+00 Gradient_loss: 4.731e+00 l1_loss: 9.954e-01 Constrast_loss: 1.941e+01 
+22-03-31 07:09:12.485 : <epoch:4018, iter: 103,400, lr:2.000e-04> G_loss: 2.631e+01 TV_loss: 0.000e+00 Gradient_loss: 4.547e+00 l1_loss: 8.619e-01 Constrast_loss: 2.090e+01 
+22-03-31 07:10:14.999 : <epoch:4027, iter: 103,600, lr:2.000e-04> G_loss: 2.550e+01 TV_loss: 0.000e+00 Gradient_loss: 2.859e+00 l1_loss: 7.210e-01 Constrast_loss: 2.192e+01 
+22-03-31 07:11:18.117 : <epoch:4036, iter: 103,800, lr:2.000e-04> G_loss: 2.402e+01 TV_loss: 0.000e+00 Gradient_loss: 3.703e+00 l1_loss: 6.653e-01 Constrast_loss: 1.965e+01 
+22-03-31 07:12:21.062 : <epoch:4045, iter: 104,000, lr:2.000e-04> G_loss: 2.610e+01 TV_loss: 0.000e+00 Gradient_loss: 3.787e+00 l1_loss: 7.438e-01 Constrast_loss: 2.157e+01 
+22-03-31 07:12:21.066 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/104000_E.pth
+22-03-31 07:13:35.783 : <epoch:4054, iter: 104,200, lr:2.000e-04> G_loss: 2.517e+01 TV_loss: 0.000e+00 Gradient_loss: 5.398e+00 l1_loss: 1.251e+00 Constrast_loss: 1.852e+01 
+22-03-31 07:14:37.894 : <epoch:4063, iter: 104,400, lr:2.000e-04> G_loss: 2.593e+01 TV_loss: 0.000e+00 Gradient_loss: 3.869e+00 l1_loss: 9.373e-01 Constrast_loss: 2.113e+01 
+22-03-31 07:15:41.099 : <epoch:4072, iter: 104,600, lr:2.000e-04> G_loss: 2.518e+01 TV_loss: 0.000e+00 Gradient_loss: 5.313e+00 l1_loss: 1.298e+00 Constrast_loss: 1.857e+01 
+22-03-31 07:16:43.731 : <epoch:4081, iter: 104,800, lr:2.000e-04> G_loss: 2.502e+01 TV_loss: 0.000e+00 Gradient_loss: 1.743e+00 l1_loss: 3.143e-01 Constrast_loss: 2.296e+01 
+22-03-31 07:17:46.296 : <epoch:4090, iter: 105,000, lr:2.000e-04> G_loss: 2.663e+01 TV_loss: 0.000e+00 Gradient_loss: 3.330e+00 l1_loss: 7.467e-01 Constrast_loss: 2.255e+01 
+22-03-31 07:17:46.298 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/105000_E.pth
+22-03-31 07:19:01.595 : <epoch:4099, iter: 105,200, lr:2.000e-04> G_loss: 2.432e+01 TV_loss: 0.000e+00 Gradient_loss: 2.078e+00 l1_loss: 4.647e-01 Constrast_loss: 2.178e+01 
+22-03-31 07:20:05.240 : <epoch:4109, iter: 105,400, lr:2.000e-04> G_loss: 2.477e+01 TV_loss: 0.000e+00 Gradient_loss: 2.709e+00 l1_loss: 6.758e-01 Constrast_loss: 2.138e+01 
+22-03-31 07:21:08.169 : <epoch:4118, iter: 105,600, lr:2.000e-04> G_loss: 2.554e+01 TV_loss: 0.000e+00 Gradient_loss: 5.549e+00 l1_loss: 1.206e+00 Constrast_loss: 1.879e+01 
+22-03-31 07:22:09.983 : <epoch:4127, iter: 105,800, lr:2.000e-04> G_loss: 2.573e+01 TV_loss: 0.000e+00 Gradient_loss: 2.119e+00 l1_loss: 4.661e-01 Constrast_loss: 2.315e+01 
+22-03-31 07:23:11.785 : <epoch:4136, iter: 106,000, lr:2.000e-04> G_loss: 2.609e+01 TV_loss: 0.000e+00 Gradient_loss: 4.980e+00 l1_loss: 9.628e-01 Constrast_loss: 2.014e+01 
+22-03-31 07:23:11.789 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/106000_E.pth
+22-03-31 07:24:26.524 : <epoch:4145, iter: 106,200, lr:2.000e-04> G_loss: 2.593e+01 TV_loss: 0.000e+00 Gradient_loss: 3.180e+00 l1_loss: 6.599e-01 Constrast_loss: 2.209e+01 
+22-03-31 07:25:28.691 : <epoch:4154, iter: 106,400, lr:2.000e-04> G_loss: 2.534e+01 TV_loss: 0.000e+00 Gradient_loss: 2.488e+00 l1_loss: 6.159e-01 Constrast_loss: 2.223e+01 
+22-03-31 07:26:30.451 : <epoch:4163, iter: 106,600, lr:2.000e-04> G_loss: 2.627e+01 TV_loss: 0.000e+00 Gradient_loss: 5.019e+00 l1_loss: 9.764e-01 Constrast_loss: 2.027e+01 
+22-03-31 07:27:32.186 : <epoch:4172, iter: 106,800, lr:2.000e-04> G_loss: 2.522e+01 TV_loss: 0.000e+00 Gradient_loss: 2.965e+00 l1_loss: 4.659e-01 Constrast_loss: 2.179e+01 
+22-03-31 07:28:35.285 : <epoch:4181, iter: 107,000, lr:2.000e-04> G_loss: 2.510e+01 TV_loss: 0.000e+00 Gradient_loss: 1.599e+00 l1_loss: 4.025e-01 Constrast_loss: 2.310e+01 
+22-03-31 07:28:35.288 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/107000_E.pth
+22-03-31 07:29:51.561 : <epoch:4190, iter: 107,200, lr:2.000e-04> G_loss: 2.635e+01 TV_loss: 0.000e+00 Gradient_loss: 2.848e+00 l1_loss: 5.648e-01 Constrast_loss: 2.294e+01 
+22-03-31 07:30:55.381 : <epoch:4199, iter: 107,400, lr:2.000e-04> G_loss: 2.545e+01 TV_loss: 0.000e+00 Gradient_loss: 2.694e+00 l1_loss: 6.017e-01 Constrast_loss: 2.215e+01 
+22-03-31 07:31:59.172 : <epoch:4209, iter: 107,600, lr:2.000e-04> G_loss: 2.450e+01 TV_loss: 0.000e+00 Gradient_loss: 3.297e+00 l1_loss: 8.092e-01 Constrast_loss: 2.039e+01 
+22-03-31 07:33:01.192 : <epoch:4218, iter: 107,800, lr:2.000e-04> G_loss: 2.613e+01 TV_loss: 0.000e+00 Gradient_loss: 4.681e+00 l1_loss: 9.878e-01 Constrast_loss: 2.046e+01 
+22-03-31 07:34:02.606 : <epoch:4227, iter: 108,000, lr:2.000e-04> G_loss: 2.505e+01 TV_loss: 0.000e+00 Gradient_loss: 2.873e+00 l1_loss: 4.659e-01 Constrast_loss: 2.171e+01 
+22-03-31 07:34:02.610 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/108000_E.pth
+22-03-31 07:35:18.052 : <epoch:4236, iter: 108,200, lr:2.000e-04> G_loss: 2.609e+01 TV_loss: 0.000e+00 Gradient_loss: 3.193e+00 l1_loss: 5.846e-01 Constrast_loss: 2.231e+01 
+22-03-31 07:36:20.268 : <epoch:4245, iter: 108,400, lr:2.000e-04> G_loss: 2.545e+01 TV_loss: 0.000e+00 Gradient_loss: 3.359e+00 l1_loss: 7.863e-01 Constrast_loss: 2.131e+01 
+22-03-31 07:37:22.213 : <epoch:4254, iter: 108,600, lr:2.000e-04> G_loss: 2.498e+01 TV_loss: 0.000e+00 Gradient_loss: 5.499e+00 l1_loss: 1.127e+00 Constrast_loss: 1.835e+01 
+22-03-31 07:38:24.198 : <epoch:4263, iter: 108,800, lr:2.000e-04> G_loss: 2.710e+01 TV_loss: 0.000e+00 Gradient_loss: 5.269e+00 l1_loss: 1.165e+00 Constrast_loss: 2.067e+01 
+22-03-31 07:39:26.087 : <epoch:4272, iter: 109,000, lr:2.000e-04> G_loss: 2.625e+01 TV_loss: 0.000e+00 Gradient_loss: 4.575e+00 l1_loss: 9.655e-01 Constrast_loss: 2.071e+01 
+22-03-31 07:39:26.091 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/109000_E.pth
+22-03-31 07:40:41.223 : <epoch:4281, iter: 109,200, lr:2.000e-04> G_loss: 2.602e+01 TV_loss: 0.000e+00 Gradient_loss: 3.615e+00 l1_loss: 8.714e-01 Constrast_loss: 2.153e+01 
+22-03-31 07:41:43.905 : <epoch:4290, iter: 109,400, lr:2.000e-04> G_loss: 2.587e+01 TV_loss: 0.000e+00 Gradient_loss: 3.104e+00 l1_loss: 5.727e-01 Constrast_loss: 2.219e+01 
+22-03-31 07:42:46.063 : <epoch:4299, iter: 109,600, lr:2.000e-04> G_loss: 2.501e+01 TV_loss: 0.000e+00 Gradient_loss: 2.264e+00 l1_loss: 5.324e-01 Constrast_loss: 2.221e+01 
+22-03-31 07:43:50.144 : <epoch:4309, iter: 109,800, lr:2.000e-04> G_loss: 2.483e+01 TV_loss: 0.000e+00 Gradient_loss: 1.430e+00 l1_loss: 2.193e-01 Constrast_loss: 2.318e+01 
+22-03-31 07:44:52.079 : <epoch:4318, iter: 110,000, lr:2.000e-04> G_loss: 2.570e+01 TV_loss: 0.000e+00 Gradient_loss: 4.717e+00 l1_loss: 9.672e-01 Constrast_loss: 2.001e+01 
+22-03-31 07:44:52.083 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/110000_E.pth
+22-03-31 07:46:06.100 : <epoch:4327, iter: 110,200, lr:2.000e-04> G_loss: 2.521e+01 TV_loss: 0.000e+00 Gradient_loss: 4.083e+00 l1_loss: 9.868e-01 Constrast_loss: 2.014e+01 
+22-03-31 07:47:07.264 : <epoch:4336, iter: 110,400, lr:2.000e-04> G_loss: 2.480e+01 TV_loss: 0.000e+00 Gradient_loss: 3.669e+00 l1_loss: 7.028e-01 Constrast_loss: 2.042e+01 
+22-03-31 07:48:08.365 : <epoch:4345, iter: 110,600, lr:2.000e-04> G_loss: 2.517e+01 TV_loss: 0.000e+00 Gradient_loss: 3.356e+00 l1_loss: 7.371e-01 Constrast_loss: 2.108e+01 
+22-03-31 07:49:09.896 : <epoch:4354, iter: 110,800, lr:2.000e-04> G_loss: 2.547e+01 TV_loss: 0.000e+00 Gradient_loss: 2.979e+00 l1_loss: 5.616e-01 Constrast_loss: 2.193e+01 
+22-03-31 07:50:11.787 : <epoch:4363, iter: 111,000, lr:2.000e-04> G_loss: 2.501e+01 TV_loss: 0.000e+00 Gradient_loss: 3.182e+00 l1_loss: 6.057e-01 Constrast_loss: 2.122e+01 
+22-03-31 07:50:11.791 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/111000_E.pth
+22-03-31 07:51:25.795 : <epoch:4372, iter: 111,200, lr:2.000e-04> G_loss: 2.509e+01 TV_loss: 0.000e+00 Gradient_loss: 2.370e+00 l1_loss: 4.525e-01 Constrast_loss: 2.227e+01 
+22-03-31 07:52:29.028 : <epoch:4381, iter: 111,400, lr:2.000e-04> G_loss: 2.539e+01 TV_loss: 0.000e+00 Gradient_loss: 1.191e+00 l1_loss: 2.103e-01 Constrast_loss: 2.398e+01 
+22-03-31 07:53:30.982 : <epoch:4390, iter: 111,600, lr:2.000e-04> G_loss: 2.501e+01 TV_loss: 0.000e+00 Gradient_loss: 4.819e+00 l1_loss: 1.002e+00 Constrast_loss: 1.919e+01 
+22-03-31 07:54:32.152 : <epoch:4399, iter: 111,800, lr:2.000e-04> G_loss: 2.602e+01 TV_loss: 0.000e+00 Gradient_loss: 3.530e+00 l1_loss: 6.692e-01 Constrast_loss: 2.182e+01 
+22-03-31 07:55:36.485 : <epoch:4409, iter: 112,000, lr:2.000e-04> G_loss: 2.495e+01 TV_loss: 0.000e+00 Gradient_loss: 3.734e+00 l1_loss: 8.137e-01 Constrast_loss: 2.040e+01 
+22-03-31 07:55:36.489 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/112000_E.pth
+22-03-31 07:56:52.535 : <epoch:4418, iter: 112,200, lr:2.000e-04> G_loss: 2.507e+01 TV_loss: 0.000e+00 Gradient_loss: 3.714e+00 l1_loss: 6.883e-01 Constrast_loss: 2.067e+01 
+22-03-31 07:57:55.266 : <epoch:4427, iter: 112,400, lr:2.000e-04> G_loss: 2.537e+01 TV_loss: 0.000e+00 Gradient_loss: 2.385e+00 l1_loss: 5.733e-01 Constrast_loss: 2.241e+01 
+22-03-31 07:58:57.294 : <epoch:4436, iter: 112,600, lr:2.000e-04> G_loss: 2.544e+01 TV_loss: 0.000e+00 Gradient_loss: 3.996e+00 l1_loss: 9.169e-01 Constrast_loss: 2.053e+01 
+22-03-31 08:00:00.152 : <epoch:4445, iter: 112,800, lr:2.000e-04> G_loss: 2.586e+01 TV_loss: 0.000e+00 Gradient_loss: 3.728e+00 l1_loss: 7.346e-01 Constrast_loss: 2.140e+01 
+22-03-31 08:01:02.443 : <epoch:4454, iter: 113,000, lr:2.000e-04> G_loss: 2.531e+01 TV_loss: 0.000e+00 Gradient_loss: 2.049e+00 l1_loss: 3.818e-01 Constrast_loss: 2.288e+01 
+22-03-31 08:01:02.445 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/113000_E.pth
+22-03-31 08:02:16.298 : <epoch:4463, iter: 113,200, lr:2.000e-04> G_loss: 2.441e+01 TV_loss: 0.000e+00 Gradient_loss: 4.555e+00 l1_loss: 1.000e+00 Constrast_loss: 1.886e+01 
+22-03-31 08:03:19.292 : <epoch:4472, iter: 113,400, lr:2.000e-04> G_loss: 2.579e+01 TV_loss: 0.000e+00 Gradient_loss: 1.971e+00 l1_loss: 2.559e-01 Constrast_loss: 2.357e+01 
+22-03-31 08:04:22.262 : <epoch:4481, iter: 113,600, lr:2.000e-04> G_loss: 2.596e+01 TV_loss: 0.000e+00 Gradient_loss: 2.341e+00 l1_loss: 5.197e-01 Constrast_loss: 2.310e+01 
+22-03-31 08:05:23.239 : <epoch:4490, iter: 113,800, lr:2.000e-04> G_loss: 2.514e+01 TV_loss: 0.000e+00 Gradient_loss: 4.003e+00 l1_loss: 7.486e-01 Constrast_loss: 2.039e+01 
+22-03-31 08:06:24.869 : <epoch:4499, iter: 114,000, lr:2.000e-04> G_loss: 2.545e+01 TV_loss: 0.000e+00 Gradient_loss: 3.032e+00 l1_loss: 7.254e-01 Constrast_loss: 2.169e+01 
+22-03-31 08:06:24.874 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/114000_E.pth
+22-03-31 08:07:42.199 : <epoch:4509, iter: 114,200, lr:2.000e-04> G_loss: 2.419e+01 TV_loss: 0.000e+00 Gradient_loss: 3.026e+00 l1_loss: 8.170e-01 Constrast_loss: 2.035e+01 
+22-03-31 08:08:45.384 : <epoch:4518, iter: 114,400, lr:2.000e-04> G_loss: 2.554e+01 TV_loss: 0.000e+00 Gradient_loss: 2.305e+00 l1_loss: 4.822e-01 Constrast_loss: 2.276e+01 
+22-03-31 08:09:46.629 : <epoch:4527, iter: 114,600, lr:2.000e-04> G_loss: 2.488e+01 TV_loss: 0.000e+00 Gradient_loss: 3.358e+00 l1_loss: 6.913e-01 Constrast_loss: 2.083e+01 
+22-03-31 08:10:48.589 : <epoch:4536, iter: 114,800, lr:2.000e-04> G_loss: 2.588e+01 TV_loss: 0.000e+00 Gradient_loss: 3.866e+00 l1_loss: 7.256e-01 Constrast_loss: 2.128e+01 
+22-03-31 08:11:50.782 : <epoch:4545, iter: 115,000, lr:2.000e-04> G_loss: 2.553e+01 TV_loss: 0.000e+00 Gradient_loss: 2.962e+00 l1_loss: 5.842e-01 Constrast_loss: 2.199e+01 
+22-03-31 08:11:50.786 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/115000_E.pth
+22-03-31 08:13:07.302 : <epoch:4554, iter: 115,200, lr:2.000e-04> G_loss: 2.465e+01 TV_loss: 0.000e+00 Gradient_loss: 2.965e+00 l1_loss: 6.993e-01 Constrast_loss: 2.099e+01 
+22-03-31 08:14:09.879 : <epoch:4563, iter: 115,400, lr:2.000e-04> G_loss: 2.442e+01 TV_loss: 0.000e+00 Gradient_loss: 4.548e+00 l1_loss: 1.016e+00 Constrast_loss: 1.885e+01 
+22-03-31 08:15:12.599 : <epoch:4572, iter: 115,600, lr:2.000e-04> G_loss: 2.567e+01 TV_loss: 0.000e+00 Gradient_loss: 3.600e+00 l1_loss: 6.551e-01 Constrast_loss: 2.141e+01 
+22-03-31 08:16:16.969 : <epoch:4581, iter: 115,800, lr:2.000e-04> G_loss: 2.530e+01 TV_loss: 0.000e+00 Gradient_loss: 2.731e+00 l1_loss: 6.399e-01 Constrast_loss: 2.193e+01 
+22-03-31 08:17:19.216 : <epoch:4590, iter: 116,000, lr:2.000e-04> G_loss: 2.425e+01 TV_loss: 0.000e+00 Gradient_loss: 4.298e+00 l1_loss: 8.968e-01 Constrast_loss: 1.905e+01 
+22-03-31 08:17:19.218 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/116000_E.pth
+22-03-31 08:18:33.152 : <epoch:4599, iter: 116,200, lr:2.000e-04> G_loss: 2.490e+01 TV_loss: 0.000e+00 Gradient_loss: 1.794e+00 l1_loss: 3.390e-01 Constrast_loss: 2.277e+01 
+22-03-31 08:19:36.388 : <epoch:4609, iter: 116,400, lr:2.000e-04> G_loss: 2.488e+01 TV_loss: 0.000e+00 Gradient_loss: 4.150e+00 l1_loss: 9.952e-01 Constrast_loss: 1.973e+01 
+22-03-31 08:20:38.657 : <epoch:4618, iter: 116,600, lr:2.000e-04> G_loss: 2.635e+01 TV_loss: 0.000e+00 Gradient_loss: 4.545e+00 l1_loss: 8.456e-01 Constrast_loss: 2.095e+01 
+22-03-31 08:21:41.706 : <epoch:4627, iter: 116,800, lr:2.000e-04> G_loss: 2.408e+01 TV_loss: 0.000e+00 Gradient_loss: 3.172e+00 l1_loss: 6.748e-01 Constrast_loss: 2.024e+01 
+22-03-31 08:22:44.209 : <epoch:4636, iter: 117,000, lr:2.000e-04> G_loss: 2.424e+01 TV_loss: 0.000e+00 Gradient_loss: 3.742e+00 l1_loss: 6.779e-01 Constrast_loss: 1.982e+01 
+22-03-31 08:22:44.213 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/117000_E.pth
+22-03-31 08:23:59.256 : <epoch:4645, iter: 117,200, lr:2.000e-04> G_loss: 2.611e+01 TV_loss: 0.000e+00 Gradient_loss: 4.564e+00 l1_loss: 1.021e+00 Constrast_loss: 2.053e+01 
+22-03-31 08:25:01.569 : <epoch:4654, iter: 117,400, lr:2.000e-04> G_loss: 2.464e+01 TV_loss: 0.000e+00 Gradient_loss: 2.964e+00 l1_loss: 6.913e-01 Constrast_loss: 2.098e+01 
+22-03-31 08:26:03.151 : <epoch:4663, iter: 117,600, lr:2.000e-04> G_loss: 2.629e+01 TV_loss: 0.000e+00 Gradient_loss: 3.572e+00 l1_loss: 7.968e-01 Constrast_loss: 2.192e+01 
+22-03-31 08:27:04.855 : <epoch:4672, iter: 117,800, lr:2.000e-04> G_loss: 2.508e+01 TV_loss: 0.000e+00 Gradient_loss: 3.452e+00 l1_loss: 9.354e-01 Constrast_loss: 2.069e+01 
+22-03-31 08:28:08.148 : <epoch:4681, iter: 118,000, lr:2.000e-04> G_loss: 2.489e+01 TV_loss: 0.000e+00 Gradient_loss: 3.139e+00 l1_loss: 9.221e-01 Constrast_loss: 2.083e+01 
+22-03-31 08:28:08.152 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/118000_E.pth
+22-03-31 08:29:22.318 : <epoch:4690, iter: 118,200, lr:2.000e-04> G_loss: 2.459e+01 TV_loss: 0.000e+00 Gradient_loss: 4.756e+00 l1_loss: 9.700e-01 Constrast_loss: 1.887e+01 
+22-03-31 08:30:23.826 : <epoch:4699, iter: 118,400, lr:2.000e-04> G_loss: 2.486e+01 TV_loss: 0.000e+00 Gradient_loss: 1.563e+00 l1_loss: 5.238e-01 Constrast_loss: 2.277e+01 
+22-03-31 08:31:27.866 : <epoch:4709, iter: 118,600, lr:2.000e-04> G_loss: 2.441e+01 TV_loss: 0.000e+00 Gradient_loss: 5.232e+00 l1_loss: 1.278e+00 Constrast_loss: 1.790e+01 
+22-03-31 08:32:31.601 : <epoch:4718, iter: 118,800, lr:2.000e-04> G_loss: 2.548e+01 TV_loss: 0.000e+00 Gradient_loss: 4.650e+00 l1_loss: 1.191e+00 Constrast_loss: 1.964e+01 
+22-03-31 08:33:33.603 : <epoch:4727, iter: 119,000, lr:2.000e-04> G_loss: 2.550e+01 TV_loss: 0.000e+00 Gradient_loss: 3.283e+00 l1_loss: 8.546e-01 Constrast_loss: 2.136e+01 
+22-03-31 08:33:33.604 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/119000_E.pth
+22-03-31 08:34:48.027 : <epoch:4736, iter: 119,200, lr:2.000e-04> G_loss: 2.529e+01 TV_loss: 0.000e+00 Gradient_loss: 3.981e+00 l1_loss: 8.520e-01 Constrast_loss: 2.046e+01 
+22-03-31 08:35:49.508 : <epoch:4745, iter: 119,400, lr:2.000e-04> G_loss: 2.518e+01 TV_loss: 0.000e+00 Gradient_loss: 4.376e+00 l1_loss: 1.158e+00 Constrast_loss: 1.965e+01 
+22-03-31 08:36:52.093 : <epoch:4754, iter: 119,600, lr:2.000e-04> G_loss: 2.630e+01 TV_loss: 0.000e+00 Gradient_loss: 3.760e+00 l1_loss: 1.335e+00 Constrast_loss: 2.120e+01 
+22-03-31 08:37:54.623 : <epoch:4763, iter: 119,800, lr:2.000e-04> G_loss: 2.553e+01 TV_loss: 0.000e+00 Gradient_loss: 4.147e+00 l1_loss: 1.120e+00 Constrast_loss: 2.026e+01 
+22-03-31 08:38:56.425 : <epoch:4772, iter: 120,000, lr:2.000e-04> G_loss: 2.592e+01 TV_loss: 0.000e+00 Gradient_loss: 5.066e+00 l1_loss: 1.235e+00 Constrast_loss: 1.962e+01 
+22-03-31 08:38:56.428 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/120000_E.pth
+22-03-31 08:40:12.667 : <epoch:4781, iter: 120,200, lr:2.000e-04> G_loss: 2.510e+01 TV_loss: 0.000e+00 Gradient_loss: 2.874e+00 l1_loss: 7.327e-01 Constrast_loss: 2.149e+01 
+22-03-31 08:41:14.463 : <epoch:4790, iter: 120,400, lr:2.000e-04> G_loss: 2.543e+01 TV_loss: 0.000e+00 Gradient_loss: 3.101e+00 l1_loss: 7.650e-01 Constrast_loss: 2.156e+01 
+22-03-31 08:42:16.816 : <epoch:4799, iter: 120,600, lr:2.000e-04> G_loss: 2.437e+01 TV_loss: 0.000e+00 Gradient_loss: 2.273e+00 l1_loss: 7.072e-01 Constrast_loss: 2.139e+01 
+22-03-31 08:43:20.340 : <epoch:4809, iter: 120,800, lr:2.000e-04> G_loss: 2.335e+01 TV_loss: 0.000e+00 Gradient_loss: 3.566e+00 l1_loss: 8.249e-01 Constrast_loss: 1.896e+01 
+22-03-31 08:44:22.329 : <epoch:4818, iter: 121,000, lr:2.000e-04> G_loss: 2.570e+01 TV_loss: 0.000e+00 Gradient_loss: 5.589e+00 l1_loss: 1.329e+00 Constrast_loss: 1.878e+01 
+22-03-31 08:44:22.332 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/121000_E.pth
+22-03-31 08:45:36.872 : <epoch:4827, iter: 121,200, lr:2.000e-04> G_loss: 2.464e+01 TV_loss: 0.000e+00 Gradient_loss: 3.659e+00 l1_loss: 8.081e-01 Constrast_loss: 2.017e+01 
+22-03-31 08:46:39.853 : <epoch:4836, iter: 121,400, lr:2.000e-04> G_loss: 2.506e+01 TV_loss: 0.000e+00 Gradient_loss: 2.844e+00 l1_loss: 8.375e-01 Constrast_loss: 2.138e+01 
+22-03-31 08:47:41.365 : <epoch:4845, iter: 121,600, lr:2.000e-04> G_loss: 2.502e+01 TV_loss: 0.000e+00 Gradient_loss: 1.649e+00 l1_loss: 3.794e-01 Constrast_loss: 2.299e+01 
+22-03-31 08:48:42.483 : <epoch:4854, iter: 121,800, lr:2.000e-04> G_loss: 2.530e+01 TV_loss: 0.000e+00 Gradient_loss: 4.952e+00 l1_loss: 1.225e+00 Constrast_loss: 1.912e+01 
+22-03-31 08:49:44.006 : <epoch:4863, iter: 122,000, lr:2.000e-04> G_loss: 2.677e+01 TV_loss: 0.000e+00 Gradient_loss: 4.899e+00 l1_loss: 1.188e+00 Constrast_loss: 2.069e+01 
+22-03-31 08:49:44.010 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/122000_E.pth
+22-03-31 08:50:58.298 : <epoch:4872, iter: 122,200, lr:2.000e-04> G_loss: 2.455e+01 TV_loss: 0.000e+00 Gradient_loss: 2.995e+00 l1_loss: 6.930e-01 Constrast_loss: 2.086e+01 
+22-03-31 08:52:00.148 : <epoch:4881, iter: 122,400, lr:2.000e-04> G_loss: 2.539e+01 TV_loss: 0.000e+00 Gradient_loss: 2.488e+00 l1_loss: 6.603e-01 Constrast_loss: 2.224e+01 
+22-03-31 08:53:01.379 : <epoch:4890, iter: 122,600, lr:2.000e-04> G_loss: 2.472e+01 TV_loss: 0.000e+00 Gradient_loss: 3.715e+00 l1_loss: 8.975e-01 Constrast_loss: 2.011e+01 
+22-03-31 08:54:02.995 : <epoch:4899, iter: 122,800, lr:2.000e-04> G_loss: 2.489e+01 TV_loss: 0.000e+00 Gradient_loss: 2.923e+00 l1_loss: 8.638e-01 Constrast_loss: 2.111e+01 
+22-03-31 08:55:06.082 : <epoch:4909, iter: 123,000, lr:2.000e-04> G_loss: 2.552e+01 TV_loss: 0.000e+00 Gradient_loss: 3.728e+00 l1_loss: 1.063e+00 Constrast_loss: 2.073e+01 
+22-03-31 08:55:06.086 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/123000_E.pth
+22-03-31 08:56:20.149 : <epoch:4918, iter: 123,200, lr:2.000e-04> G_loss: 2.524e+01 TV_loss: 0.000e+00 Gradient_loss: 4.629e+00 l1_loss: 1.064e+00 Constrast_loss: 1.955e+01 
+22-03-31 08:57:21.308 : <epoch:4927, iter: 123,400, lr:2.000e-04> G_loss: 2.520e+01 TV_loss: 0.000e+00 Gradient_loss: 4.944e+00 l1_loss: 1.294e+00 Constrast_loss: 1.896e+01 
+22-03-31 08:58:23.170 : <epoch:4936, iter: 123,600, lr:2.000e-04> G_loss: 2.407e+01 TV_loss: 0.000e+00 Gradient_loss: 3.562e+00 l1_loss: 7.626e-01 Constrast_loss: 1.975e+01 
+22-03-31 08:59:27.502 : <epoch:4945, iter: 123,800, lr:2.000e-04> G_loss: 2.551e+01 TV_loss: 0.000e+00 Gradient_loss: 3.344e+00 l1_loss: 9.587e-01 Constrast_loss: 2.121e+01 
+22-03-31 09:00:29.354 : <epoch:4954, iter: 124,000, lr:2.000e-04> G_loss: 2.489e+01 TV_loss: 0.000e+00 Gradient_loss: 2.992e+00 l1_loss: 8.536e-01 Constrast_loss: 2.104e+01 
+22-03-31 09:00:29.358 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/124000_E.pth
+22-03-31 09:01:43.260 : <epoch:4963, iter: 124,200, lr:2.000e-04> G_loss: 2.473e+01 TV_loss: 0.000e+00 Gradient_loss: 3.820e+00 l1_loss: 1.053e+00 Constrast_loss: 1.985e+01 
+22-03-31 09:02:45.773 : <epoch:4972, iter: 124,400, lr:2.000e-04> G_loss: 2.339e+01 TV_loss: 0.000e+00 Gradient_loss: 5.132e+00 l1_loss: 1.261e+00 Constrast_loss: 1.700e+01 
+22-03-31 09:03:47.730 : <epoch:4981, iter: 124,600, lr:2.000e-04> G_loss: 2.584e+01 TV_loss: 0.000e+00 Gradient_loss: 2.508e+00 l1_loss: 7.612e-01 Constrast_loss: 2.257e+01 
+22-03-31 09:04:52.136 : <epoch:4990, iter: 124,800, lr:2.000e-04> G_loss: 2.507e+01 TV_loss: 0.000e+00 Gradient_loss: 3.108e+00 l1_loss: 9.324e-01 Constrast_loss: 2.103e+01 
+22-03-31 09:05:53.881 : <epoch:4999, iter: 125,000, lr:2.000e-04> G_loss: 2.459e+01 TV_loss: 0.000e+00 Gradient_loss: 2.609e+00 l1_loss: 5.837e-01 Constrast_loss: 2.140e+01 
+22-03-31 09:05:53.885 : Saving the model. Save path is:Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/125000_E.pth
+22-04-04 17:04:07.330 :   task: Medical_Fusion
+  model: plain
+  gpu_ids: [0, 1, 2]
+  dist: True
+  scale: 1
+  n_channels: 1
+  path:[
+    root: Model/Medical_Fusion-PET-MRI
+    pretrained_netG: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/10000_G.pth
+    pretrained_netE: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/10000_E.pth
+    task: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    log: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    options: Model/Medical_Fusion-PET-MRI/Medical_Fusion/options
+    models: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models
+    images: Model/Medical_Fusion-PET-MRI/Medical_Fusion/images
+    pretrained_optimizerG: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/10000_optimizerG.pth
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: med
+      dataroot_A: Dataset/trainsets/PET-MRI/MRI
+      dataroot_B: Dataset/trainsets/PET-MRI/PET_Y
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 12
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: med
+      dataroot_A: Dataset/valsets/PET-MRI/MRI
+      dataroot_B: Dataset/valsets/PET-MRI/PET_Y
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: swinfusion1
+    upscale: 1
+    in_chans: 1
+    img_size: 128
+    window_size: 8
+    img_range: 1.0
+    depths: [6, 6, 6, 6]
+    embed_dim: 60
+    num_heads: [6, 6, 6, 6]
+    mlp_ratio: 2
+    upsampler: None
+    resi_connection: 1conv
+    init_type: default
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: med
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0002
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: True
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [250000, 400000, 450000, 475000, 500000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 1000
+    checkpoint_save: 1000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+  ]
+  opt_path: options/swinir/train_swinfusion_med.json
+  is_train: True
+  merge_bn: False
+  merge_bn_startpoint: -1
+  find_unused_parameters: True
+  num_gpu: 3
+  rank: 0
+  world_size: 3
+
+22-04-04 17:04:07.374 : Number of train images: 269, iters: 23
+22-04-04 17:06:30.864 :   task: Medical_Fusion
+  model: plain
+  gpu_ids: [0, 1, 2]
+  dist: True
+  scale: 1
+  n_channels: 1
+  path:[
+    root: Model/Medical_Fusion-PET-MRI
+    pretrained_netG: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/10000_G.pth
+    pretrained_netE: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/10000_E.pth
+    task: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    log: Model/Medical_Fusion-PET-MRI/Medical_Fusion
+    options: Model/Medical_Fusion-PET-MRI/Medical_Fusion/options
+    models: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models
+    images: Model/Medical_Fusion-PET-MRI/Medical_Fusion/images
+    pretrained_optimizerG: Model/Medical_Fusion-PET-MRI/Medical_Fusion/models/10000_optimizerG.pth
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: med
+      dataroot_A: Dataset/trainsets/PET-MRI/MRI
+      dataroot_B: Dataset/trainsets/PET-MRI/PET_Y
+      H_size: 64
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 16
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: med
+      dataroot_A: Dataset/valsets/PET-MRI/MRI
+      dataroot_B: Dataset/valsets/PET-MRI/PET_Y
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: swinfusion1
+    upscale: 1
+    in_chans: 1
+    img_size: 128
+    window_size: 8
+    img_range: 1.0
+    depths: [6, 6, 6, 6]
+    embed_dim: 60
+    num_heads: [6, 6, 6, 6]
+    mlp_ratio: 2
+    upsampler: None
+    resi_connection: 1conv
+    init_type: default
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: med
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0002
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: True
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [250000, 400000, 450000, 475000, 500000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 1000
+    checkpoint_save: 1000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+  ]
+  opt_path: options/swinir/train_swinfusion_med.json
+  is_train: True
+  merge_bn: False
+  merge_bn_startpoint: -1
+  find_unused_parameters: True
+  num_gpu: 3
+  rank: 0
+  world_size: 3
+
+22-04-04 17:06:30.871 : Number of train images: 269, iters: 17
+22-04-04 17:09:28.587 : <epoch: 11, iter:  10,200, lr:2.000e-04> G_loss: 2.929e+01 TV_loss: 0.000e+00 Gradient_loss: 8.439e+00 l1_loss: 1.068e+00 Constrast_loss: 1.978e+01 

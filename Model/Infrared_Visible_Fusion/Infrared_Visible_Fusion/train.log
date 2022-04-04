@@ -1,0 +1,162 @@
+22-02-20 11:15:52.225 :   task: Infrared_Visible_Fusion
+  model: plain
+  gpu_ids: [0, 1, 2]
+  dist: True
+  scale: 1
+  n_channels: 1
+  path:[
+    root: Model/Infrared_Visible_Fusion
+    pretrained_netG: None
+    pretrained_netE: None
+    task: Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion
+    log: Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion
+    options: Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/options
+    models: Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models
+    images: Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: vif
+      dataroot_A: Dataset/trainsets/MSRS/ir
+      dataroot_B: Dataset/trainsets/MSRS/vi
+      dataroot_GT: Dataset/trainsets/MSRS/vi
+      H_size: 128
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 12
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: vif
+      dataroot_A: Dataset/valsets/MSRS/ir
+      dataroot_B: Dataset/valsets/MSRS/vi
+      dataroot_GT: Dataset/valsets/MSRS/vi
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: swinfusion1
+    upscale: 1
+    in_chans: 1
+    img_size: 128
+    window_size: 8
+    img_range: 1.0
+    depths: [6, 6, 6, 6]
+    embed_dim: 60
+    num_heads: [6, 6, 6, 6]
+    mlp_ratio: 2
+    upsampler: None
+    resi_connection: 1conv
+    init_type: default
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: vif
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 2e-05
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: True
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [250000, 400000, 450000, 475000, 500000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 1000
+    checkpoint_save: 1000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+  ]
+  opt_path: options/swinir/train_swinfusion_vif.json
+  is_train: True
+  merge_bn: False
+  merge_bn_startpoint: -1
+  find_unused_parameters: True
+  num_gpu: 3
+  rank: 0
+  world_size: 3
+
+22-02-20 11:15:52.312 : Number of train images: 1,083, iters: 91
+22-02-20 11:20:50.695 : <epoch:  2, iter:     200, lr:2.000e-05> G_loss: 7.255e+00 TV_loss: 5.545e-02 Gradient_loss: 2.967e+00 l1_loss: 7.620e-01 Constrast_loss: 3.471e+00 
+22-02-20 11:25:47.871 : <epoch:  4, iter:     400, lr:2.000e-05> G_loss: 3.975e+00 TV_loss: 3.219e-02 Gradient_loss: 1.322e+00 l1_loss: 1.755e-01 Constrast_loss: 2.445e+00 
+22-02-20 11:30:45.814 : <epoch:  6, iter:     600, lr:2.000e-05> G_loss: 2.487e+00 TV_loss: 7.961e-03 Gradient_loss: 7.668e-01 l1_loss: 1.446e-01 Constrast_loss: 1.568e+00 
+22-02-20 11:35:42.560 : <epoch:  8, iter:     800, lr:2.000e-05> G_loss: 5.129e+00 TV_loss: 2.965e-02 Gradient_loss: 1.667e+00 l1_loss: 4.729e-01 Constrast_loss: 2.960e+00 
+22-02-20 11:40:41.461 : <epoch: 11, iter:   1,000, lr:2.000e-05> G_loss: 2.906e+00 TV_loss: 7.796e-03 Gradient_loss: 7.694e-01 l1_loss: 1.704e-01 Constrast_loss: 1.959e+00 
+22-02-20 11:40:41.466 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/1000_E.pth
+22-02-20 11:46:05.616 : <epoch: 13, iter:   1,200, lr:2.000e-05> G_loss: 3.710e+00 TV_loss: 1.579e-02 Gradient_loss: 1.418e+00 l1_loss: 1.746e-01 Constrast_loss: 2.101e+00 
+22-02-20 11:51:02.218 : <epoch: 15, iter:   1,400, lr:2.000e-05> G_loss: 3.729e+00 TV_loss: 6.901e-03 Gradient_loss: 1.081e+00 l1_loss: 2.560e-01 Constrast_loss: 2.385e+00 
+22-02-20 11:55:58.341 : <epoch: 17, iter:   1,600, lr:2.000e-05> G_loss: 2.557e+00 TV_loss: 2.705e-03 Gradient_loss: 5.236e-01 l1_loss: 1.339e-01 Constrast_loss: 1.896e+00 
+22-02-20 12:00:55.503 : <epoch: 19, iter:   1,800, lr:2.000e-05> G_loss: 3.888e+00 TV_loss: 7.320e-03 Gradient_loss: 9.728e-01 l1_loss: 2.624e-01 Constrast_loss: 2.645e+00 
+22-02-20 12:05:52.949 : <epoch: 22, iter:   2,000, lr:2.000e-05> G_loss: 3.333e+00 TV_loss: 7.045e-03 Gradient_loss: 9.525e-01 l1_loss: 1.325e-01 Constrast_loss: 2.241e+00 
+22-02-20 12:05:52.961 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/2000_E.pth
+22-02-20 12:11:15.028 : <epoch: 24, iter:   2,200, lr:2.000e-05> G_loss: 2.611e+00 TV_loss: 3.350e-03 Gradient_loss: 6.653e-01 l1_loss: 1.617e-01 Constrast_loss: 1.781e+00 
+22-02-20 12:16:10.450 : <epoch: 26, iter:   2,400, lr:2.000e-05> G_loss: 2.439e+00 TV_loss: 1.856e-03 Gradient_loss: 4.958e-01 l1_loss: 6.411e-02 Constrast_loss: 1.878e+00 
+22-02-20 12:21:06.506 : <epoch: 28, iter:   2,600, lr:2.000e-05> G_loss: 3.452e+00 TV_loss: 7.035e-03 Gradient_loss: 7.345e-01 l1_loss: 2.034e-01 Constrast_loss: 2.507e+00 
+22-02-20 12:26:02.932 : <epoch: 31, iter:   2,800, lr:2.000e-05> G_loss: 2.889e+00 TV_loss: 4.319e-03 Gradient_loss: 7.450e-01 l1_loss: 8.799e-02 Constrast_loss: 2.052e+00 
+22-02-20 12:30:59.858 : <epoch: 33, iter:   3,000, lr:2.000e-05> G_loss: 3.845e+00 TV_loss: 1.133e-02 Gradient_loss: 9.119e-01 l1_loss: 1.240e-01 Constrast_loss: 2.798e+00 
+22-02-20 12:30:59.865 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/3000_E.pth
+22-02-20 12:36:22.252 : <epoch: 35, iter:   3,200, lr:2.000e-05> G_loss: 2.866e+00 TV_loss: 1.966e-03 Gradient_loss: 5.899e-01 l1_loss: 1.113e-01 Constrast_loss: 2.162e+00 
+22-02-20 12:41:17.205 : <epoch: 37, iter:   3,400, lr:2.000e-05> G_loss: 1.951e+00 TV_loss: 1.798e-03 Gradient_loss: 4.165e-01 l1_loss: 9.069e-02 Constrast_loss: 1.442e+00 
+22-02-20 12:46:13.276 : <epoch: 39, iter:   3,600, lr:2.000e-05> G_loss: 3.063e+00 TV_loss: 3.024e-03 Gradient_loss: 6.396e-01 l1_loss: 1.273e-01 Constrast_loss: 2.293e+00 
+22-02-20 12:51:11.654 : <epoch: 42, iter:   3,800, lr:2.000e-05> G_loss: 2.851e+00 TV_loss: 5.598e-03 Gradient_loss: 6.813e-01 l1_loss: 1.432e-01 Constrast_loss: 2.021e+00 
+22-02-20 12:56:08.745 : <epoch: 44, iter:   4,000, lr:2.000e-05> G_loss: 2.805e+00 TV_loss: 2.730e-03 Gradient_loss: 5.454e-01 l1_loss: 1.172e-01 Constrast_loss: 2.140e+00 
+22-02-20 12:56:08.756 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/4000_E.pth
+22-02-20 13:01:32.308 : <epoch: 46, iter:   4,200, lr:2.000e-05> G_loss: 2.308e+00 TV_loss: 1.311e-03 Gradient_loss: 5.792e-01 l1_loss: 4.804e-02 Constrast_loss: 1.679e+00 
+22-02-20 13:06:28.797 : <epoch: 48, iter:   4,400, lr:2.000e-05> G_loss: 3.302e+00 TV_loss: 5.218e-03 Gradient_loss: 6.852e-01 l1_loss: 1.875e-01 Constrast_loss: 2.425e+00 
+22-02-20 13:11:25.881 : <epoch: 51, iter:   4,600, lr:2.000e-05> G_loss: 2.124e+00 TV_loss: 2.719e-03 Gradient_loss: 5.866e-01 l1_loss: 7.434e-02 Constrast_loss: 1.460e+00 
+22-02-20 13:16:22.016 : <epoch: 53, iter:   4,800, lr:2.000e-05> G_loss: 3.043e+00 TV_loss: 2.727e-03 Gradient_loss: 5.793e-01 l1_loss: 9.699e-02 Constrast_loss: 2.364e+00 
+22-02-20 13:21:18.942 : <epoch: 55, iter:   5,000, lr:2.000e-05> G_loss: 2.713e+00 TV_loss: 1.035e-03 Gradient_loss: 5.798e-01 l1_loss: 8.189e-02 Constrast_loss: 2.050e+00 
+22-02-20 13:21:18.953 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/5000_E.pth
+22-02-20 13:26:41.905 : <epoch: 57, iter:   5,200, lr:2.000e-05> G_loss: 1.647e+00 TV_loss: 1.025e-03 Gradient_loss: 3.518e-01 l1_loss: 7.898e-02 Constrast_loss: 1.215e+00 
+22-02-20 13:31:42.150 : <epoch: 59, iter:   5,400, lr:2.000e-05> G_loss: 2.963e+00 TV_loss: 3.148e-03 Gradient_loss: 5.456e-01 l1_loss: 1.216e-01 Constrast_loss: 2.293e+00 
+22-02-20 13:36:42.790 : <epoch: 62, iter:   5,600, lr:2.000e-05> G_loss: 3.193e+00 TV_loss: 2.998e-03 Gradient_loss: 9.092e-01 l1_loss: 1.713e-01 Constrast_loss: 2.109e+00 
+22-02-20 13:41:40.624 : <epoch: 64, iter:   5,800, lr:2.000e-05> G_loss: 3.269e+00 TV_loss: 5.676e-03 Gradient_loss: 8.557e-01 l1_loss: 8.244e-02 Constrast_loss: 2.325e+00 
+22-02-20 13:46:38.706 : <epoch: 66, iter:   6,000, lr:2.000e-05> G_loss: 2.596e+00 TV_loss: 1.104e-03 Gradient_loss: 4.569e-01 l1_loss: 6.203e-02 Constrast_loss: 2.076e+00 
+22-02-20 13:46:38.718 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/6000_E.pth
+22-02-20 13:52:02.555 : <epoch: 68, iter:   6,200, lr:2.000e-05> G_loss: 3.236e+00 TV_loss: 5.991e-03 Gradient_loss: 7.641e-01 l1_loss: 1.429e-01 Constrast_loss: 2.323e+00 
+22-02-20 13:57:00.986 : <epoch: 71, iter:   6,400, lr:2.000e-05> G_loss: 2.357e+00 TV_loss: 5.142e-03 Gradient_loss: 5.983e-01 l1_loss: 7.072e-02 Constrast_loss: 1.683e+00 
+22-02-20 14:01:57.611 : <epoch: 73, iter:   6,600, lr:2.000e-05> G_loss: 2.599e+00 TV_loss: 4.553e-03 Gradient_loss: 7.481e-01 l1_loss: 1.122e-01 Constrast_loss: 1.735e+00 
+22-02-20 14:06:56.975 : <epoch: 75, iter:   6,800, lr:2.000e-05> G_loss: 2.267e+00 TV_loss: 3.121e-03 Gradient_loss: 6.047e-01 l1_loss: 8.292e-02 Constrast_loss: 1.576e+00 
+22-02-20 14:11:54.216 : <epoch: 77, iter:   7,000, lr:2.000e-05> G_loss: 1.922e+00 TV_loss: 2.952e-03 Gradient_loss: 4.696e-01 l1_loss: 6.737e-02 Constrast_loss: 1.382e+00 
+22-02-20 14:11:54.228 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/7000_E.pth
+22-02-20 14:17:20.545 : <epoch: 79, iter:   7,200, lr:2.000e-05> G_loss: 3.086e+00 TV_loss: 1.769e-03 Gradient_loss: 5.351e-01 l1_loss: 1.217e-01 Constrast_loss: 2.427e+00 
+22-02-20 14:22:19.856 : <epoch: 82, iter:   7,400, lr:2.000e-05> G_loss: 2.759e+00 TV_loss: 1.964e-03 Gradient_loss: 4.869e-01 l1_loss: 1.316e-01 Constrast_loss: 2.138e+00 
+22-02-20 14:27:18.368 : <epoch: 84, iter:   7,600, lr:2.000e-05> G_loss: 2.548e+00 TV_loss: 4.348e-03 Gradient_loss: 6.048e-01 l1_loss: 5.974e-02 Constrast_loss: 1.879e+00 
+22-02-20 14:32:15.591 : <epoch: 86, iter:   7,800, lr:2.000e-05> G_loss: 2.128e+00 TV_loss: 1.043e-03 Gradient_loss: 3.711e-01 l1_loss: 3.453e-02 Constrast_loss: 1.722e+00 
+22-02-20 14:37:12.619 : <epoch: 88, iter:   8,000, lr:2.000e-05> G_loss: 2.869e+00 TV_loss: 9.164e-04 Gradient_loss: 5.292e-01 l1_loss: 9.392e-02 Constrast_loss: 2.245e+00 
+22-02-20 14:37:12.631 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/8000_E.pth
+22-02-20 14:43:17.235 : <epoch: 91, iter:   8,200, lr:2.000e-05> G_loss: 3.163e+00 TV_loss: 4.298e-03 Gradient_loss: 6.296e-01 l1_loss: 8.550e-02 Constrast_loss: 2.444e+00 
+22-02-20 14:48:12.288 : <epoch: 93, iter:   8,400, lr:2.000e-05> G_loss: 2.165e+00 TV_loss: 1.462e-03 Gradient_loss: 4.658e-01 l1_loss: 1.001e-01 Constrast_loss: 1.598e+00 
+22-02-20 14:53:08.262 : <epoch: 95, iter:   8,600, lr:2.000e-05> G_loss: 2.861e+00 TV_loss: 2.150e-03 Gradient_loss: 6.672e-01 l1_loss: 1.385e-01 Constrast_loss: 2.053e+00 
+22-02-20 14:58:04.514 : <epoch: 97, iter:   8,800, lr:2.000e-05> G_loss: 2.286e+00 TV_loss: 2.888e-03 Gradient_loss: 5.010e-01 l1_loss: 1.367e-01 Constrast_loss: 1.646e+00 
+22-02-20 15:02:58.696 : <epoch: 99, iter:   9,000, lr:2.000e-05> G_loss: 3.010e+00 TV_loss: 3.525e-03 Gradient_loss: 4.882e-01 l1_loss: 1.396e-01 Constrast_loss: 2.379e+00 
+22-02-20 15:02:58.712 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/9000_E.pth
+22-02-20 15:08:23.883 : <epoch:102, iter:   9,200, lr:2.000e-05> G_loss: 3.178e+00 TV_loss: 4.151e-03 Gradient_loss: 6.866e-01 l1_loss: 1.346e-01 Constrast_loss: 2.353e+00 
+22-02-20 15:13:18.691 : <epoch:104, iter:   9,400, lr:2.000e-05> G_loss: 3.972e+00 TV_loss: 3.446e-03 Gradient_loss: 9.680e-01 l1_loss: 5.718e-02 Constrast_loss: 2.943e+00 
+22-02-20 15:18:13.174 : <epoch:106, iter:   9,600, lr:2.000e-05> G_loss: 2.499e+00 TV_loss: 2.298e-03 Gradient_loss: 4.391e-01 l1_loss: 5.972e-02 Constrast_loss: 1.998e+00 
+22-02-20 15:23:06.512 : <epoch:108, iter:   9,800, lr:2.000e-05> G_loss: 3.936e+00 TV_loss: 4.471e-03 Gradient_loss: 5.868e-01 l1_loss: 2.393e-01 Constrast_loss: 3.105e+00 
+22-02-20 15:28:01.379 : <epoch:111, iter:  10,000, lr:2.000e-05> G_loss: 2.398e+00 TV_loss: 1.588e-03 Gradient_loss: 5.879e-01 l1_loss: 1.030e-01 Constrast_loss: 1.705e+00 
+22-02-20 15:28:01.386 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/10000_E.pth
+22-02-20 15:33:35.731 : <epoch:113, iter:  10,200, lr:2.000e-05> G_loss: 2.926e+00 TV_loss: 5.304e-03 Gradient_loss: 7.029e-01 l1_loss: 1.707e-01 Constrast_loss: 2.048e+00 
+22-02-20 15:38:36.642 : <epoch:115, iter:  10,400, lr:2.000e-05> G_loss: 2.620e+00 TV_loss: 1.772e-03 Gradient_loss: 5.141e-01 l1_loss: 1.202e-01 Constrast_loss: 1.984e+00 
+22-02-20 15:43:35.528 : <epoch:117, iter:  10,600, lr:2.000e-05> G_loss: 2.564e+00 TV_loss: 1.340e-03 Gradient_loss: 3.844e-01 l1_loss: 1.056e-01 Constrast_loss: 2.072e+00 
+22-02-20 15:48:35.481 : <epoch:119, iter:  10,800, lr:2.000e-05> G_loss: 2.502e+00 TV_loss: 1.129e-03 Gradient_loss: 4.443e-01 l1_loss: 8.182e-02 Constrast_loss: 1.975e+00 
+22-02-20 15:53:34.714 : <epoch:122, iter:  11,000, lr:2.000e-05> G_loss: 2.901e+00 TV_loss: 4.308e-03 Gradient_loss: 6.789e-01 l1_loss: 1.915e-01 Constrast_loss: 2.026e+00 
+22-02-20 15:53:34.726 : Saving the model. Save path is:Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/11000_E.pth
+22-02-20 15:59:06.159 : <epoch:124, iter:  11,200, lr:2.000e-05> G_loss: 2.133e+00 TV_loss: 4.752e-04 Gradient_loss: 3.912e-01 l1_loss: 1.409e-02 Constrast_loss: 1.727e+00 
+22-02-20 16:04:05.141 : <epoch:126, iter:  11,400, lr:2.000e-05> G_loss: 3.005e+00 TV_loss: 4.411e-03 Gradient_loss: 6.315e-01 l1_loss: 1.322e-01 Constrast_loss: 2.237e+00 

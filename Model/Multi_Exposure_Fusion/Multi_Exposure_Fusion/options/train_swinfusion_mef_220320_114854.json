@@ -1,0 +1,114 @@
+{
+  "task": "Multi_Exposure_Fusion",
+  "model": "plain",
+  "gpu_ids": [
+    0,
+    1,
+    2
+  ],
+  "dist": "True",
+  "scale": 1,
+  "n_channels": 1,
+  "path": {
+    "root": "Model/Multi_Exposure_Fusion",
+    "pretrained_netG": "Model/Multi_Exposure_Fusion/Multi_Exposure_Fusion/models/11000_G.pth",
+    "pretrained_netE": "Model/Multi_Exposure_Fusion/Multi_Exposure_Fusion/models/11000_E.pth",
+    "task": "Model/Multi_Exposure_Fusion/Multi_Exposure_Fusion",
+    "log": "Model/Multi_Exposure_Fusion/Multi_Exposure_Fusion",
+    "options": "Model/Multi_Exposure_Fusion/Multi_Exposure_Fusion/options",
+    "models": "Model/Multi_Exposure_Fusion/Multi_Exposure_Fusion/models",
+    "images": "Model/Multi_Exposure_Fusion/Multi_Exposure_Fusion/images",
+    "pretrained_optimizerG": "Model/Multi_Exposure_Fusion/Multi_Exposure_Fusion/models/11000_optimizerG.pth"
+  },
+  "datasets": {
+    "train": {
+      "name": "train_dataset",
+      "dataset_type": "mef",
+      "dataroot_A": "Dataset/trainsets/MEF/under",
+      "dataroot_B": "Dataset/trainsets/MEF/over",
+      "dataroot_GT": "Dataset/trainsets/MEF/GT",
+      "H_size": 128,
+      "dataloader_shuffle": true,
+      "dataloader_num_workers": 8,
+      "dataloader_batch_size": 8,
+      "phase": "train",
+      "scale": 1,
+      "n_channels": 1
+    },
+    "test": {
+      "name": "test_dataset",
+      "dataset_type": "mef",
+      "dataroot_A": "Dataset/valsets/test1/under",
+      "dataroot_B": "Dataset/valsets/test1/over",
+      "dataroot_GT": "Dataset/valsets/test1/GT",
+      "phase": "test",
+      "scale": 1,
+      "n_channels": 1
+    }
+  },
+  "netG": {
+    "net_type": "swinfusion1",
+    "upscale": 1,
+    "in_chans": 1,
+    "img_size": 128,
+    "window_size": 8,
+    "img_range": 1.0,
+    "depths": [
+      6,
+      6,
+      6,
+      6
+    ],
+    "embed_dim": 60,
+    "num_heads": [
+      6,
+      6,
+      6,
+      6
+    ],
+    "mlp_ratio": 2,
+    "upsampler": null,
+    "resi_connection": "1conv",
+    "init_type": "default",
+    "scale": 1
+  },
+  "train": {
+    "G_lossfn_type": "mef",
+    "G_lossfn_weight": 1.0,
+    "E_decay": 0.999,
+    "G_optimizer_type": "adam",
+    "G_optimizer_lr": 0.0002,
+    "G_optimizer_wd": 0,
+    "G_optimizer_clipgrad": null,
+    "G_optimizer_reuse": true,
+    "G_scheduler_type": "MultiStepLR",
+    "G_scheduler_milestones": [
+      250000,
+      400000,
+      450000,
+      475000,
+      500000
+    ],
+    "G_scheduler_gamma": 0.5,
+    "G_regularizer_orthstep": null,
+    "G_regularizer_clipstep": null,
+    "G_param_strict": true,
+    "E_param_strict": true,
+    "checkpoint_test": 1000,
+    "checkpoint_save": 1000,
+    "checkpoint_print": 200,
+    "F_feature_layer": 34,
+    "F_weights": 1.0,
+    "F_lossfn_type": "l1",
+    "F_use_input_norm": true,
+    "F_use_range_norm": false
+  },
+  "opt_path": "options/swinir/train_swinfusion_mef.json",
+  "is_train": true,
+  "merge_bn": false,
+  "merge_bn_startpoint": -1,
+  "find_unused_parameters": true,
+  "num_gpu": 3,
+  "rank": 0,
+  "world_size": 3
+}

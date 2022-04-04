@@ -1,0 +1,288 @@
+22-02-21 10:21:08.211 :   task: RGB_NIR_Fusion
+  model: plain
+  gpu_ids: [0, 1, 2]
+  dist: True
+  scale: 1
+  n_channels: 1
+  path:[
+    root: Model/RGB_NIR_Fusion
+    pretrained_netG: None
+    pretrained_netE: None
+    task: Model/RGB_NIR_Fusion/RGB_NIR_Fusion
+    log: Model/RGB_NIR_Fusion/RGB_NIR_Fusion
+    options: Model/RGB_NIR_Fusion/RGB_NIR_Fusion/options
+    models: Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models
+    images: Model/RGB_NIR_Fusion/RGB_NIR_Fusion/images
+    pretrained_optimizerG: None
+  ]
+  datasets:[
+    train:[
+      name: train_dataset
+      dataset_type: nir
+      dataroot_A: Dataset/trainsets/Nirscene/NIR
+      dataroot_B: Dataset/trainsets/Nirscene/RGB
+      dataroot_GT: Dataset/trainsets/Nirscene/RGB_Y
+      H_size: 128
+      dataloader_shuffle: True
+      dataloader_num_workers: 8
+      dataloader_batch_size: 8
+      phase: train
+      scale: 1
+      n_channels: 1
+    ]
+    test:[
+      name: test_dataset
+      dataset_type: vif
+      dataroot_A: Dataset/valsets/Nirscene/A_Y
+      dataroot_B: Dataset/valsets/Nirscene/B_Y
+      dataroot_GT: Dataset/valsets/Nirscene/B_Y
+      phase: test
+      scale: 1
+      n_channels: 1
+    ]
+  ]
+  netG:[
+    net_type: swinfusion1
+    upscale: 1
+    in_chans: 1
+    img_size: 128
+    window_size: 8
+    img_range: 1.0
+    depths: [6, 6, 6, 6]
+    embed_dim: 60
+    num_heads: [6, 6, 6, 6]
+    mlp_ratio: 2
+    upsampler: None
+    resi_connection: 1conv
+    init_type: default
+    scale: 1
+  ]
+  train:[
+    G_lossfn_type: mef
+    G_lossfn_weight: 1.0
+    E_decay: 0.999
+    G_optimizer_type: adam
+    G_optimizer_lr: 0.0002
+    G_optimizer_wd: 0
+    G_optimizer_clipgrad: None
+    G_optimizer_reuse: True
+    G_scheduler_type: MultiStepLR
+    G_scheduler_milestones: [250000, 400000, 450000, 475000, 500000]
+    G_scheduler_gamma: 0.5
+    G_regularizer_orthstep: None
+    G_regularizer_clipstep: None
+    G_param_strict: True
+    E_param_strict: True
+    checkpoint_test: 1000
+    checkpoint_save: 1000
+    checkpoint_print: 200
+    F_feature_layer: 34
+    F_weights: 1.0
+    F_lossfn_type: l1
+    F_use_input_norm: True
+    F_use_range_norm: False
+  ]
+  opt_path: options/swinir/train_swinfusion_nir.json
+  is_train: True
+  merge_bn: False
+  merge_bn_startpoint: -1
+  find_unused_parameters: True
+  num_gpu: 3
+  rank: 0
+  world_size: 3
+
+22-02-21 10:21:08.215 : Number of train images: 477, iters: 60
+22-02-21 10:22:36.558 : <epoch:  2, iter:     200, lr:2.000e-04> G_loss: 3.648e+00 TV_loss: 3.529e-03 Gradient_loss: 1.135e+00 l1_loss: 1.255e+00 Constrast_loss: 1.255e+00 
+22-02-21 10:24:04.086 : <epoch:  5, iter:     400, lr:2.000e-04> G_loss: 4.897e+00 TV_loss: 1.521e-02 Gradient_loss: 2.420e+00 l1_loss: 5.039e-01 Constrast_loss: 1.958e+00 
+22-02-21 10:25:32.285 : <epoch:  7, iter:     600, lr:2.000e-04> G_loss: 1.126e+00 TV_loss: 1.008e-03 Gradient_loss: 6.306e-01 l1_loss: 1.030e-01 Constrast_loss: 3.908e-01 
+22-02-21 10:27:02.557 : <epoch: 10, iter:     800, lr:2.000e-04> G_loss: 1.281e+00 TV_loss: 2.245e-03 Gradient_loss: 6.770e-01 l1_loss: 1.067e-01 Constrast_loss: 4.956e-01 
+22-02-21 10:28:35.281 : <epoch: 12, iter:   1,000, lr:2.000e-04> G_loss: 2.603e+00 TV_loss: 6.786e-03 Gradient_loss: 1.365e+00 l1_loss: 2.149e-01 Constrast_loss: 1.016e+00 
+22-02-21 10:28:35.287 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/1000_E.pth
+22-02-21 10:31:16.925 : <epoch: 15, iter:   1,200, lr:2.000e-04> G_loss: 2.011e+00 TV_loss: 4.165e-03 Gradient_loss: 1.002e+00 l1_loss: 3.532e-01 Constrast_loss: 6.518e-01 
+22-02-21 10:32:51.061 : <epoch: 17, iter:   1,400, lr:2.000e-04> G_loss: 4.841e+00 TV_loss: 7.452e-03 Gradient_loss: 2.842e+00 l1_loss: 2.719e-01 Constrast_loss: 1.720e+00 
+22-02-21 10:34:25.507 : <epoch: 20, iter:   1,600, lr:2.000e-04> G_loss: 3.404e+00 TV_loss: 6.442e-03 Gradient_loss: 1.820e+00 l1_loss: 1.945e-01 Constrast_loss: 1.383e+00 
+22-02-21 10:35:59.489 : <epoch: 22, iter:   1,800, lr:2.000e-04> G_loss: 1.834e+00 TV_loss: 2.804e-03 Gradient_loss: 9.526e-01 l1_loss: 1.801e-01 Constrast_loss: 6.990e-01 
+22-02-21 10:37:33.399 : <epoch: 25, iter:   2,000, lr:2.000e-04> G_loss: 2.019e+00 TV_loss: 1.473e-03 Gradient_loss: 7.834e-01 l1_loss: 5.186e-01 Constrast_loss: 7.155e-01 
+22-02-21 10:37:33.408 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/2000_E.pth
+22-02-21 10:40:19.907 : <epoch: 27, iter:   2,200, lr:2.000e-04> G_loss: 2.185e+00 TV_loss: 6.878e-03 Gradient_loss: 9.056e-01 l1_loss: 4.361e-01 Constrast_loss: 8.366e-01 
+22-02-21 10:41:54.909 : <epoch: 30, iter:   2,400, lr:2.000e-04> G_loss: 2.809e+00 TV_loss: 8.454e-03 Gradient_loss: 1.601e+00 l1_loss: 2.266e-01 Constrast_loss: 9.730e-01 
+22-02-21 10:43:29.189 : <epoch: 32, iter:   2,600, lr:2.000e-04> G_loss: 1.923e+00 TV_loss: 7.677e-03 Gradient_loss: 9.298e-01 l1_loss: 2.674e-01 Constrast_loss: 7.181e-01 
+22-02-21 10:45:04.028 : <epoch: 35, iter:   2,800, lr:2.000e-04> G_loss: 1.414e+00 TV_loss: 1.608e-03 Gradient_loss: 4.341e-01 l1_loss: 5.373e-01 Constrast_loss: 4.412e-01 
+22-02-21 10:46:38.025 : <epoch: 37, iter:   3,000, lr:2.000e-04> G_loss: 9.650e-01 TV_loss: 1.373e-03 Gradient_loss: 5.216e-01 l1_loss: 7.917e-02 Constrast_loss: 3.629e-01 
+22-02-21 10:46:38.031 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/3000_E.pth
+22-02-21 10:49:22.248 : <epoch: 40, iter:   3,200, lr:2.000e-04> G_loss: 2.068e+00 TV_loss: 9.771e-03 Gradient_loss: 1.030e+00 l1_loss: 2.129e-01 Constrast_loss: 8.157e-01 
+22-02-21 10:50:56.543 : <epoch: 43, iter:   3,400, lr:2.000e-04> G_loss: 3.464e+00 TV_loss: 9.437e-03 Gradient_loss: 1.484e+00 l1_loss: 3.810e-01 Constrast_loss: 1.590e+00 
+22-02-21 10:52:30.169 : <epoch: 45, iter:   3,600, lr:2.000e-04> G_loss: 4.675e+00 TV_loss: 1.005e-02 Gradient_loss: 1.788e+00 l1_loss: 5.331e-01 Constrast_loss: 2.344e+00 
+22-02-21 10:54:04.665 : <epoch: 48, iter:   3,800, lr:2.000e-04> G_loss: 3.984e+00 TV_loss: 5.329e-03 Gradient_loss: 1.725e+00 l1_loss: 1.873e-01 Constrast_loss: 2.067e+00 
+22-02-21 10:55:39.806 : <epoch: 50, iter:   4,000, lr:2.000e-04> G_loss: 2.688e+00 TV_loss: 3.447e-03 Gradient_loss: 1.249e+00 l1_loss: 1.743e-01 Constrast_loss: 1.262e+00 
+22-02-21 10:55:39.812 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/4000_E.pth
+22-02-21 10:58:24.763 : <epoch: 53, iter:   4,200, lr:2.000e-04> G_loss: 9.795e-01 TV_loss: 6.389e-04 Gradient_loss: 4.740e-01 l1_loss: 2.057e-01 Constrast_loss: 2.992e-01 
+22-02-21 10:59:58.993 : <epoch: 55, iter:   4,400, lr:2.000e-04> G_loss: 8.045e-01 TV_loss: 1.252e-03 Gradient_loss: 4.304e-01 l1_loss: 1.412e-01 Constrast_loss: 2.316e-01 
+22-02-21 11:01:33.995 : <epoch: 58, iter:   4,600, lr:2.000e-04> G_loss: 2.038e+00 TV_loss: 2.695e-03 Gradient_loss: 7.959e-01 l1_loss: 3.392e-01 Constrast_loss: 9.005e-01 
+22-02-21 11:03:08.379 : <epoch: 60, iter:   4,800, lr:2.000e-04> G_loss: 3.035e+00 TV_loss: 7.784e-03 Gradient_loss: 1.473e+00 l1_loss: 2.712e-01 Constrast_loss: 1.283e+00 
+22-02-21 11:04:43.201 : <epoch: 63, iter:   5,000, lr:2.000e-04> G_loss: 1.978e+00 TV_loss: 7.091e-03 Gradient_loss: 9.969e-01 l1_loss: 3.476e-01 Constrast_loss: 6.263e-01 
+22-02-21 11:04:43.211 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/5000_E.pth
+22-02-21 11:07:30.143 : <epoch: 65, iter:   5,200, lr:2.000e-04> G_loss: 3.383e+00 TV_loss: 1.698e-02 Gradient_loss: 1.219e+00 l1_loss: 3.085e-01 Constrast_loss: 1.838e+00 
+22-02-21 11:09:05.700 : <epoch: 68, iter:   5,400, lr:2.000e-04> G_loss: 1.215e+00 TV_loss: 1.363e-03 Gradient_loss: 4.916e-01 l1_loss: 1.485e-01 Constrast_loss: 5.731e-01 
+22-02-21 11:10:41.290 : <epoch: 70, iter:   5,600, lr:2.000e-04> G_loss: 2.573e+00 TV_loss: 2.121e-02 Gradient_loss: 1.103e+00 l1_loss: 4.469e-01 Constrast_loss: 1.002e+00 
+22-02-21 11:12:15.830 : <epoch: 73, iter:   5,800, lr:2.000e-04> G_loss: 1.120e+00 TV_loss: 1.377e-03 Gradient_loss: 4.925e-01 l1_loss: 2.256e-01 Constrast_loss: 4.009e-01 
+22-02-21 11:13:49.828 : <epoch: 75, iter:   6,000, lr:2.000e-04> G_loss: 2.344e+00 TV_loss: 5.373e-03 Gradient_loss: 9.992e-01 l1_loss: 3.041e-01 Constrast_loss: 1.035e+00 
+22-02-21 11:13:49.838 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/6000_E.pth
+22-02-21 11:16:35.027 : <epoch: 78, iter:   6,200, lr:2.000e-04> G_loss: 2.686e+00 TV_loss: 1.827e-02 Gradient_loss: 1.232e+00 l1_loss: 4.078e-01 Constrast_loss: 1.028e+00 
+22-02-21 11:18:10.566 : <epoch: 81, iter:   6,400, lr:2.000e-04> G_loss: 2.784e+00 TV_loss: 1.208e-02 Gradient_loss: 1.397e+00 l1_loss: 2.928e-01 Constrast_loss: 1.083e+00 
+22-02-21 11:19:45.955 : <epoch: 83, iter:   6,600, lr:2.000e-04> G_loss: 8.450e-01 TV_loss: 6.454e-04 Gradient_loss: 4.005e-01 l1_loss: 6.556e-02 Constrast_loss: 3.782e-01 
+22-02-21 11:21:20.935 : <epoch: 86, iter:   6,800, lr:2.000e-04> G_loss: 1.228e+00 TV_loss: 1.545e-03 Gradient_loss: 5.676e-01 l1_loss: 1.539e-01 Constrast_loss: 5.046e-01 
+22-02-21 11:22:55.227 : <epoch: 88, iter:   7,000, lr:2.000e-04> G_loss: 2.077e+00 TV_loss: 5.221e-03 Gradient_loss: 7.049e-01 l1_loss: 1.819e-01 Constrast_loss: 1.185e+00 
+22-02-21 11:22:55.237 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/7000_E.pth
+22-02-21 11:25:32.605 : <epoch: 91, iter:   7,200, lr:2.000e-04> G_loss: 2.726e+00 TV_loss: 1.153e-02 Gradient_loss: 7.039e-01 l1_loss: 3.696e-01 Constrast_loss: 1.641e+00 
+22-02-21 11:27:07.033 : <epoch: 93, iter:   7,400, lr:2.000e-04> G_loss: 1.490e+00 TV_loss: 4.547e-03 Gradient_loss: 7.096e-01 l1_loss: 1.550e-01 Constrast_loss: 6.212e-01 
+22-02-21 11:28:42.026 : <epoch: 96, iter:   7,600, lr:2.000e-04> G_loss: 2.805e+00 TV_loss: 6.311e-03 Gradient_loss: 8.733e-01 l1_loss: 2.425e-01 Constrast_loss: 1.683e+00 
+22-02-21 11:30:16.113 : <epoch: 98, iter:   7,800, lr:2.000e-04> G_loss: 2.406e+00 TV_loss: 3.564e-02 Gradient_loss: 7.853e-01 l1_loss: 4.412e-01 Constrast_loss: 1.143e+00 
+22-02-21 11:31:51.721 : <epoch:101, iter:   8,000, lr:2.000e-04> G_loss: 1.797e+00 TV_loss: 9.342e-03 Gradient_loss: 8.135e-01 l1_loss: 2.289e-01 Constrast_loss: 7.453e-01 
+22-02-21 11:31:51.725 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/8000_E.pth
+22-02-21 11:34:29.769 : <epoch:103, iter:   8,200, lr:2.000e-04> G_loss: 1.820e+00 TV_loss: 1.987e-03 Gradient_loss: 6.891e-01 l1_loss: 1.871e-01 Constrast_loss: 9.416e-01 
+22-02-21 11:36:05.101 : <epoch:106, iter:   8,400, lr:2.000e-04> G_loss: 2.524e+00 TV_loss: 7.899e-03 Gradient_loss: 1.046e+00 l1_loss: 3.254e-01 Constrast_loss: 1.144e+00 
+22-02-21 11:37:40.588 : <epoch:108, iter:   8,600, lr:2.000e-04> G_loss: 1.680e+00 TV_loss: 1.139e-02 Gradient_loss: 8.680e-01 l1_loss: 2.622e-01 Constrast_loss: 5.387e-01 
+22-02-21 11:39:16.561 : <epoch:111, iter:   8,800, lr:2.000e-04> G_loss: 3.669e+00 TV_loss: 1.464e-02 Gradient_loss: 1.463e+00 l1_loss: 4.447e-01 Constrast_loss: 1.747e+00 
+22-02-21 11:40:53.019 : <epoch:113, iter:   9,000, lr:2.000e-04> G_loss: 3.612e+00 TV_loss: 2.437e-02 Gradient_loss: 1.784e+00 l1_loss: 3.840e-01 Constrast_loss: 1.420e+00 
+22-02-21 11:40:53.029 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/9000_E.pth
+22-02-21 11:43:37.456 : <epoch:116, iter:   9,200, lr:2.000e-04> G_loss: 1.511e+00 TV_loss: 1.866e-03 Gradient_loss: 5.188e-01 l1_loss: 2.710e-01 Constrast_loss: 7.193e-01 
+22-02-21 11:45:13.847 : <epoch:118, iter:   9,400, lr:2.000e-04> G_loss: 1.755e+00 TV_loss: 3.119e-03 Gradient_loss: 5.606e-01 l1_loss: 1.716e-01 Constrast_loss: 1.019e+00 
+22-02-21 11:46:49.706 : <epoch:121, iter:   9,600, lr:2.000e-04> G_loss: 1.006e+00 TV_loss: 2.318e-03 Gradient_loss: 5.462e-01 l1_loss: 1.806e-01 Constrast_loss: 2.773e-01 
+22-02-21 11:48:24.874 : <epoch:124, iter:   9,800, lr:2.000e-04> G_loss: 2.138e+00 TV_loss: 1.630e-03 Gradient_loss: 7.535e-01 l1_loss: 1.840e-01 Constrast_loss: 1.199e+00 
+22-02-21 11:49:59.242 : <epoch:126, iter:  10,000, lr:2.000e-04> G_loss: 2.260e+00 TV_loss: 6.705e-03 Gradient_loss: 9.171e-01 l1_loss: 2.483e-01 Constrast_loss: 1.088e+00 
+22-02-21 11:49:59.244 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/10000_E.pth
+22-02-21 11:52:46.740 : <epoch:129, iter:  10,200, lr:2.000e-04> G_loss: 1.439e+00 TV_loss: 1.063e-02 Gradient_loss: 6.952e-01 l1_loss: 1.747e-01 Constrast_loss: 5.583e-01 
+22-02-21 11:54:22.157 : <epoch:131, iter:  10,400, lr:2.000e-04> G_loss: 2.103e+00 TV_loss: 3.864e-03 Gradient_loss: 7.837e-01 l1_loss: 1.679e-01 Constrast_loss: 1.147e+00 
+22-02-21 11:55:57.571 : <epoch:134, iter:  10,600, lr:2.000e-04> G_loss: 2.106e+00 TV_loss: 1.042e-02 Gradient_loss: 1.077e+00 l1_loss: 2.415e-01 Constrast_loss: 7.768e-01 
+22-02-21 11:57:32.162 : <epoch:136, iter:  10,800, lr:2.000e-04> G_loss: 6.229e-01 TV_loss: 1.632e-03 Gradient_loss: 2.284e-01 l1_loss: 2.546e-01 Constrast_loss: 1.383e-01 
+22-02-21 11:59:06.930 : <epoch:139, iter:  11,000, lr:2.000e-04> G_loss: 1.270e+00 TV_loss: 5.232e-03 Gradient_loss: 5.904e-01 l1_loss: 2.311e-01 Constrast_loss: 4.434e-01 
+22-02-21 11:59:06.933 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/11000_E.pth
+22-02-21 12:01:50.739 : <epoch:141, iter:  11,200, lr:2.000e-04> G_loss: 1.404e+00 TV_loss: 1.761e-03 Gradient_loss: 5.188e-01 l1_loss: 2.009e-01 Constrast_loss: 6.823e-01 
+22-02-21 12:03:27.360 : <epoch:144, iter:  11,400, lr:2.000e-04> G_loss: 1.730e+00 TV_loss: 5.710e-03 Gradient_loss: 6.654e-01 l1_loss: 2.274e-01 Constrast_loss: 8.313e-01 
+22-02-21 12:05:02.604 : <epoch:146, iter:  11,600, lr:2.000e-04> G_loss: 1.734e+00 TV_loss: 1.745e-03 Gradient_loss: 6.953e-01 l1_loss: 1.908e-01 Constrast_loss: 8.465e-01 
+22-02-21 12:06:37.187 : <epoch:149, iter:  11,800, lr:2.000e-04> G_loss: 2.664e+00 TV_loss: 7.903e-03 Gradient_loss: 7.778e-01 l1_loss: 2.336e-01 Constrast_loss: 1.645e+00 
+22-02-21 12:08:13.084 : <epoch:151, iter:  12,000, lr:2.000e-04> G_loss: 2.008e+00 TV_loss: 3.575e-03 Gradient_loss: 7.921e-01 l1_loss: 1.359e-01 Constrast_loss: 1.077e+00 
+22-02-21 12:08:13.093 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/12000_E.pth
+22-02-21 12:10:59.240 : <epoch:154, iter:  12,200, lr:2.000e-04> G_loss: 1.942e+00 TV_loss: 3.150e-03 Gradient_loss: 6.714e-01 l1_loss: 1.900e-01 Constrast_loss: 1.077e+00 
+22-02-21 12:12:34.778 : <epoch:156, iter:  12,400, lr:2.000e-04> G_loss: 2.268e+00 TV_loss: 5.179e-03 Gradient_loss: 7.741e-01 l1_loss: 2.546e-01 Constrast_loss: 1.234e+00 
+22-02-21 12:14:10.765 : <epoch:159, iter:  12,600, lr:2.000e-04> G_loss: 1.027e+00 TV_loss: 8.683e-04 Gradient_loss: 4.049e-01 l1_loss: 2.540e-01 Constrast_loss: 3.673e-01 
+22-02-21 12:15:46.024 : <epoch:162, iter:  12,800, lr:2.000e-04> G_loss: 3.895e+00 TV_loss: 2.356e-02 Gradient_loss: 1.545e+00 l1_loss: 4.785e-01 Constrast_loss: 1.848e+00 
+22-02-21 12:17:21.458 : <epoch:164, iter:  13,000, lr:2.000e-04> G_loss: 2.941e+00 TV_loss: 2.647e-02 Gradient_loss: 1.104e+00 l1_loss: 3.950e-01 Constrast_loss: 1.416e+00 
+22-02-21 12:17:21.469 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/13000_E.pth
+22-02-21 12:20:07.910 : <epoch:167, iter:  13,200, lr:2.000e-04> G_loss: 2.466e+00 TV_loss: 8.478e-03 Gradient_loss: 1.060e+00 l1_loss: 2.860e-01 Constrast_loss: 1.111e+00 
+22-02-21 12:21:43.583 : <epoch:169, iter:  13,400, lr:2.000e-04> G_loss: 1.895e+00 TV_loss: 5.863e-03 Gradient_loss: 1.024e+00 l1_loss: 2.116e-01 Constrast_loss: 6.538e-01 
+22-02-21 12:23:20.438 : <epoch:172, iter:  13,600, lr:2.000e-04> G_loss: 1.370e+00 TV_loss: 1.337e-03 Gradient_loss: 5.501e-01 l1_loss: 9.929e-02 Constrast_loss: 7.193e-01 
+22-02-21 12:24:55.690 : <epoch:174, iter:  13,800, lr:2.000e-04> G_loss: 3.994e+00 TV_loss: 1.553e-02 Gradient_loss: 1.683e+00 l1_loss: 3.802e-01 Constrast_loss: 1.915e+00 
+22-02-21 12:26:30.506 : <epoch:177, iter:  14,000, lr:2.000e-04> G_loss: 2.387e+00 TV_loss: 1.592e-02 Gradient_loss: 8.040e-01 l1_loss: 2.536e-01 Constrast_loss: 1.314e+00 
+22-02-21 12:26:30.514 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/14000_E.pth
+22-02-21 12:29:20.298 : <epoch:179, iter:  14,200, lr:2.000e-04> G_loss: 2.034e+00 TV_loss: 5.438e-03 Gradient_loss: 8.347e-01 l1_loss: 2.347e-01 Constrast_loss: 9.593e-01 
+22-02-21 12:30:55.637 : <epoch:182, iter:  14,400, lr:2.000e-04> G_loss: 3.038e+00 TV_loss: 4.392e-02 Gradient_loss: 1.289e+00 l1_loss: 4.761e-01 Constrast_loss: 1.229e+00 
+22-02-21 12:32:31.478 : <epoch:184, iter:  14,600, lr:2.000e-04> G_loss: 2.333e+00 TV_loss: 1.378e-02 Gradient_loss: 9.694e-01 l1_loss: 2.893e-01 Constrast_loss: 1.061e+00 
+22-02-21 12:34:06.874 : <epoch:187, iter:  14,800, lr:2.000e-04> G_loss: 3.154e+00 TV_loss: 1.025e-02 Gradient_loss: 1.035e+00 l1_loss: 2.748e-01 Constrast_loss: 1.834e+00 
+22-02-21 12:35:41.223 : <epoch:189, iter:  15,000, lr:2.000e-04> G_loss: 1.946e+00 TV_loss: 8.046e-03 Gradient_loss: 6.366e-01 l1_loss: 5.753e-01 Constrast_loss: 7.256e-01 
+22-02-21 12:35:41.234 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/15000_E.pth
+22-02-21 12:38:40.489 : <epoch:192, iter:  15,200, lr:2.000e-04> G_loss: 1.028e+00 TV_loss: 1.077e-03 Gradient_loss: 3.680e-01 l1_loss: 1.335e-01 Constrast_loss: 5.258e-01 
+22-02-21 12:40:16.396 : <epoch:194, iter:  15,400, lr:2.000e-04> G_loss: 1.075e+00 TV_loss: 1.662e-03 Gradient_loss: 4.869e-01 l1_loss: 1.079e-01 Constrast_loss: 4.784e-01 
+22-02-21 12:41:52.025 : <epoch:197, iter:  15,600, lr:2.000e-04> G_loss: 2.997e+00 TV_loss: 9.293e-03 Gradient_loss: 9.998e-01 l1_loss: 3.534e-01 Constrast_loss: 1.635e+00 
+22-02-21 12:43:27.630 : <epoch:199, iter:  15,800, lr:2.000e-04> G_loss: 9.677e-01 TV_loss: 1.469e-03 Gradient_loss: 4.430e-01 l1_loss: 1.333e-01 Constrast_loss: 3.900e-01 
+22-02-21 12:45:02.466 : <epoch:202, iter:  16,000, lr:2.000e-04> G_loss: 3.219e+00 TV_loss: 1.093e-02 Gradient_loss: 1.082e+00 l1_loss: 2.615e-01 Constrast_loss: 1.865e+00 
+22-02-21 12:45:02.477 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/16000_E.pth
+22-02-21 12:47:53.335 : <epoch:205, iter:  16,200, lr:2.000e-04> G_loss: 3.620e+00 TV_loss: 1.489e-02 Gradient_loss: 1.234e+00 l1_loss: 3.845e-01 Constrast_loss: 1.987e+00 
+22-02-21 12:49:29.506 : <epoch:207, iter:  16,400, lr:2.000e-04> G_loss: 1.297e+00 TV_loss: 2.765e-03 Gradient_loss: 4.994e-01 l1_loss: 1.646e-01 Constrast_loss: 6.304e-01 
+22-02-21 12:51:04.165 : <epoch:210, iter:  16,600, lr:2.000e-04> G_loss: 1.310e+00 TV_loss: 2.151e-03 Gradient_loss: 5.739e-01 l1_loss: 1.700e-01 Constrast_loss: 5.644e-01 
+22-02-21 12:52:40.017 : <epoch:212, iter:  16,800, lr:2.000e-04> G_loss: 3.170e+00 TV_loss: 6.673e-03 Gradient_loss: 9.581e-01 l1_loss: 3.185e-01 Constrast_loss: 1.887e+00 
+22-02-21 12:54:15.854 : <epoch:215, iter:  17,000, lr:2.000e-04> G_loss: 1.848e+00 TV_loss: 9.278e-03 Gradient_loss: 6.385e-01 l1_loss: 2.628e-01 Constrast_loss: 9.376e-01 
+22-02-21 12:54:15.865 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/17000_E.pth
+22-02-21 12:57:07.694 : <epoch:217, iter:  17,200, lr:2.000e-04> G_loss: 2.112e+00 TV_loss: 4.046e-03 Gradient_loss: 6.994e-01 l1_loss: 2.503e-01 Constrast_loss: 1.158e+00 
+22-02-21 12:58:43.920 : <epoch:220, iter:  17,400, lr:2.000e-04> G_loss: 2.780e+00 TV_loss: 1.394e-02 Gradient_loss: 9.871e-01 l1_loss: 3.304e-01 Constrast_loss: 1.448e+00 
+22-02-21 13:00:15.808 : <epoch:222, iter:  17,600, lr:2.000e-04> G_loss: 3.474e+00 TV_loss: 2.019e-02 Gradient_loss: 9.782e-01 l1_loss: 3.937e-01 Constrast_loss: 2.082e+00 
+22-02-21 13:01:51.175 : <epoch:225, iter:  17,800, lr:2.000e-04> G_loss: 2.607e+00 TV_loss: 1.431e-02 Gradient_loss: 1.125e+00 l1_loss: 3.114e-01 Constrast_loss: 1.157e+00 
+22-02-21 13:03:25.189 : <epoch:227, iter:  18,000, lr:2.000e-04> G_loss: 1.158e+00 TV_loss: 4.776e-03 Gradient_loss: 4.296e-01 l1_loss: 2.081e-01 Constrast_loss: 5.153e-01 
+22-02-21 13:03:25.197 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/18000_E.pth
+22-02-21 13:06:14.978 : <epoch:230, iter:  18,200, lr:2.000e-04> G_loss: 2.475e+00 TV_loss: 2.220e-02 Gradient_loss: 9.697e-01 l1_loss: 3.505e-01 Constrast_loss: 1.133e+00 
+22-02-21 13:07:50.153 : <epoch:232, iter:  18,400, lr:2.000e-04> G_loss: 1.584e+00 TV_loss: 7.309e-03 Gradient_loss: 7.638e-01 l1_loss: 2.674e-01 Constrast_loss: 5.452e-01 
+22-02-21 13:09:25.008 : <epoch:235, iter:  18,600, lr:2.000e-04> G_loss: 1.574e+00 TV_loss: 5.042e-03 Gradient_loss: 5.361e-01 l1_loss: 3.032e-01 Constrast_loss: 7.294e-01 
+22-02-21 13:11:00.306 : <epoch:237, iter:  18,800, lr:2.000e-04> G_loss: 4.376e+00 TV_loss: 3.186e-02 Gradient_loss: 1.648e+00 l1_loss: 3.953e-01 Constrast_loss: 2.301e+00 
+22-02-21 13:12:35.015 : <epoch:240, iter:  19,000, lr:2.000e-04> G_loss: 2.103e+00 TV_loss: 7.961e-03 Gradient_loss: 6.295e-01 l1_loss: 2.542e-01 Constrast_loss: 1.211e+00 
+22-02-21 13:12:35.026 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/19000_E.pth
+22-02-21 13:15:29.346 : <epoch:243, iter:  19,200, lr:2.000e-04> G_loss: 2.800e+00 TV_loss: 6.263e-03 Gradient_loss: 1.019e+00 l1_loss: 2.402e-01 Constrast_loss: 1.534e+00 
+22-02-21 13:17:05.180 : <epoch:245, iter:  19,400, lr:2.000e-04> G_loss: 4.297e+00 TV_loss: 2.028e-02 Gradient_loss: 1.346e+00 l1_loss: 4.014e-01 Constrast_loss: 2.530e+00 
+22-02-21 13:18:41.420 : <epoch:248, iter:  19,600, lr:2.000e-04> G_loss: 3.359e+00 TV_loss: 7.292e-03 Gradient_loss: 9.289e-01 l1_loss: 3.086e-01 Constrast_loss: 2.114e+00 
+22-02-21 13:20:16.017 : <epoch:250, iter:  19,800, lr:2.000e-04> G_loss: 2.362e+00 TV_loss: 4.853e-03 Gradient_loss: 8.310e-01 l1_loss: 1.897e-01 Constrast_loss: 1.336e+00 
+22-02-21 13:21:51.559 : <epoch:253, iter:  20,000, lr:2.000e-04> G_loss: 1.841e+00 TV_loss: 1.098e-02 Gradient_loss: 5.408e-01 l1_loss: 2.678e-01 Constrast_loss: 1.022e+00 
+22-02-21 13:21:51.570 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/20000_E.pth
+22-02-21 13:24:46.084 : <epoch:255, iter:  20,200, lr:2.000e-04> G_loss: 2.927e+00 TV_loss: 2.249e-02 Gradient_loss: 1.478e+00 l1_loss: 3.522e-01 Constrast_loss: 1.074e+00 
+22-02-21 13:26:22.409 : <epoch:258, iter:  20,400, lr:2.000e-04> G_loss: 1.120e+00 TV_loss: 1.053e-03 Gradient_loss: 4.390e-01 l1_loss: 8.584e-02 Constrast_loss: 5.944e-01 
+22-02-21 13:27:57.326 : <epoch:260, iter:  20,600, lr:2.000e-04> G_loss: 1.880e+00 TV_loss: 8.541e-03 Gradient_loss: 6.655e-01 l1_loss: 1.824e-01 Constrast_loss: 1.023e+00 
+22-02-21 13:29:32.936 : <epoch:263, iter:  20,800, lr:2.000e-04> G_loss: 2.707e+00 TV_loss: 4.599e-03 Gradient_loss: 8.478e-01 l1_loss: 2.484e-01 Constrast_loss: 1.606e+00 
+22-02-21 13:31:08.662 : <epoch:265, iter:  21,000, lr:2.000e-04> G_loss: 2.465e+00 TV_loss: 7.251e-03 Gradient_loss: 8.145e-01 l1_loss: 2.017e-01 Constrast_loss: 1.441e+00 
+22-02-21 13:31:08.673 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/21000_E.pth
+22-02-21 13:33:56.944 : <epoch:268, iter:  21,200, lr:2.000e-04> G_loss: 2.611e+00 TV_loss: 9.236e-03 Gradient_loss: 8.219e-01 l1_loss: 3.015e-01 Constrast_loss: 1.479e+00 
+22-02-21 13:35:33.312 : <epoch:270, iter:  21,400, lr:2.000e-04> G_loss: 3.341e+00 TV_loss: 3.104e-02 Gradient_loss: 1.379e+00 l1_loss: 5.660e-01 Constrast_loss: 1.365e+00 
+22-02-21 13:37:09.374 : <epoch:273, iter:  21,600, lr:2.000e-04> G_loss: 1.438e+00 TV_loss: 3.835e-03 Gradient_loss: 7.925e-01 l1_loss: 1.822e-01 Constrast_loss: 4.590e-01 
+22-02-21 13:38:44.397 : <epoch:275, iter:  21,800, lr:2.000e-04> G_loss: 3.727e+00 TV_loss: 2.676e-02 Gradient_loss: 1.434e+00 l1_loss: 4.333e-01 Constrast_loss: 1.833e+00 
+22-02-21 13:40:20.383 : <epoch:278, iter:  22,000, lr:2.000e-04> G_loss: 2.183e+00 TV_loss: 7.635e-03 Gradient_loss: 8.641e-01 l1_loss: 3.062e-01 Constrast_loss: 1.005e+00 
+22-02-21 13:40:20.394 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/22000_E.pth
+22-02-21 13:43:05.929 : <epoch:281, iter:  22,200, lr:2.000e-04> G_loss: 2.253e+00 TV_loss: 1.576e-02 Gradient_loss: 9.756e-01 l1_loss: 2.602e-01 Constrast_loss: 1.001e+00 
+22-02-21 13:44:43.607 : <epoch:283, iter:  22,400, lr:2.000e-04> G_loss: 2.017e+00 TV_loss: 4.849e-03 Gradient_loss: 5.357e-01 l1_loss: 2.167e-01 Constrast_loss: 1.260e+00 
+22-02-21 13:46:20.174 : <epoch:286, iter:  22,600, lr:2.000e-04> G_loss: 3.583e+00 TV_loss: 3.594e-02 Gradient_loss: 1.547e+00 l1_loss: 4.111e-01 Constrast_loss: 1.589e+00 
+22-02-21 13:47:55.722 : <epoch:288, iter:  22,800, lr:2.000e-04> G_loss: 3.338e+00 TV_loss: 9.976e-03 Gradient_loss: 1.173e+00 l1_loss: 2.869e-01 Constrast_loss: 1.868e+00 
+22-02-21 13:49:32.527 : <epoch:291, iter:  23,000, lr:2.000e-04> G_loss: 2.491e+00 TV_loss: 1.101e-02 Gradient_loss: 8.412e-01 l1_loss: 2.971e-01 Constrast_loss: 1.342e+00 
+22-02-21 13:49:32.538 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/23000_E.pth
+22-02-21 13:52:22.933 : <epoch:293, iter:  23,200, lr:2.000e-04> G_loss: 1.462e+00 TV_loss: 3.928e-03 Gradient_loss: 5.934e-01 l1_loss: 1.760e-01 Constrast_loss: 6.884e-01 
+22-02-21 13:53:59.511 : <epoch:296, iter:  23,400, lr:2.000e-04> G_loss: 2.898e+00 TV_loss: 1.547e-02 Gradient_loss: 8.076e-01 l1_loss: 4.123e-01 Constrast_loss: 1.663e+00 
+22-02-21 13:55:35.448 : <epoch:298, iter:  23,600, lr:2.000e-04> G_loss: 3.469e+00 TV_loss: 3.865e-02 Gradient_loss: 1.105e+00 l1_loss: 6.207e-01 Constrast_loss: 1.705e+00 
+22-02-21 13:57:10.491 : <epoch:301, iter:  23,800, lr:2.000e-04> G_loss: 1.784e+00 TV_loss: 9.746e-03 Gradient_loss: 6.330e-01 l1_loss: 3.749e-01 Constrast_loss: 7.667e-01 
+22-02-21 13:58:45.264 : <epoch:303, iter:  24,000, lr:2.000e-04> G_loss: 1.661e+00 TV_loss: 3.650e-03 Gradient_loss: 4.806e-01 l1_loss: 1.758e-01 Constrast_loss: 1.001e+00 
+22-02-21 13:58:45.272 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/24000_E.pth
+22-02-21 14:01:33.458 : <epoch:306, iter:  24,200, lr:2.000e-04> G_loss: 2.913e+00 TV_loss: 1.277e-02 Gradient_loss: 1.166e+00 l1_loss: 3.009e-01 Constrast_loss: 1.433e+00 
+22-02-21 14:03:10.008 : <epoch:308, iter:  24,400, lr:2.000e-04> G_loss: 5.420e-01 TV_loss: 1.197e-03 Gradient_loss: 3.040e-01 l1_loss: 1.042e-01 Constrast_loss: 1.326e-01 
+22-02-21 14:04:45.515 : <epoch:311, iter:  24,600, lr:2.000e-04> G_loss: 3.955e+00 TV_loss: 2.035e-02 Gradient_loss: 1.574e+00 l1_loss: 3.470e-01 Constrast_loss: 2.013e+00 
+22-02-21 14:06:20.381 : <epoch:313, iter:  24,800, lr:2.000e-04> G_loss: 7.403e+00 TV_loss: 8.953e-02 Gradient_loss: 3.280e+00 l1_loss: 7.552e-01 Constrast_loss: 3.278e+00 
+22-02-21 14:07:56.254 : <epoch:316, iter:  25,000, lr:2.000e-04> G_loss: 6.958e-01 TV_loss: 1.149e-03 Gradient_loss: 3.119e-01 l1_loss: 9.279e-02 Constrast_loss: 2.899e-01 
+22-02-21 14:07:56.259 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/25000_E.pth
+22-02-21 14:10:41.797 : <epoch:318, iter:  25,200, lr:2.000e-04> G_loss: 1.633e+00 TV_loss: 4.897e-03 Gradient_loss: 5.156e-01 l1_loss: 2.064e-01 Constrast_loss: 9.057e-01 
+22-02-21 14:12:17.914 : <epoch:321, iter:  25,400, lr:2.000e-04> G_loss: 2.686e+00 TV_loss: 1.562e-02 Gradient_loss: 1.196e+00 l1_loss: 3.097e-01 Constrast_loss: 1.165e+00 
+22-02-21 14:13:54.825 : <epoch:324, iter:  25,600, lr:2.000e-04> G_loss: 4.272e+00 TV_loss: 2.629e-02 Gradient_loss: 1.516e+00 l1_loss: 4.260e-01 Constrast_loss: 2.304e+00 
+22-02-21 14:15:28.969 : <epoch:326, iter:  25,800, lr:2.000e-04> G_loss: 2.610e+00 TV_loss: 6.399e-03 Gradient_loss: 7.701e-01 l1_loss: 3.234e-01 Constrast_loss: 1.510e+00 
+22-02-21 14:17:05.202 : <epoch:329, iter:  26,000, lr:2.000e-04> G_loss: 2.413e+00 TV_loss: 3.445e-02 Gradient_loss: 9.257e-01 l1_loss: 3.512e-01 Constrast_loss: 1.101e+00 
+22-02-21 14:17:05.213 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/26000_E.pth
+22-02-21 14:19:52.807 : <epoch:331, iter:  26,200, lr:2.000e-04> G_loss: 2.349e+00 TV_loss: 5.029e-03 Gradient_loss: 7.831e-01 l1_loss: 1.903e-01 Constrast_loss: 1.371e+00 
+22-02-21 14:21:28.907 : <epoch:334, iter:  26,400, lr:2.000e-04> G_loss: 4.565e+00 TV_loss: 4.742e-02 Gradient_loss: 1.767e+00 l1_loss: 5.632e-01 Constrast_loss: 2.187e+00 
+22-02-21 14:23:05.486 : <epoch:336, iter:  26,600, lr:2.000e-04> G_loss: 1.120e+00 TV_loss: 3.059e-03 Gradient_loss: 3.386e-01 l1_loss: 1.712e-01 Constrast_loss: 6.073e-01 
+22-02-21 14:24:40.573 : <epoch:339, iter:  26,800, lr:2.000e-04> G_loss: 1.567e+00 TV_loss: 4.442e-03 Gradient_loss: 6.356e-01 l1_loss: 1.820e-01 Constrast_loss: 7.449e-01 
+22-02-21 14:26:15.815 : <epoch:341, iter:  27,000, lr:2.000e-04> G_loss: 2.487e+00 TV_loss: 6.032e-03 Gradient_loss: 7.567e-01 l1_loss: 1.666e-01 Constrast_loss: 1.558e+00 
+22-02-21 14:26:15.826 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/27000_E.pth
+22-02-21 14:28:59.812 : <epoch:344, iter:  27,200, lr:2.000e-04> G_loss: 2.193e+00 TV_loss: 1.130e-02 Gradient_loss: 7.676e-01 l1_loss: 3.235e-01 Constrast_loss: 1.090e+00 
+22-02-21 14:30:35.366 : <epoch:346, iter:  27,400, lr:2.000e-04> G_loss: 2.155e+00 TV_loss: 5.195e-03 Gradient_loss: 8.309e-01 l1_loss: 2.263e-01 Constrast_loss: 1.093e+00 
+22-02-21 14:32:11.583 : <epoch:349, iter:  27,600, lr:2.000e-04> G_loss: 2.628e+00 TV_loss: 8.146e-03 Gradient_loss: 7.072e-01 l1_loss: 2.602e-01 Constrast_loss: 1.653e+00 
+22-02-21 14:33:47.960 : <epoch:351, iter:  27,800, lr:2.000e-04> G_loss: 6.293e-01 TV_loss: 8.293e-04 Gradient_loss: 2.598e-01 l1_loss: 1.082e-01 Constrast_loss: 2.605e-01 
+22-02-21 14:35:23.340 : <epoch:354, iter:  28,000, lr:2.000e-04> G_loss: 1.125e+00 TV_loss: 4.871e-03 Gradient_loss: 5.292e-01 l1_loss: 1.157e-01 Constrast_loss: 4.752e-01 
+22-02-21 14:35:23.346 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/28000_E.pth
+22-02-21 14:38:05.113 : <epoch:356, iter:  28,200, lr:2.000e-04> G_loss: 2.161e+00 TV_loss: 7.550e-03 Gradient_loss: 6.173e-01 l1_loss: 2.370e-01 Constrast_loss: 1.299e+00 
+22-02-21 14:39:39.919 : <epoch:359, iter:  28,400, lr:2.000e-04> G_loss: 3.723e+00 TV_loss: 2.498e-02 Gradient_loss: 1.057e+00 l1_loss: 4.296e-01 Constrast_loss: 2.212e+00 
+22-02-21 14:41:15.761 : <epoch:362, iter:  28,600, lr:2.000e-04> G_loss: 1.220e+00 TV_loss: 3.348e-03 Gradient_loss: 5.331e-01 l1_loss: 1.476e-01 Constrast_loss: 5.362e-01 
+22-02-21 14:42:51.019 : <epoch:364, iter:  28,800, lr:2.000e-04> G_loss: 3.927e+00 TV_loss: 1.576e-02 Gradient_loss: 1.268e+00 l1_loss: 4.109e-01 Constrast_loss: 2.233e+00 
+22-02-21 14:44:26.437 : <epoch:367, iter:  29,000, lr:2.000e-04> G_loss: 1.579e+00 TV_loss: 3.768e-03 Gradient_loss: 6.196e-01 l1_loss: 1.657e-01 Constrast_loss: 7.901e-01 
+22-02-21 14:44:26.447 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/29000_E.pth
+22-02-21 14:47:11.045 : <epoch:369, iter:  29,200, lr:2.000e-04> G_loss: 2.952e+00 TV_loss: 1.595e-02 Gradient_loss: 1.354e+00 l1_loss: 3.391e-01 Constrast_loss: 1.244e+00 
+22-02-21 14:48:46.593 : <epoch:372, iter:  29,400, lr:2.000e-04> G_loss: 1.973e+00 TV_loss: 3.894e-03 Gradient_loss: 7.364e-01 l1_loss: 1.845e-01 Constrast_loss: 1.048e+00 
+22-02-21 14:50:22.361 : <epoch:374, iter:  29,600, lr:2.000e-04> G_loss: 5.110e+00 TV_loss: 3.403e-02 Gradient_loss: 1.886e+00 l1_loss: 5.172e-01 Constrast_loss: 2.673e+00 
+22-02-21 14:51:59.184 : <epoch:377, iter:  29,800, lr:2.000e-04> G_loss: 3.146e+00 TV_loss: 2.771e-02 Gradient_loss: 1.209e+00 l1_loss: 3.723e-01 Constrast_loss: 1.538e+00 
+22-02-21 14:53:34.549 : <epoch:379, iter:  30,000, lr:2.000e-04> G_loss: 4.467e+00 TV_loss: 1.881e-02 Gradient_loss: 1.278e+00 l1_loss: 3.961e-01 Constrast_loss: 2.775e+00 
+22-02-21 14:53:34.560 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/30000_E.pth
+22-02-21 14:56:18.781 : <epoch:382, iter:  30,200, lr:2.000e-04> G_loss: 4.035e+00 TV_loss: 2.385e-02 Gradient_loss: 1.411e+00 l1_loss: 3.848e-01 Constrast_loss: 2.216e+00 
+22-02-21 14:57:53.956 : <epoch:384, iter:  30,400, lr:2.000e-04> G_loss: 2.048e+00 TV_loss: 8.180e-03 Gradient_loss: 8.359e-01 l1_loss: 2.705e-01 Constrast_loss: 9.339e-01 
+22-02-21 14:59:29.462 : <epoch:387, iter:  30,600, lr:2.000e-04> G_loss: 3.256e+00 TV_loss: 2.436e-02 Gradient_loss: 1.328e+00 l1_loss: 4.661e-01 Constrast_loss: 1.437e+00 
+22-02-21 15:01:04.427 : <epoch:389, iter:  30,800, lr:2.000e-04> G_loss: 2.322e+00 TV_loss: 1.799e-02 Gradient_loss: 8.630e-01 l1_loss: 3.382e-01 Constrast_loss: 1.103e+00 
+22-02-21 15:02:40.076 : <epoch:392, iter:  31,000, lr:2.000e-04> G_loss: 9.369e-01 TV_loss: 2.548e-03 Gradient_loss: 3.884e-01 l1_loss: 2.314e-01 Constrast_loss: 3.146e-01 
+22-02-21 15:02:40.084 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/31000_E.pth
+22-02-21 15:05:29.105 : <epoch:394, iter:  31,200, lr:2.000e-04> G_loss: 2.117e+00 TV_loss: 1.800e-02 Gradient_loss: 9.194e-01 l1_loss: 3.609e-01 Constrast_loss: 8.187e-01 
+22-02-21 15:07:06.964 : <epoch:397, iter:  31,400, lr:2.000e-04> G_loss: 4.629e+00 TV_loss: 6.847e-02 Gradient_loss: 1.778e+00 l1_loss: 6.077e-01 Constrast_loss: 2.175e+00 
+22-02-21 15:08:42.737 : <epoch:399, iter:  31,600, lr:2.000e-04> G_loss: 2.050e+00 TV_loss: 2.260e-02 Gradient_loss: 8.280e-01 l1_loss: 3.863e-01 Constrast_loss: 8.128e-01 
+22-02-21 15:10:17.514 : <epoch:402, iter:  31,800, lr:2.000e-04> G_loss: 2.348e+00 TV_loss: 8.660e-03 Gradient_loss: 8.190e-01 l1_loss: 3.143e-01 Constrast_loss: 1.206e+00 
+22-02-21 15:11:53.666 : <epoch:405, iter:  32,000, lr:2.000e-04> G_loss: 5.041e+00 TV_loss: 5.238e-02 Gradient_loss: 2.034e+00 l1_loss: 6.986e-01 Constrast_loss: 2.256e+00 
+22-02-21 15:11:53.672 : Saving the model. Save path is:Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/32000_E.pth
+22-02-21 15:14:35.681 : <epoch:407, iter:  32,200, lr:2.000e-04> G_loss: 2.808e+00 TV_loss: 9.173e-03 Gradient_loss: 8.521e-01 l1_loss: 3.341e-01 Constrast_loss: 1.612e+00 
+22-02-21 15:16:13.410 : <epoch:410, iter:  32,400, lr:2.000e-04> G_loss: 2.821e+00 TV_loss: 1.945e-02 Gradient_loss: 9.945e-01 l1_loss: 3.742e-01 Constrast_loss: 1.433e+00 
