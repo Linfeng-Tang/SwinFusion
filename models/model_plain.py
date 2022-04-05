@@ -191,7 +191,7 @@ class ModelPlain(ModelBase):
             loe_loss, loss_tv, loss_grad, loss_l1 = self.G_lossfn(self.A, self.B, self.E, self.GT)   
             G_loss = self.G_lossfn_weight * loe_loss   
         elif G_lossfn_type in ['mef', 'mff', 'vif', 'nir', 'med']:
-            total_loss, loss_tv, loss_grad, loss_l1, loss_contrast = self.G_lossfn(self.A, self.B, self.E)   
+            total_loss, loss_text, loss_int, loss_ssim = self.G_lossfn(self.A, self.B, self.E)
             G_loss = self.G_lossfn_weight * total_loss      
         else:
             G_loss = self.G_lossfn_weight * self.G_lossfn(self.E, self.GT)
@@ -220,10 +220,9 @@ class ModelPlain(ModelBase):
         # self.log_dict['G_loss'] = G_loss.item()/self.E.size()[0]  # if `reduction='sum'`
         self.log_dict['G_loss'] = G_loss.item()
         if G_lossfn_type in ['loe', 'mef', 'vif', 'mff', 'gt', 'nir', 'med']:
-            self.log_dict['TV_loss'] = loss_tv.item()  
-            self.log_dict['Gradient_loss'] = loss_grad.item()
-            self.log_dict['l1_loss'] = loss_l1.item()
-            self.log_dict['Constrast_loss'] = loss_contrast.item()              
+            self.log_dict['Text_loss'] = loss_text.item()
+            self.log_dict['Int_loss'] = loss_int.item()
+            self.log_dict['SSIM_loss'] = loss_ssim.item()
 
         if self.opt_train['E_decay'] > 0:
             self.update_E(self.opt_train['E_decay'])
@@ -237,12 +236,6 @@ class ModelPlain(ModelBase):
             self.writer.add_image('over_image[1]', self.B[-1])
             self.writer.add_image('fused_image[0]', self.E[0])
             self.writer.add_image('fused_image[1]', self.E[-1])
-            # self.writer.add_image('under_image_contrast[0]', self.A_contrast[0])
-            # self.writer.add_image('under_image_contrast[1]', self.A_contrast[1])
-            # self.writer.add_image('over_image_contrast[0]', self.B_contrast[0])
-            # self.writer.add_image('over_image_contrast[1]', self.B_contrast[1])
-            # self.writer.add_image('fused_image_contrast[0]', self.E_contrast[0])
-            # self.writer.add_image('fused_image_contrast[1]', self.E_contrast[1])
         elif G_lossfn_type == 'vif':
             self.writer.add_image('ir_image[0]', self.A[0])
             self.writer.add_image('ir_image[1]', self.A[1])
