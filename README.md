@@ -64,7 +64,7 @@ Download the training dataset from [**Lytro dataset**](https://github.com/HaoZha
 
 ## Citation
 ```
-@ARTICLE{Ma2022SwinFusion,  
+@article{Ma2022SwinFusion,  
 author={Ma, Jiayi and Tang, Linfeng and Fan, Fan and Huang, Jun and Mei, Xiaoguang and Ma, Yong},  
 journal={IEEE/CAA Journal of Automatica Sinica},   
 title={SwinFusion: Cross-domain Long-range Learning for General Image Fusion via Swin Transformer},   
