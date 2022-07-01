@@ -63,7 +63,7 @@ Download the training dataset from [**Lytro dataset**](https://github.com/HaoZha
  - [x] numpy 1.21.2
 
 ## Citation
-'''
+```
 @ARTICLE{Ma2022SwinFusion,  
 author={Ma, Jiayi and Tang, Linfeng and Fan, Fan and Huang, Jun and Mei, Xiaoguang and Ma, Yong},  
 journal={IEEE/CAA Journal of Automatica Sinica},   
@@ -73,6 +73,6 @@ volume={9},
 number={7},  
 pages={1200-1217}
 }
-'''
+```
 ## Acknowledgement
 The codes are heavily based on [SwinIR](https://github.com/JingyunLiang/SwinIR). Please also follow their licenses. Thanks for their awesome works.
