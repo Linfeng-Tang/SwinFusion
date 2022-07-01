@@ -1,6 +1,13 @@
 
 # SwinFusion
 This is official Pytorch implementation of "SwinFusion: Cross-domain Long-range Learning for General Image Fusion via Swin Transformer"
+## Image Fusion Example
+![Schematic illustration of multi-modal image fusion and digital photography image fusion. ](https://github.com/Linfeng-Tang/SwinFusion/blob/master/Figure/Schematic_illustration.png)
+Schematic illustration of multi-modal image fusion and digital photography image fusion. First row: source image pairs, second row: fused results of U2Fusion and our SwinFusion.
+
+## Framework
+![The framework of the proposed SwinFusion for multi-modal image fusion and digital photography image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/Figure/SwinFusion1.png)
+The framework of the proposed SwinFusion for multi-modal image fusion and digital photography image fusion.
 
 ## To Train
 ### Visible and Infrared Image Fusion (VIF)
