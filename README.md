@@ -2,11 +2,11 @@
 # SwinFusion
 This is official Pytorch implementation of ["SwinFusion: Cross-domain Long-range Learning for General Image Fusion via Swin Transformer"](https://ieeexplore.ieee.org/document/9812535)
 ## Image Fusion Example
-![Schematic illustration of multi-modal image fusion and digital photography image fusion. ](https://github.com/Linfeng-Tang/SwinFusion/blob/master/Figure/Schematic_illustration.png)
+![Schematic illustration of multi-modal image fusion and digital photography image fusion. ](https://github.com/Linfeng-Tang/SwinFusion/blob/master/SwinFusion/Schematic_illustration.jpg)
 Schematic illustration of multi-modal image fusion and digital photography image fusion. First row: source image pairs, second row: fused results of U2Fusion and our SwinFusion.
 
 ## Framework
-![The framework of the proposed SwinFusion for multi-modal image fusion and digital photography image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/Figure/SwinFusion1.png)
+![The framework of the proposed SwinFusion for multi-modal image fusion and digital photography image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/SwinFusion/SwinFusion1.jpg)
 The framework of the proposed SwinFusion for multi-modal image fusion and digital photography image fusion.
 
 ## Visible and Infrared Image Fusion (VIF)
@@ -21,7 +21,7 @@ Download the test dataset from [**MSRS dataset**](https://github.com/Linfeng-Tan
     python test_swinfusion.py --model_path=./Model/Infrared_Visible_Fusion/Infrared_Visible_Fusion/models/ --iter_number=10000 --dataset=MSRS --A_dir=IR  --B_dir=VI_Y
  
  ### Visual Comparison
-![Qualitative comparison of SwinFusion with five state-of-the-art methods on visible and infrared image fusion](https://github.com/Linfeng-Tang/SwinFusion/blob/master/Figure/VIF.png)
+![Qualitative comparison of SwinFusion with five state-of-the-art methods on visible and infrared image fusion](https://github.com/Linfeng-Tang/SwinFusion/blob/master/SwinFusion/VIF.jpg)
 Qualitative comparison of SwinFusion with five state-of-the-art methods on visible and infrared image fusion. From left to right: infrared image, visible
 image, and the results of GTF, DenseFuse, IFCNN SDNet, U2Fusion, and our SwinFusion.
 
@@ -37,7 +37,7 @@ Download the test dataset from [**VIS-NIR Scene dataset**](http://matthewalunbro
     python test_swinfusion.py --model_path=./Model/RGB_NIR_Fusion/RGB_NIR_Fusion/models/ --iter_number=10000 --dataset=NirScene --A_dir=NIR  --B_dir=VI_Y
 
 ### Visual Comparison
-![Qualitative comparison of SwinFusion with five state-of-the-art methods on visible and near-infrared image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/Figure/NIR.png)
+![Qualitative comparison of SwinFusion with five state-of-the-art methods on visible and near-infrared image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/SwinFusion/NIR.jpg)
 Qualitative comparison of SwinFusion with five state-of-the-art methods on visible and near-infrared image fusion. From left to right: near-infrared
 image, visible image, and the results of ANVF, DenseFuse, IFCNN, SDNet, U2Fusion, and our SwinFusion.
 
@@ -56,11 +56,11 @@ Download the training dataset from [**Harvard medical dataset**](http://matthewa
     python test_swinfusion.py --model_path=./Model/Medical_Fusion-CT-MRI/Medical_Fusion/models/ --iter_number=10000 --dataset=CT-MRI--A_dir=MRI --B_dir=CT
 
 ### Visual Comparison
-![Qualitative comparison of SwinFusion with five state-of-the-art methods on PET and MRI image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/Figure/PET-MRI.png)
+![Qualitative comparison of SwinFusion with five state-of-the-art methods on PET and MRI image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/SwinFusion/PET-MRI.jpg)
 Qualitative comparison of SwinFusion with five state-of-the-art methods on PET and MRI image fusion. From left to right: MRI image, PET image,
 and the results of CSMCA, DDcGAN, IFCNN, SDNet, U2Fusion, and our SwinFusion.
 
-![Qualitative comparison of SwinFusion with five state-of-the-art methods on CT and MRI image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/Figure/CT-MRI.png)
+![Qualitative comparison of SwinFusion with five state-of-the-art methods on CT and MRI image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/SwinFusion/CT-MRI.jpg)
 Qualitative comparison of SwinFusion with five state-of-the-art methods on CT and MRI image fusion. From left to right: MRI image, CT image, and
 the results of CSMCA, DDcGAN, IFCNN, SDNet, U2Fusion, and our SwinFusion.
 
@@ -76,7 +76,7 @@ Download the training dataset from [**MEF Benchmark dataset**](https://github.co
     python test_swinfusion.py --model_path=./Model/Multi_Exposure_Fusion/Multi_Exposure_Fusion/models/ --iter_number=10000 --dataset=MEF_Benchmark --A_dir=under_Y --B_dir=over_Y
     
 ### Visual Comparison
-![Qualitative results of multi-exposure image fusion. ](https://github.com/Linfeng-Tang/SwinFusion/blob/master/Figure/MEF.png)
+![Qualitative results of multi-exposure image fusion. ](https://github.com/Linfeng-Tang/SwinFusion/blob/master/SwinFusion/MEF.jpg)
 Qualitative results of multi-exposure image fusion. From left to right: under-exposed image, over-exposed image, and the results of SPD-MEF,
 MEF-GAN, IFCNN SDNet, U2Fusion, and our SwinFusion.
 
@@ -92,7 +92,7 @@ Download the training dataset from [**Lytro dataset**](https://github.com/HaoZha
     python test_swinfusion.py --model_path=./Model/Multi_Focus_Fusion/Multi_Focus_Fusion/models/ --iter_number=10000 --dataset=Lytro --A_dir=A_Y --B_dir=B_Y
     
 ### Visual Comparison
-![Qualitative results of multi-focus image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/Figure/MFF.png)
+![Qualitative results of multi-focus image fusion.](https://github.com/Linfeng-Tang/SwinFusion/blob/master/SwinFusion/MFF.jpg)
 Qualitative results of multi-focus image fusion. From left to right: near/far-focus image, the fused results and difference maps of SFMD, DRPL,
 MFF-GAN, IFCNN, SDNet, U2Fusion, and our SwinFusion. The difference maps represent the difference between the near-focus image and fused results.
 
