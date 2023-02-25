@@ -43,7 +43,7 @@ image, visible image, and the results of ANVF, DenseFuse, IFCNN, SDNet, U2Fusion
 
 ## Medical Image Fusion (Med)
 ### To Train
-Download the training dataset from [**Harvard medical dataset**](http://matthewalunbrown.com/nirscene/nirscene.html), and put it in **./Dataset/trainsets/PET-MRI/** or **./Dataset/trainsets/CT-MRI/**. 
+Download the training dataset from [**Harvard medical dataset**](http://www.med.harvard.edu/AANLIB/home.html), and put it in **./Dataset/trainsets/PET-MRI/** or **./Dataset/trainsets/CT-MRI/**. 
 
     python -m torch.distributed.launch --nproc_per_node=3 --master_port=1234 main_train_swinfusion.py --opt options/swinir/train_swinfusion_med.json  --dist True
     
