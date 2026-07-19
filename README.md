@@ -1,15 +1,10 @@
+<h1 align="center"><a href="https://ieeexplore.ieee.org/document/9812535">SwinFusion: Cross-domain Long-range Learning for General Image Fusion via Swin Transformer</a></h1>
 
-# SwinFusion
+<p align="center"><a href="https://sites.google.com/site/jiayima2013">Jiayi Ma</a>&emsp; <a href="https://github.com/Linfeng-Tang">Linfeng Tang</a>&emsp; Fan Fan&emsp; Jun Huang&emsp; Xiaoguang Mei&emsp; Yong Ma</p>
+<p align="center"><strong>Wuhan University &middot; Northwestern Polytechnical University</strong></p>
+<p align="center"><strong>IEEE/CAA Journal of Automatica Sinica</strong> &middot; 2022</p>
+<p align="center"><a href="https://esi.help.clarivate.com/Content/overview.htm"><img src="https://img.shields.io/badge/%F0%9F%94%A5_ESI_Hot-Top_0.1%25-E85D3F?style=flat-square" alt="ESI Hot Paper (top 0.1%)"></a> <a href="https://esi.help.clarivate.com/Content/overview.htm"><img src="https://img.shields.io/badge/%F0%9F%8F%86_ESI_Highly_Cited-Top_1%25-D4A017?style=flat-square" alt="ESI Highly Cited Paper (top 1%)"></a> <a href="https://www.ieee-jas.net/news/news_en/5e720d40-3647-459c-acd8-df750fa9f74f_en.htm"><img src="https://img.shields.io/badge/%F0%9F%8F%85_Hsue--shen_Tsien_Paper_Award-2023-7B61A8?style=flat-square" alt="Hsue-shen Tsien Paper Award 2023"></a><br><sub><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=PyRqpAsAAAAJ&citation_for_view=PyRqpAsAAAAJ:u-x6o8ySG0sC">Google Scholar &middot; <strong>1,582 citations</strong></a> &middot; updated July 18, 2026</sub></p>
 
-<p align="center">
-  <a href="https://esi.help.clarivate.com/Content/overview.htm"><img src="https://img.shields.io/badge/ESI_Hot_Paper-Top_0.1%25-E85D3F?style=for-the-badge" alt="ESI Hot Paper (top 0.1%)"></a>
-  <a href="https://esi.help.clarivate.com/Content/overview.htm"><img src="https://img.shields.io/badge/ESI_Highly_Cited_Paper-Top_1%25-2F6FB0?style=for-the-badge" alt="ESI Highly Cited Paper (top 1%)"></a>
-  <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=PyRqpAsAAAAJ&citation_for_view=PyRqpAsAAAAJ:u-x6o8ySG0sC"><img src="https://img.shields.io/badge/Google_Scholar_Citations-1%2C582-4285F4?style=for-the-badge&logo=google-scholar&logoColor=white" alt="Google Scholar citations"></a>
-</p>
-<p align="center"><sub>Google Scholar citation count updated July 18, 2026.</sub></p>
-
-
-This is official Pytorch implementation of ["SwinFusion: Cross-domain Long-range Learning for General Image Fusion via Swin Transformer"](https://ieeexplore.ieee.org/document/9812535)
 ## ✨ News  
 - **[2026-06-02]** Our paper **[DSPFusion: Image Fusion via Degradation and Semantic Dual-Prior Guidance](https://doi.org/10.1109/TIP.2026.3700938)** has been officially accepted by **IEEE Transactions on Image Processing (IEEE TIP)**! [[Paper](https://doi.org/10.1109/TIP.2026.3700938)] [[arXiv](https://arxiv.org/abs/2503.23355)] [[Code](https://github.com/Linfeng-Tang/DSPFusion)]
 - **[2026-02-21]** Our paper **[VideoFusion: A Spatio-Temporal Collaborative Network for Multi-modal Video Fusion](https://openaccess.thecvf.com/content/CVPR2026/html/Tang_VideoFusion_A_Spatio-Temporal_Collaborative_Network_for_Multi-modal_Video_Fusion_CVPR_2026_paper.html)** has been accepted by **The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR 2026)**! [[Paper](https://openaccess.thecvf.com/content/CVPR2026/html/Tang_VideoFusion_A_Spatio-Temporal_Collaborative_Network_for_Multi-modal_Video_Fusion_CVPR_2026_paper.html)] [[arXiv](https://arxiv.org/abs/2503.23359)] [[Code](https://github.com/Linfeng-Tang/VideoFusion)]
